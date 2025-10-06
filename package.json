@@ -20,7 +20,7 @@
     "custom widgets"
   ],
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.8.0",
