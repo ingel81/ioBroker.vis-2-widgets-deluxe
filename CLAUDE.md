@@ -229,17 +229,59 @@ Every 2 seconds, the dev script:
 - Prevents stale Module Federation cache
 - Shows "🔄 Changes detected (#N)" in console
 
-## Testing Commands
+## Testing & Quality Assurance
 
+### Test Commands
 ```bash
-npm test          # Run widget tests
-npm run lint      # Run ESLint
-npm run build     # Production build
+npm test              # Run all tests
+npm run test:js       # Widget unit tests
+npm run test:package  # Package validation
+npm run test:integration # Integration tests (skipped for vis-2 widgets)
+npm run lint          # ESLint check
+npm run lint:fix      # Auto-fix linting errors
+npm run check         # TypeScript type checking
+npm run build         # Production build
 ```
+
+### Linting Setup
+- **Main directory**: ESLint configured in `eslint.config.mjs`
+- **Widget sources**: Separate config in `src-widgets/eslint.config.mjs`
+- **Auto-fix**: Available with `npm run lint:fix`
+- **Prettier**: Integrated for consistent formatting
+
+## Publishing & Release
+
+### Build for Production
+```bash
+npm run build  # Creates production-ready widgets in /widgets
+```
+
+### Release Process
+```bash
+# Version bumps (choose one):
+npm run release-patch  # 0.1.0 → 0.1.1
+npm run release-minor  # 0.1.0 → 0.2.0
+npm run release-major  # 0.1.0 → 1.0.0
+
+# Interactive release:
+npm run release  # Prompts for version
+```
+
+### GitHub Actions CI/CD
+- **Automatic testing** on push/PR
+- **Multi-platform**: Tests on Ubuntu, Windows, macOS
+- **Node versions**: 20.x, 22.x
+- **Checks**: Linting, type-checking, package validation, build
+
+### NPM Publishing Requirements
+1. Valid npm account: `npm login`
+2. Repository on GitHub: `github.com/ingel81/ioBroker.vis-2-widgets-deluxe`
+3. Clean git status (all committed)
+4. Tests passing
 
 ## Environment Requirements
 
-- Node.js 18 or higher
+- Node.js 20 or higher (required for dependencies)
 - npm or yarn
 - Linux/macOS (Windows untested)
 - ioBroker dev-server installed globally: `npm i -g @iobroker/dev-server`
@@ -273,6 +315,30 @@ npm run build     # Production build
 
 MIT
 
+## Project Metadata
+
+- **Author**: ingel81 (ingel81@sgeht.net)
+- **Repository**: https://github.com/ingel81/ioBroker.vis-2-widgets-deluxe
+- **License**: MIT
+- **Type**: visualization-widgets (pure UI, no backend)
+- **Base Template**: ioBroker vis-2 Material widgets
+- **Node Requirement**: >= 20.x
+
+## Important Notes
+
+### vis-2 Widget Adapter Specifics
+- **No main.js required** - Pure UI widgets without backend logic
+- **Integration tests skipped** - Not applicable for widget-only adapters
+- **Module Federation** - Widgets loaded dynamically at runtime
+- **Cache clearing** - vis-2 restart required for widget updates
+
+### Development Best Practices
+1. Always run `npm run dev` for development
+2. Use `npm run lint:fix` before commits
+3. Test in multiple browsers (cache issues vary)
+4. Keep package-lock.json files in repo for CI/CD
+5. Use semantic versioning for releases
+
 ---
-*Last updated: 2024-10-06*
+*Last updated: 2025-10-06*
 *This file helps Claude Code understand the project structure and development workflow*
