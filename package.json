@@ -30,7 +30,8 @@
     "@iobroker/eslint-config": "^2.2.0",
     "@iobroker/vis-2-widgets-testing": "^1.0.6",
     "@types/mocha": "^10.0.10",
-    "@types/node": "^24.6.1"
+    "@types/node": "^24.6.1",
+    "typescript": "^5.9.3"
   },
   "files": [
     "admin/",
@@ -43,6 +44,7 @@
     "prepublishOnly": "npm run build",
     "lint": "eslint -c eslint.config.mjs src-widgets/src/",
     "lint:fix": "eslint -c eslint.config.mjs src-widgets/src/ --fix",
+    "check": "cd src-widgets && tsc --noEmit",
     "build": "node tasks",
     "copy-files": "node tasks --copy-files",
     "release": "release-script",
