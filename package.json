@@ -1,0 +1,62 @@
+{
+  "name": "iobroker.vis-2-widgets-deluxe",
+  "version": "0.1.0",
+  "description": "Custom deluxe widgets for ioBroker vis2",
+  "author": {
+    "name": "ingel81",
+    "email": "ingel81@sgeht.net"
+  },
+  "homepage": "https://github.com/ingel81/ioBroker.vis-2-widgets-deluxe",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ingel81/ioBroker.vis-2-widgets-deluxe.git"
+  },
+  "keywords": [
+    "ioBroker",
+    "visualization",
+    "home automation",
+    "vis-2-widgets-deluxe",
+    "custom widgets"
+  ],
+  "engines": {
+    "node": ">= 18"
+  },
+  "devDependencies": {
+    "@alcalzone/release-script": "^3.8.0",
+    "@alcalzone/release-script-plugin-iobroker": "^3.7.2",
+    "@alcalzone/release-script-plugin-license": "^3.7.0",
+    "@iobroker/build-tools": "^2.0.15",
+    "@iobroker/eslint-config": "^2.2.0",
+    "@iobroker/vis-2-widgets-testing": "^1.0.6",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "^24.6.1"
+  },
+  "files": [
+    "admin/",
+    "img/",
+    "io-package.json",
+    "LICENSE",
+    "widgets/"
+  ],
+  "scripts": {
+    "prepublishOnly": "npm run build",
+    "lint": "eslint -c eslint.config.mjs src-widgets/src/",
+    "lint:fix": "eslint -c eslint.config.mjs src-widgets/src/ --fix",
+    "build": "node tasks",
+    "copy-files": "node tasks --copy-files",
+    "release": "release-script",
+    "release-patch": "release-script patch --yes",
+    "release-minor": "release-script minor --yes",
+    "release-major": "release-script major --yes",
+    "test": "mocha ./test/*.test.js",
+    "update-packages": "npx -y npm-check-updates --upgrade && cd src-widgets && npx -y npm-check-updates --upgrade",
+    "npm": "npm i && cd src-widgets && npm i -f",
+    "dev:setup": "dev-server setup --force",
+    "dev": "./dev.sh"
+  },
+  "bugs": {
+    "url": "https://github.com/ingel81/ioBroker.vis-2-widgets-deluxe/issues"
+  },
+  "readmeFilename": "README.md"
+}
