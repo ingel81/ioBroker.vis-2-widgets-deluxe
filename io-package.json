@@ -155,7 +155,8 @@
         "url": "vis-2-widgets-deluxe/customWidgets.js",
         "bundlerType": "module",
         "components": [
-          "HelloWorld"
+          "HelloWorld",
+          "DimmerWidget"
         ]
       }
     },
