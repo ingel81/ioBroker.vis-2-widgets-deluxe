@@ -52,7 +52,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
             id: 'tplDeluxeHelloWorld',
-            visSet: 'Deluxe widgets',
+            visSet: 'vis-2-widgets-deluxe',
             visWidgetLabel: 'hello_world',
             visName: 'Hello World',
             visAttrs: [

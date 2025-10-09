@@ -1,11 +1,11 @@
 // @ts-expect-error no types
-import react from '@vitejs/plugin-react';
-import commonjs from 'vite-plugin-commonjs';
-import vitetsConfigPaths from 'vite-tsconfig-paths';
-import { federation } from '@module-federation/vite';
 import { moduleFederationShared } from '@iobroker/types-vis-2/modulefederation.vis.config';
+import { federation } from '@module-federation/vite';
+import react from '@vitejs/plugin-react';
 import { readFileSync } from 'node:fs';
+import commonjs from 'vite-plugin-commonjs';
 import topLevelAwait from 'vite-plugin-top-level-await';
+import vitetsConfigPaths from 'vite-tsconfig-paths';
 
 const pack = JSON.parse(readFileSync('./package.json').toString());
 
@@ -18,7 +18,7 @@ const config = {
             exposes: {
                 './HelloWorld': './src/HelloWorld',
                 './DimmerWidget': './src/DimmerWidget',
-                './translations': './src/translations.js',
+                './translations': './src/translations.ts',
             },
             remotes: {},
             shared: moduleFederationShared(pack),

@@ -52,7 +52,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
     static getWidgetInfo(): RxWidgetInfo {
         return {
             id: 'tplDeluxeDimmerWidget',
-            visSet: 'Deluxe widgets',
+            visSet: 'vis-2-widgets-deluxe',
             visWidgetLabel: 'dimmer_widget',
             visName: 'Dimmer Widget',
             visAttrs: [
