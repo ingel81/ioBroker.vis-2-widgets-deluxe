@@ -35,6 +35,7 @@ interface DimmerWidgetState extends VisRxWidgetState {
     dialog: boolean;
     localValue: number;
     isChanging: boolean;
+    oidName: string | null;
 }
 
 class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
@@ -47,6 +48,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
             dialog: false,
             localValue: 0,
             isChanging: false,
+            oidName: null,
         };
     }
 
@@ -72,7 +74,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             name: 'widgetTitle',
                             label: 'widget_title',
                             type: 'text',
-                            default: 'Dimmer Control',
+                            default: '',
                         },
                         {
                             name: 'noCard',
@@ -156,6 +158,22 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
         return DimmerWidget.getWidgetInfo();
     }
 
+    async fetchOidName(): Promise<void> {
+        if (this.state.rxData.dimmerOid) {
+            try {
+                const obj = await this.props.context.socket.getObject(this.state.rxData.dimmerOid);
+                if (obj?.common?.name) {
+                    const name = typeof obj.common.name === 'object'
+                        ? obj.common.name[this.props.context.lang] || obj.common.name.en || Object.values(obj.common.name)[0]
+                        : obj.common.name;
+                    this.setState({ oidName: name as string });
+                }
+            } catch (error) {
+                console.error('Error fetching OID name:', error);
+            }
+        }
+    }
+
     componentDidMount(): void {
         super.componentDidMount();
         if (this.state.rxData.dimmerOid) {
@@ -163,6 +181,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
             if (value !== null && value !== undefined) {
                 this.setState({ localValue: Number(value) || 0 });
             }
+            this.fetchOidName();
         }
     }
 
@@ -319,7 +338,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                 }}
             >
                 <DialogTitle>
-                    {this.state.rxData.widgetTitle || 'Dimmer Control'}
+                    {this.state.rxData.widgetTitle || this.state.oidName || 'Dimmer Control'}
                     <IconButton
                         sx={{
                             position: 'absolute',
