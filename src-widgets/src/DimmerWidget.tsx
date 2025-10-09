@@ -12,12 +12,7 @@ import {
     Tooltip,
     ButtonGroup,
 } from '@mui/material';
-import {
-    Lightbulb,
-    LightbulbOutlined,
-    Close,
-    PowerSettingsNew,
-} from '@mui/icons-material';
+import { Lightbulb, LightbulbOutlined, Close, PowerSettingsNew } from '@mui/icons-material';
 
 import Generic from './Generic';
 
@@ -320,7 +315,11 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                 </DialogTitle>
                 <DialogContent>
                     <Box sx={{ pt: 2, pb: 2 }}>
-                        <Typography variant="h4" align="center" sx={{ mb: 3 }}>
+                        <Typography
+                            variant="h4"
+                            align="center"
+                            sx={{ mb: 3 }}
+                        >
                             {Math.round(this.state.localValue)}%
                         </Typography>
 
@@ -348,7 +347,10 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             sx={{ mb: 2 }}
                         >
                             {quickButtons.slice(0, 3).map(btn => (
-                                <Tooltip key={btn.value} title={Generic.t(btn.label)}>
+                                <Tooltip
+                                    key={btn.value}
+                                    title={Generic.t(btn.label)}
+                                >
                                     <Button
                                         onClick={() => this.onQuickSet(btn.value)}
                                         sx={{
@@ -371,7 +373,10 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             variant="outlined"
                         >
                             {quickButtons.slice(3).map(btn => (
-                                <Tooltip key={btn.value} title={Generic.t(btn.label)}>
+                                <Tooltip
+                                    key={btn.value}
+                                    title={Generic.t(btn.label)}
+                                >
                                     <Button
                                         onClick={() => this.onQuickSet(btn.value)}
                                         sx={{
