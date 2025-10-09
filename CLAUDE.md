@@ -9,6 +9,9 @@ This is an ioBroker vis-2 custom widget development framework using Vite and Mod
 **Project Name**: ioBroker.vis-2-widgets-deluxe
 **Purpose**: Custom widget development for ioBroker vis-2
 
+**📚 Additional Documentation:**
+- [WIDGETS.md](./WIDGETS.md) - Comprehensive widget development guide (translations, icons, styling, troubleshooting)
+
 ## Quick Start
 
 ### Initial Setup (one-time)
@@ -101,6 +104,8 @@ class MyWidget extends Generic<MyWidgetData, MyWidgetState> {
         return {
             id: 'tplDeluxeMyWidget',
             visSet: 'vis-2-widgets-deluxe',
+            visSetLabel: 'set_label',
+            visWidgetLabel: 'my_widget',
             visName: 'My Widget',
             visAttrs: [/* configuration */],
             visDefaultStyle: { width: 400, height: 300 }
@@ -121,7 +126,7 @@ export default MyWidget;
 exposes: {
     './HelloWorld': './src/HelloWorld',
     './MyWidget': './src/MyWidget',  // Add here
-    './translations': './src/translations.js',
+    './translations': './src/translations.ts',
 }
 ```
 
@@ -275,4 +280,4 @@ MIT
 - **Node**: >= 20.x
 
 ---
-*Last updated: 2025-10-07*
+*Last updated: 2025-10-09*
