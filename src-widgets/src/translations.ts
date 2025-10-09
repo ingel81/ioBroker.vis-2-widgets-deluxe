@@ -1,5 +1,6 @@
 const translations = {
     en: {
+        set_label: 'Deluxe Widgets',
         hello_world: 'Hello World Widget',
         message: 'Message',
         text_color: 'Text Color',
@@ -18,6 +19,9 @@ const translations = {
         debug_mode_tooltip: 'Shows technical information about the widget',
         // Dimmer Widget
         dimmer_widget: 'Dimmer Widget',
+        deluxe_common: 'Deluxe - Common',
+        deluxe_icon_settings: 'Deluxe - Icon Settings',
+        deluxe_dialog_settings: 'Deluxe - Dialog Settings',
         dimmer_state: 'Dimmer State',
         dimmer_state_tooltip: 'ioBroker state for dimmer value (0-100%)',
         widget_title: 'Widget Title',
@@ -34,6 +38,7 @@ const translations = {
         off: 'Off',
     },
     de: {
+        set_label: 'Deluxe Widgets',
         hello_world: 'Hallo Welt Widget',
         message: 'Nachricht',
         text_color: 'Textfarbe',
@@ -52,6 +57,9 @@ const translations = {
         debug_mode_tooltip: 'Zeigt technische Informationen zum Widget',
         // Dimmer Widget
         dimmer_widget: 'Dimmer Widget',
+        deluxe_common: 'Deluxe - Allgemein',
+        deluxe_icon_settings: 'Deluxe - Icon-Einstellungen',
+        deluxe_dialog_settings: 'Deluxe - Dialog-Einstellungen',
         dimmer_state: 'Dimmer-Zustand',
         dimmer_state_tooltip: 'ioBroker-Zustand für Dimmerwert (0-100%)',
         widget_title: 'Widget-Titel',

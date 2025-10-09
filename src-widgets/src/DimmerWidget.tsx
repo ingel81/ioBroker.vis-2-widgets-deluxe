@@ -12,7 +12,8 @@ import {
     Tooltip,
     ButtonGroup,
 } from '@mui/material';
-import { Lightbulb, LightbulbOutlined, Close, PowerSettingsNew } from '@mui/icons-material';
+import { Lightbulb, Close, PowerSettingsNew } from '@mui/icons-material';
+import { Icon } from '@iobroker/adapter-react-v5';
 
 import Generic from './Generic';
 
@@ -53,11 +54,13 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
         return {
             id: 'tplDeluxeDimmerWidget',
             visSet: 'vis-2-widgets-deluxe',
+            visSetLabel: 'set_label',
             visWidgetLabel: 'dimmer_widget',
             visName: 'Dimmer Widget',
             visAttrs: [
                 {
                     name: 'common',
+                    label: 'deluxe_common',
                     fields: [
                         {
                             name: 'dimmerOid',
@@ -87,7 +90,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                 },
                 {
                     name: 'icon',
-                    label: 'icon_settings',
+                    label: 'deluxe_icon_settings',
                     fields: [
                         {
                             name: 'icon',
@@ -123,7 +126,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                 },
                 {
                     name: 'dialog',
-                    label: 'dialog_settings',
+                    label: 'deluxe_dialog_settings',
                     fields: [
                         {
                             name: 'sliderColor',
@@ -208,62 +211,77 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
     renderIcon(): React.JSX.Element {
         const value = this.state.localValue;
         const isOn = value > 0;
-        const iconColor = isOn
-            ? this.state.rxData.activeColor || '#FFC107'
-            : this.state.rxData.inactiveColor || '#CCCCCC';
-
         const iconSize = this.state.rxData.iconSize || 48;
+        const icon = this.state.rxData.icon || 'lightbulb';
 
-        let IconComponent = Lightbulb;
+        // Determine icon color based on state
+        const iconColor = isOn
+            ? this.state.rxData.activeColor || '#FFA726'
+            : this.state.rxData.inactiveColor || '#757575';
 
-        if (this.state.rxData.icon) {
-            if (this.state.rxData.icon === 'lightbulb_outlined') {
-                IconComponent = LightbulbOutlined;
-            } else if (this.state.rxData.icon === 'power') {
-                IconComponent = PowerSettingsNew;
-            }
-        }
-
-        if (!isOn) {
-            IconComponent = LightbulbOutlined;
-        }
+        // Check if icon is a data URL (SVG/Base64) or icon name
+        const isDataUrl = icon.startsWith('data:') || icon.startsWith('http');
 
         return (
             <Box
                 sx={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    justifyContent: 'center',
+                    position: 'relative',
                     height: '100%',
                     width: '100%',
+                    overflow: 'hidden',
+                    padding: 0,
+                    margin: 0,
                 }}
             >
                 <IconButton
                     onClick={() => !this.state.editMode && this.setState({ dialog: true })}
                     disabled={this.state.editMode}
                     sx={{
-                        padding: 1,
+                        padding: 0,
+                        margin: 0,
+                        height: '100%',
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                         '&:hover': {
                             backgroundColor: 'rgba(0, 0, 0, 0.04)',
                         },
                     }}
                 >
-                    <IconComponent
-                        sx={{
-                            fontSize: iconSize,
-                            color: iconColor,
-                            filter: isOn ? `brightness(${0.5 + value / 200})` : 'none',
-                            transition: 'all 0.3s ease',
-                        }}
-                    />
+                    {isDataUrl ? (
+                        <Icon
+                            src={icon}
+                            style={{
+                                width: iconSize,
+                                height: iconSize,
+                                maxWidth: '100%',
+                                maxHeight: '100%',
+                                color: iconColor,
+                            }}
+                        />
+                    ) : (
+                        <Lightbulb
+                            sx={{
+                                fontSize: iconSize,
+                                maxWidth: '100%',
+                                maxHeight: '100%',
+                                color: iconColor,
+                            }}
+                        />
+                    )}
                 </IconButton>
                 {this.state.rxData.showPercentage && (
                     <Typography
                         variant="caption"
                         sx={{
-                            color: isOn ? this.state.rxData.activeColor : this.state.rxData.iconColor,
-                            fontWeight: isOn ? 'bold' : 'normal',
+                            position: 'absolute',
+                            bottom: 2,
+                            left: 0,
+                            right: 0,
+                            textAlign: 'center',
+                            color: iconColor,
+                            pointerEvents: 'none',
                         }}
                     >
                         {Math.round(value)}%
@@ -326,8 +344,8 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                         <Box sx={{ px: 2, mb: 3 }}>
                             <Slider
                                 value={this.state.localValue}
-                                onChange={(e, value) => this.onDimmerChange(value as number)}
-                                onChangeCommitted={(e, value) => this.finishChanging(value as number)}
+                                onChange={(_e, value) => this.onDimmerChange(value as number)}
+                                onChangeCommitted={(_e, value) => this.finishChanging(value as number)}
                                 min={0}
                                 max={100}
                                 valueLabelDisplay="auto"
@@ -421,7 +439,10 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                     boxShadow: 1,
                     height: '100%',
                     width: '100%',
-                    padding: 1,
+                    boxSizing: 'border-box',
+                    overflow: 'hidden',
+                    padding: 0,
+                    margin: 0,
                 }}
             >
                 {content}

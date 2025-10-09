@@ -53,6 +53,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
         return {
             id: 'tplDeluxeHelloWorld',
             visSet: 'vis-2-widgets-deluxe',
+            visSetLabel: 'set_label',
             visWidgetLabel: 'hello_world',
             visName: 'Hello World',
             visAttrs: [
