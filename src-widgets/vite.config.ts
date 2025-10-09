@@ -1,4 +1,3 @@
-// @ts-expect-error no types
 import { moduleFederationShared } from '@iobroker/types-vis-2/modulefederation.vis.config';
 import { federation } from '@module-federation/vite';
 import react from '@vitejs/plugin-react';
