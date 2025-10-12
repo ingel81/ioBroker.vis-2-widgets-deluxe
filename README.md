@@ -25,7 +25,15 @@ A demonstration widget that showcases the capabilities of the framework:
 - **Debug Mode**: View widget internals for development
 - **User Input**: Text fields and interactive elements
 
-![Hello World Widget](img/hello-world-preview.png)
+### Dimmer Widget
+
+A customizable dimmer control widget for controlling dimmable lights:
+
+- **Slider Control**: Smooth dimming from 0-100%
+- **Quick Buttons**: Preset brightness levels (20%, 40%, 60%, 80%, 100%, off)
+- **Icon Display**: Customizable icon with active/inactive colors
+- **Real-time Updates**: Reflects current device state
+- **Dialog Interface**: Clean popup control interface
 
 ## Development
 
@@ -141,7 +149,6 @@ this.props.context.setValue('myStateOid', newValue);
 │   └── package.json
 ├── widgets/                     # Built widget files (auto-generated)
 ├── admin/                       # Admin panel files
-├── img/                         # Widget preview images
 └── io-package.json             # ioBroker package configuration
 ```
 
@@ -168,6 +175,11 @@ this.props.context.setValue('myStateOid', newValue);
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- Sizing fixen
+
 ### 0.1.1 (2025-10-12)
 
 - Testrelease

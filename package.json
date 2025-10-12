@@ -39,7 +39,6 @@
   },
   "files": [
     "admin/",
-    "img/",
     "io-package.json",
     "LICENSE",
     "widgets/"
