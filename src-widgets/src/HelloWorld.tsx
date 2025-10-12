@@ -29,6 +29,9 @@ interface HelloWorldRxData {
     stepSize: number;
     maxValue: number;
     minValue: number;
+
+    // Index signature for Generic compatibility
+    [key: string]: unknown;
 }
 
 // Define the widget state

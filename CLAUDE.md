@@ -281,3 +281,4 @@ MIT
 
 ---
 *Last updated: 2025-10-09*
+- commits nur auf anweisung durchführen, commits immer mit einer einzeiligen message und ohne claude footer oder co-author

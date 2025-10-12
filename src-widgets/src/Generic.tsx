@@ -4,10 +4,11 @@ import type VisRxWidget from '@iobroker/types-vis-2/visRxWidget';
 export const HISTORY_ADAPTER_NAMES = ['history', 'sql', 'influxdb'];
 
 export default class Generic<
-    RxData extends Record<string, any>,
+    RxData extends Record<string, unknown>,
     State extends Partial<VisRxWidgetState> = VisRxWidgetState,
 > extends (window.visRxWidget as typeof VisRxWidget)<RxData, State> {
-    getPropertyValue = (stateName: string): any => this.state.values[`${(this.state.rxData as any)[stateName]}.val`];
+    getPropertyValue = (stateName: string): unknown =>
+        this.state.values[`${(this.state.rxData as Record<string, unknown>)[stateName]}.val`];
 
     static getI18nPrefix(): string {
         return 'vis_2_widgets_deluxe_';

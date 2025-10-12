@@ -1,6 +1,6 @@
 declare global {
     interface Window {
-        CryptoJS: any;
+        CryptoJS: unknown;
         _localStorage?: Storage;
         _sessionStorage?: Storage;
     }

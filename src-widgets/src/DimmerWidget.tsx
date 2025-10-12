@@ -29,6 +29,7 @@ interface DimmerWidgetRxData {
     sliderColor: string;
     buttonsColor: string;
     showPercentage: boolean;
+    [key: string]: unknown;
 }
 
 interface DimmerWidgetState extends VisRxWidgetState {
