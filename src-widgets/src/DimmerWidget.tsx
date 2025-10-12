@@ -185,7 +185,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
             visDefaultStyle: {
                 width: 100,
                 height: 100,
-                position: 'relative',
+                position: 'absolute',
             },
             visPrev: 'widgets/vis-2-widgets-deluxe/img/prev_dimmer_widget.png',
         };

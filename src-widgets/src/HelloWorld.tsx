@@ -157,7 +157,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
             visDefaultStyle: {
                 width: 400,
                 height: 300,
-                position: 'relative',
+                position: 'absolute',
             },
             visPrev: 'widgets/vis-2-widgets-deluxe/img/prev_hello_world.png',
         };
