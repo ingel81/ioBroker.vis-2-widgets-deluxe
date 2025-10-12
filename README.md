@@ -168,8 +168,7 @@ this.props.context.setValue('myStateOid', newValue);
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.1.1 (2025-10-12)
 
 - Testrelease
 

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "news": {
+      "0.1.1": {
+        "en": "Testrelease",
+        "de": "Testrease",
+        "ru": "Проверка",
+        "pt": "Ensaio de libertação",
+        "nl": "Testrelease",
+        "fr": "Libération d'essai",
+        "it": "Analisi",
+        "es": "Testrelease",
+        "pl": "Testrelease",
+        "uk": "Тестування",
+        "zh-cn": "试释"
+      },
       "1.6.0": {
         "en": "Corrected \"Actual\" widget",
         "de": "Korrigiert \"Aktuell\" Widget",
@@ -80,19 +93,6 @@
         "pl": "Małe zmiany dla SweetHome3D",
         "uk": "Маленькі зміни для SweetHome3D",
         "zh-cn": "SweetHome3D 的小变化"
-      },
-      "1.4.7": {
-        "en": "Corrected thermostat chart button",
-        "de": "Thermostat-Taste korrigiert",
-        "ru": "Исправленная кнопка термостата",
-        "pt": "Botão do gráfico do termostato correto",
-        "nl": "Gecorrigeerde thermostaatkaartknop",
-        "fr": "Bouton de carte thermostat corrigée",
-        "it": "Pulsante grafico termostato corretto",
-        "es": "Botón de la tabla de termostatos corregido",
-        "pl": "Poprawiony przycisk wykresu termostatu",
-        "uk": "Виправлена кнопка термостату",
-        "zh-cn": "校正的恒温图按钮"
       }
     },
     "titleLang": {
