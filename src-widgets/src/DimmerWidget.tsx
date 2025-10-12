@@ -71,12 +71,6 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             tooltip: 'dimmer_state_tooltip',
                         },
                         {
-                            name: 'widgetTitle',
-                            label: 'widget_title',
-                            type: 'text',
-                            default: '',
-                        },
-                        {
                             name: 'noCard',
                             label: 'without_card',
                             type: 'checkbox',
@@ -107,12 +101,6 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             default: 48,
                         },
                         {
-                            name: 'iconColor',
-                            label: 'icon_color',
-                            type: 'color',
-                            default: '#666666',
-                        },
-                        {
                             name: 'activeColor',
                             label: 'active_color',
                             type: 'color',
@@ -130,6 +118,12 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                     name: 'dialog',
                     label: 'deluxe_dialog_settings',
                     fields: [
+                        {
+                            name: 'widgetTitle',
+                            label: 'widget_title',
+                            type: 'text',
+                            default: '',
+                        },
                         {
                             name: 'sliderColor',
                             label: 'slider_color',
@@ -341,7 +335,8 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                 }}
             >
                 <DialogTitle>
-                    {this.state.rxData.widgetTitle || this.state.oidName || 'Dimmer Control'}
+                    {this.state.rxData.widgetTitle ||
+                        (this.state.oidName ? `Dimmer Control - ${this.state.oidName}` : 'Dimmer Control')}
                     <IconButton
                         sx={{
                             position: 'absolute',
