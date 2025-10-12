@@ -13,9 +13,9 @@ import {
     ButtonGroup,
 } from '@mui/material';
 import { Lightbulb, Close, PowerSettingsNew } from '@mui/icons-material';
-import { Icon } from '@iobroker/adapter-react-v5';
 
 import Generic from './Generic';
+import { Icon } from './components';
 
 interface DimmerWidgetRxData {
     dimmerOid: string;
@@ -268,12 +268,12 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                     {isDataUrl ? (
                         <Icon
                             src={icon}
+                            color={iconColor}
                             style={{
                                 width: iconSize,
                                 height: iconSize,
                                 maxWidth: '100%',
                                 maxHeight: '100%',
-                                color: iconColor,
                             }}
                         />
                     ) : (
