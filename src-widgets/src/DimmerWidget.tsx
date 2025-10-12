@@ -184,7 +184,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
             if (value !== null && value !== undefined) {
                 this.setState({ localValue: Number(value) || 0 });
             }
-            this.fetchOidName();
+            void this.fetchOidName();
         }
     }
 
