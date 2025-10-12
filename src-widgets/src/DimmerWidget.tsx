@@ -24,11 +24,16 @@ interface DimmerWidgetRxData {
     iconColor: string;
     activeColor: string;
     inactiveColor: string;
-    noCard: boolean;
+    showCard: boolean;
     iconSize: number;
     sliderColor: string;
     buttonsColor: string;
     showPercentage: boolean;
+    cardBackgroundColor: string;
+    cardBorderRadiusTL: number;
+    cardBorderRadiusTR: number;
+    cardBorderRadiusBL: number;
+    cardBorderRadiusBR: number;
     [key: string]: unknown;
 }
 
@@ -72,10 +77,10 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             tooltip: 'dimmer_state_tooltip',
                         },
                         {
-                            name: 'noCard',
-                            label: 'without_card',
+                            name: 'showCard',
+                            label: 'show_card',
                             type: 'checkbox',
-                            default: false,
+                            default: true,
                         },
                         {
                             name: 'showPercentage',
@@ -111,7 +116,44 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             name: 'inactiveColor',
                             label: 'inactive_color',
                             type: 'color',
-                            default: '#CCCCCC',
+                            default: '#555555',
+                        },
+                    ],
+                },
+                {
+                    name: 'card',
+                    label: 'deluxe_card_settings',
+                    hidden: 'data.showCard !== true',
+                    fields: [
+                        {
+                            name: 'cardBackgroundColor',
+                            label: 'card_background_color',
+                            type: 'color',
+                            default: '#ffffff',
+                        },
+                        {
+                            name: 'cardBorderRadiusTL',
+                            label: 'card_border_radius_tl',
+                            type: 'number',
+                            default: 8,
+                        },
+                        {
+                            name: 'cardBorderRadiusTR',
+                            label: 'card_border_radius_tr',
+                            type: 'number',
+                            default: 8,
+                        },
+                        {
+                            name: 'cardBorderRadiusBL',
+                            label: 'card_border_radius_bl',
+                            type: 'number',
+                            default: 8,
+                        },
+                        {
+                            name: 'cardBorderRadiusBR',
+                            label: 'card_border_radius_br',
+                            type: 'number',
+                            default: 8,
                         },
                     ],
                 },
@@ -445,15 +487,19 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
             </>
         );
 
-        if (this.state.rxData.noCard || props.widget.usedInWidget) {
+        // Show card by default (if showCard is undefined or true)
+        if (this.state.rxData.showCard === false || props.widget.usedInWidget) {
             return content;
         }
 
         return (
             <Box
                 sx={{
-                    backgroundColor: '#ffffff',
-                    borderRadius: 1,
+                    backgroundColor: this.state.rxData.cardBackgroundColor || '#ffffff',
+                    borderTopLeftRadius: `${this.state.rxData.cardBorderRadiusTL ?? 8}px`,
+                    borderTopRightRadius: `${this.state.rxData.cardBorderRadiusTR ?? 8}px`,
+                    borderBottomLeftRadius: `${this.state.rxData.cardBorderRadiusBL ?? 8}px`,
+                    borderBottomRightRadius: `${this.state.rxData.cardBorderRadiusBR ?? 8}px`,
                     boxShadow: 1,
                     height: '100%',
                     width: '100%',
