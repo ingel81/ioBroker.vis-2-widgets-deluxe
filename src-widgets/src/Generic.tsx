@@ -8,7 +8,7 @@ export default class Generic<
     State extends Partial<VisRxWidgetState> = VisRxWidgetState,
 > extends (window.visRxWidget as typeof VisRxWidget)<RxData, State> {
     getPropertyValue = (stateName: string): unknown =>
-        this.state.values[`${(this.state.rxData as Record<string, unknown>)[stateName]}.val`];
+        this.state.values[`${String((this.state.rxData as Record<string, unknown>)[stateName])}.val`];
 
     static getI18nPrefix(): string {
         return 'vis_2_widgets_deluxe_';
