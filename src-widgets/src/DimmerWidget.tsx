@@ -169,7 +169,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                               obj.common.name.en ||
                               Object.values(obj.common.name)[0]
                             : obj.common.name;
-                    this.setState({ oidName: name as string });
+                    this.setState({ oidName: name });
                 }
             } catch (error) {
                 console.error('Error fetching OID name:', error);
