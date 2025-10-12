@@ -38,52 +38,54 @@ A demonstration widget that showcases the capabilities of the framework:
 
 1. Clone this repository
 2. Install dependencies:
-   ```bash
-   npm install
-   cd src-widgets
-   npm install
-   ```
+    ```bash
+    npm install
+    cd src-widgets
+    npm install
+    ```
 
 ### Creating New Widgets
 
 1. Create a new TypeScript file in `src-widgets/src/`:
-   ```typescript
-   // MyWidget.tsx
-   import React from 'react';
-   import Generic from './Generic';
 
-   class MyWidget extends Generic<MyWidgetData, MyWidgetState> {
-       static getWidgetInfo(): RxWidgetInfo {
-           return {
-               id: 'tplDeluxeMyWidget',
-               visSet: 'vis-2-widgets-deluxe',
-               visName: 'My Widget',
-               // ... configuration
-           };
-       }
+    ```typescript
+    // MyWidget.tsx
+    import React from 'react';
+    import Generic from './Generic';
 
-       renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element {
-           // Your widget rendering logic
-       }
-   }
-   ```
+    class MyWidget extends Generic<MyWidgetData, MyWidgetState> {
+        static getWidgetInfo(): RxWidgetInfo {
+            return {
+                id: 'tplDeluxeMyWidget',
+                visSet: 'vis-2-widgets-deluxe',
+                visName: 'My Widget',
+                // ... configuration
+            };
+        }
+
+        renderWidgetBody(props: RxRenderWidgetProps): React.JSX.Element {
+            // Your widget rendering logic
+        }
+    }
+    ```
 
 2. Add your widget to `vite.config.ts`:
-   ```typescript
-   exposes: {
-       './HelloWorld': './src/HelloWorld',
-       './MyWidget': './src/MyWidget',  // Add your widget here
-       './translations': './src/translations.js',
-   }
-   ```
+
+    ```typescript
+    exposes: {
+        './HelloWorld': './src/HelloWorld',
+        './MyWidget': './src/MyWidget',  // Add your widget here
+        './translations': './src/translations.js',
+    }
+    ```
 
 3. Update `io-package.json`:
-   ```json
-   "components": [
-       "HelloWorld",
-       "MyWidget"  // Add your widget here
-   ]
-   ```
+    ```json
+    "components": [
+        "HelloWorld",
+        "MyWidget"  // Add your widget here
+    ]
+    ```
 
 ### Build Commands
 
@@ -110,6 +112,7 @@ Each widget extends the `Generic` base class and must implement:
 - `renderWidgetBody()`: Main rendering logic
 
 Available hooks:
+
 - `componentDidMount()`: Widget initialization
 - `componentDidUpdate()`: React to prop/state changes
 - `getPropertyValue()`: Get ioBroker state values
@@ -161,7 +164,17 @@ this.props.context.setValue('myStateOid', newValue);
 
 ## Changelog
 
+<!--
+  Placeholder for the next version (at the beginning of the line):
+  ### **WORK IN PROGRESS**
+-->
+
+**WORK IN PROGRESS**
+
+- Testrelease
+
 ### 0.1.0 (2024-01-XX)
+
 - Initial release with HelloWorld widget
 - Basic framework setup
 - Development environment configured
