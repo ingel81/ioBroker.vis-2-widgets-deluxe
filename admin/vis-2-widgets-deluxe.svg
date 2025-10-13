@@ -220,17 +220,12 @@
        inkscape:label="Drop Shadow"
        inkscape:menu-tooltip="Bright chrome effect"
        inkscape:menu="Non-Realistic 3D Shaders"
-       height="1.61776"
-       y="-0.29760701"
-       width="1.487382"
-       x="-0.23479719"
+       height="1.0766564"
+       y="-0.027055183"
+       width="1.0566004"
+       x="-0.019976629"
        style="color-interpolation-filters:sRGB;"
        id="filter292">
-      <feGaussianBlur
-         stdDeviation="5"
-         result="result8"
-         in="SourceGraphic"
-         id="feGaussianBlur287" />
       <feComposite
          in2="result8"
          operator="xor"
@@ -323,44 +318,75 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:zoom="6.4155209"
-     inkscape:cx="40.604653"
-     inkscape:cy="56.347724"
+     inkscape:cx="35.382941"
+     inkscape:cy="49.489356"
      inkscape:window-width="2048"
      inkscape:window-height="1080"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="g1" />
+     inkscape:current-layer="g1"
+     showguides="true"
+     showgrid="false">
+    <inkscape:grid
+       id="grid1"
+       units="px"
+       originx="0"
+       originy="0"
+       spacingx="1"
+       spacingy="1"
+       empcolor="#0099e5"
+       empopacity="0.30196078"
+       color="#0099e5"
+       opacity="0.14901961"
+       empspacing="5"
+       enabled="true"
+       visible="false" />
+    <sodipodi:guide
+       position="0,96"
+       orientation="0,96"
+       id="guide2"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="96,96"
+       orientation="96,0"
+       id="guide3"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="96,0"
+       orientation="0,-96"
+       id="guide4"
+       inkscape:locked="false" />
+    <sodipodi:guide
+       position="0,0"
+       orientation="-96,0"
+       id="guide5"
+       inkscape:locked="false" />
+  </sodipodi:namedview>
   <g
      inkscape:groupmode="layer"
      inkscape:label="Image"
      id="g1">
     <rect
-       style="fill:none;stroke:#2cafb6;stroke-width:2.71702;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:#e2e2e2;fill-opacity:1;stroke:#393939;stroke-width:2.71702;stroke-dasharray:none;stroke-opacity:1"
        id="rect2"
        width="82.282974"
        height="82.562851"
-       x="6.6581588"
-       y="6.1905427"
+       x="6.8585129"
+       y="6.7185745"
        rx="20.314194"
        ry="20.314194" />
     <text
        xml:space="preserve"
-       style="font-size:62.1201px;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#c7ce13;fill-opacity:1;stroke:none;stroke-width:29.1602;stroke-dasharray:none;stroke-opacity:1;filter:url(#filter292)"
-       x="25.429224"
-       y="70.701134"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48.7584px;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;display:inline;fill:#393939;fill-opacity:1;stroke:none;stroke-width:22.8879;stroke-dasharray:none;stroke-opacity:1"
+       x="8.0831099"
+       y="62.29121"
        id="text287"
-       transform="matrix(1.1666671,0,0,1.1666671,-10.046257,-9.3613398)"><tspan
+       transform="scale(0.9350926,1.0694128)"><tspan
          sodipodi:role="line"
          id="tspan287"
-         x="25.429224"
-         y="70.701134"
-         style="stroke-width:29.1602">W</tspan></text>
-    <path
-       d="m 88.593575,43.136524 q 0,11.897238 -6.50733,17.944453 -6.441598,5.981485 -18.010183,5.981485 H 50.995672 V 20.130815 h 14.460732 q 7.098905,0 12.291622,2.629223 5.192717,2.629224 8.019133,7.756211 2.826416,5.061256 2.826416,12.620275 z m -6.244407,0.197192 q 0,-9.399476 -4.666873,-13.737695 -4.601141,-4.40395 -13.080389,-4.40395 h -7.69048 v 36.809135 h 6.375868 q 19.061874,0 19.061874,-18.66749 z"
-       id="text4"
-       style="font-size:65.7306px;fill:#2cafb6;stroke-width:5.861;filter:url(#filter282)"
-       transform="matrix(0.91765269,0,0,1.0897369,-32,0)"
-       aria-label="D" />
+         x="8.0831099"
+         y="62.29121"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:48.7584px;font-family:Sans;-inkscape-font-specification:'Sans, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#393939;fill-opacity:1;stroke-width:22.8879">DW</tspan></text>
   </g>
 </svg>
