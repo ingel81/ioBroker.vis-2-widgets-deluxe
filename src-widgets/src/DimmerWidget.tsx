@@ -9,7 +9,6 @@ import {
     Slider,
     Box,
     Typography,
-    Tooltip,
     ButtonGroup,
 } from '@mui/material';
 import { Lightbulb, Close, PowerSettingsNew } from '@mui/icons-material';
@@ -98,7 +97,8 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             name: 'icon',
                             label: 'icon',
                             type: 'icon64',
-                            default: 'lightbulb',
+                            default:
+                                'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBmaWxsPSJjdXJyZW50Q29sb3IiIGQ9Ik05IDIxYzAgLjUuNCAxIDEgMWg0Yy42IDAgMS0uNSAxLTF2LTFIOXYxem0zLTE5QzguMSAyIDUgNS4xIDUgOWMwIDIuNCAxLjIgNC41IDMgNS43VjE3YzAgLjUuNCAxIDEgMWg2Yy42IDAgMS0uNSAxLTF2LTIuM2MxLjgtMS4zIDMtMy40IDMtNS43YzAtMy45LTMuMS03LTctN3oiLz48L3N2Zz4=',
                         },
                         {
                             name: 'iconSize',
@@ -186,7 +186,10 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                 width: 100,
                 height: 100,
                 position: 'absolute',
+                'overflow-x': 'visible',
+                'overflow-y': 'visible',
             },
+            visResizable: true,
             visPrev: 'widgets/vis-2-widgets-deluxe/img/prev_dimmer_widget.png',
         };
     }
@@ -271,15 +274,18 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
         const value = this.state.localValue;
         const isOn = value > 0;
         const iconSize = this.state.rxData.iconSize || 48;
-        const icon = this.state.rxData.icon || 'lightbulb';
+        const icon = this.state.rxData.icon;
 
         // Determine icon color based on state
         const iconColor = isOn
             ? this.state.rxData.activeColor || '#FFA726'
             : this.state.rxData.inactiveColor || '#757575';
 
+        // Check if icon exists and is not empty
+        const hasIcon = icon && icon.trim() !== '';
+
         // Check if icon is a data URL (SVG/Base64) or icon name
-        const isDataUrl = icon.startsWith('data:') || icon.startsWith('http');
+        const isDataUrl = hasIcon && (icon.startsWith('data:') || icon.startsWith('http'));
 
         return (
             <Box
@@ -308,26 +314,30 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                         },
                     }}
                 >
-                    {isDataUrl ? (
-                        <Icon
-                            src={icon}
-                            color={iconColor}
-                            style={{
-                                width: iconSize,
-                                height: iconSize,
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                            }}
-                        />
-                    ) : (
-                        <Lightbulb
-                            sx={{
-                                fontSize: iconSize,
-                                maxWidth: '100%',
-                                maxHeight: '100%',
-                                color: iconColor,
-                            }}
-                        />
+                    {hasIcon && (
+                        <>
+                            {isDataUrl ? (
+                                <Icon
+                                    src={icon}
+                                    color={iconColor}
+                                    style={{
+                                        width: iconSize,
+                                        height: iconSize,
+                                        maxWidth: '100%',
+                                        maxHeight: '100%',
+                                    }}
+                                />
+                            ) : (
+                                <Lightbulb
+                                    sx={{
+                                        fontSize: iconSize,
+                                        maxWidth: '100%',
+                                        maxHeight: '100%',
+                                        color: iconColor,
+                                    }}
+                                />
+                            )}
+                        </>
                     )}
                 </IconButton>
                 {this.state.rxData.showPercentage && (
@@ -425,24 +435,20 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             sx={{ mb: 2 }}
                         >
                             {quickButtons.slice(0, 3).map(btn => (
-                                <Tooltip
+                                <Button
                                     key={btn.value}
-                                    title={Generic.t(btn.label)}
-                                >
-                                    <Button
-                                        onClick={() => this.onQuickSet(btn.value)}
-                                        sx={{
-                                            color: this.state.rxData.buttonsColor || '#2196F3',
+                                    onClick={() => this.onQuickSet(btn.value)}
+                                    sx={{
+                                        color: this.state.rxData.buttonsColor || '#2196F3',
+                                        borderColor: this.state.rxData.buttonsColor || '#2196F3',
+                                        '&:hover': {
                                             borderColor: this.state.rxData.buttonsColor || '#2196F3',
-                                            '&:hover': {
-                                                borderColor: this.state.rxData.buttonsColor || '#2196F3',
-                                                backgroundColor: `${this.state.rxData.buttonsColor || '#2196F3'}10`,
-                                            },
-                                        }}
-                                    >
-                                        {btn.icon || btn.label}
-                                    </Button>
-                                </Tooltip>
+                                            backgroundColor: `${this.state.rxData.buttonsColor || '#2196F3'}10`,
+                                        },
+                                    }}
+                                >
+                                    {btn.icon || btn.label}
+                                </Button>
                             ))}
                         </ButtonGroup>
 
@@ -451,24 +457,20 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
                             variant="outlined"
                         >
                             {quickButtons.slice(3).map(btn => (
-                                <Tooltip
+                                <Button
                                     key={btn.value}
-                                    title={Generic.t(btn.label)}
-                                >
-                                    <Button
-                                        onClick={() => this.onQuickSet(btn.value)}
-                                        sx={{
-                                            color: this.state.rxData.buttonsColor || '#2196F3',
+                                    onClick={() => this.onQuickSet(btn.value)}
+                                    sx={{
+                                        color: this.state.rxData.buttonsColor || '#2196F3',
+                                        borderColor: this.state.rxData.buttonsColor || '#2196F3',
+                                        '&:hover': {
                                             borderColor: this.state.rxData.buttonsColor || '#2196F3',
-                                            '&:hover': {
-                                                borderColor: this.state.rxData.buttonsColor || '#2196F3',
-                                                backgroundColor: `${this.state.rxData.buttonsColor || '#2196F3'}10`,
-                                            },
-                                        }}
-                                    >
-                                        {btn.label}
-                                    </Button>
-                                </Tooltip>
+                                            backgroundColor: `${this.state.rxData.buttonsColor || '#2196F3'}10`,
+                                        },
+                                    }}
+                                >
+                                    {btn.label}
+                                </Button>
                             ))}
                         </ButtonGroup>
                     </Box>
