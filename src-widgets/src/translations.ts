@@ -1,7 +1,7 @@
 const translations = {
     en: {
         set_label: 'Deluxe Widgets',
-        hello_world: 'Hello World Widget',
+        hello_world: 'Hello World',
         message: 'Message',
         text_color: 'Text Color',
         background_color: 'Background Color',
@@ -18,7 +18,7 @@ const translations = {
         debug_mode: 'Debug Mode',
         debug_mode_tooltip: 'Shows technical information about the widget',
         // Dimmer Widget
-        dimmer_widget: 'Dimmer Widget',
+        dimmer_widget: 'Dimmer',
         deluxe_common: 'Deluxe - Common',
         deluxe_icon_settings: 'Deluxe - Icon Settings',
         deluxe_card_settings: 'Deluxe - Card Settings',

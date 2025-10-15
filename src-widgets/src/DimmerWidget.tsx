@@ -62,6 +62,7 @@ class DimmerWidget extends Generic<DimmerWidgetRxData, DimmerWidgetState> {
             id: 'tplDeluxeDimmerWidget',
             visSet: 'vis-2-widgets-deluxe',
             visSetLabel: 'set_label',
+            visSetColor: 'rgba(18, 179, 160, 1)',
             visWidgetLabel: 'dimmer_widget',
             visName: 'Dimmer Widget',
             visAttrs: [

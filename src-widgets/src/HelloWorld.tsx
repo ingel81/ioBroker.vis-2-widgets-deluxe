@@ -57,6 +57,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
             id: 'tplDeluxeHelloWorld',
             visSet: 'vis-2-widgets-deluxe',
             visSetLabel: 'set_label',
+            visSetColor: 'rgba(18, 179, 160, 1)',
             visWidgetLabel: 'hello_world',
             visName: 'Hello World',
             visAttrs: [
@@ -67,7 +68,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
                             name: 'message',
                             label: 'message',
                             type: 'text',
-                            default: 'Hello Deluxe 123456 World! 🚀',
+                            default: 'Hello World! 🚀',
                         },
                         {
                             name: 'textColor',
@@ -155,9 +156,11 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
                 },
             ],
             visDefaultStyle: {
-                width: 400,
-                height: 300,
+                width: 200,
+                height: 260,
                 position: 'absolute',
+                'overflow-x': 'visible',
+                'overflow-y': 'visible',
             },
             visPrev: 'widgets/vis-2-widgets-deluxe/img/prev_hello_world.png',
         };
