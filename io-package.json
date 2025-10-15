@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "news": {
+      "0.1.2": {
+        "en": "dimmer functional (not finished)\ncard and colors fixed, better defaults\nSizing fixen",
+        "de": "dimmer funktionell (nicht fertig)\nkarte und farben fixiert, bessere standardeinstellungen\nSizing fixing",
+        "ru": "диммер функциональный (не законченный)\nкарты и цвета фиксированные, лучшие по умолчанию\nФиксированный размер",
+        "pt": "dimmer funcional (não terminado)\ncartão e cores fixos, melhores padrões\nCorreção de dimensionamento",
+        "nl": "dimmer functioneel (niet voltooid)\nkaart en kleuren vast, betere standaardinstellingen\nSizefixen",
+        "fr": "variateur fonctionnel (non terminé)\ncarte et couleurs fixes, meilleurs par défaut\nFixation de calibrage",
+        "it": "dimmer funzionale (non finito)\nscheda e colori fissi, migliori di default\nSistema di dimensionamento",
+        "es": "dimmer funcional (no terminado)\ntarjeta y colores fijos, mejores predeterminados\nSizing fixen",
+        "pl": "przyciemniacz funkcjonalny (niegotowy)\nkarta i kolory stałe, lepsze domyślne\nMocowanie mocujące",
+        "uk": "занурення функціональних (не готових)\nкарти і кольори фіксовані, кращі за замовчуванням\nЗастібка застібка",
+        "zh-cn": "dimmer 函数( 未完成)\n已修复的卡片和颜色, 更好的默认值\n大小固定"
+      },
       "0.1.1": {
         "en": "Testrelease",
         "de": "Testrease",
@@ -80,19 +93,6 @@
         "pl": "Poprawione okno dialogowe rolet\nDodano opcję odwrotną dla rolet",
         "uk": "Виправлені жалюзі діалог\nДодано інвертний варіант для жалюзі",
         "zh-cn": "已校正的盲点对话框\n添加百叶窗的反向选项"
-      },
-      "1.4.8": {
-        "en": "Small changes for SweetHome3D",
-        "de": "Kleine Änderungen für SweetHome3D",
-        "ru": "Небольшие изменения для SweetHome3D",
-        "pt": "Pequenas mudanças para SweetHome3D",
-        "nl": "Kleine wijzigingen voor SweetHome3D",
-        "fr": "Petits changements pour SweetHome3D",
-        "it": "Piccoli cambiamenti per SweetHome3D",
-        "es": "Pequeños cambios para SweetHome3D",
-        "pl": "Małe zmiany dla SweetHome3D",
-        "uk": "Маленькі зміни для SweetHome3D",
-        "zh-cn": "SweetHome3D 的小变化"
       }
     },
     "titleLang": {
