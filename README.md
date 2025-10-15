@@ -178,6 +178,8 @@ this.props.context.setValue('myStateOid', newValue);
 
 ### **WORK IN PROGRESS**
 
+- dimmer functional (not finished)
+- card and colors fixed, better defaults
 - Sizing fixen
 
 ### 0.1.1 (2025-10-12)
