@@ -175,6 +175,11 @@ this.props.context.setValue('myStateOid', newValue);
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- npm deployment adjusted
+
 ### 0.1.2 (2025-10-15)
 
 - dimmer functional (not finished)
