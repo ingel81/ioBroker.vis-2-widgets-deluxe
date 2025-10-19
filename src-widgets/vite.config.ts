@@ -16,7 +16,7 @@ const config = {
             filename: 'customWidgets.js',
             exposes: {
                 './HelloWorld': './src/HelloWorld',
-                './DimmerWidget': './src/DimmerWidget',
+                './OneIconToRuleThemAll': './src/OneIconToRuleThemAll',
                 './translations': './src/translations.ts',
             },
             remotes: {},

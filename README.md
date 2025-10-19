@@ -175,6 +175,13 @@ this.props.context.setValue('myStateOid', newValue);
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- new general purpose widget >> "one icon to rule them all"
+- dimmer widget removed
+- refactor & cleanup
+
 ### 0.1.3 (2025-10-19)
 
 - npm deployment adjusted
