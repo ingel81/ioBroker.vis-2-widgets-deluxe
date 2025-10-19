@@ -175,8 +175,7 @@ this.props.context.setValue('myStateOid', newValue);
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.2.0 (2025-10-19)
 
 - new general purpose widget >> "one icon to rule them all"
 - dimmer widget removed
