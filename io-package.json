@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "news": {
+      "0.1.3": {
+        "en": "npm deployment adjusted",
+        "de": "npm-bereitstellung angepasst",
+        "ru": "npm развертывание скорректировано",
+        "pt": "implantação npm ajustada",
+        "nl": "npm implementatie aangepast",
+        "fr": "npm de déploiement ajusté",
+        "it": "npm implementazione regolata",
+        "es": "npm deployment adjusted",
+        "pl": "npm dopasowane",
+        "uk": "npm розгортання регульовано",
+        "zh-cn": "npm 部署调整"
+      },
       "0.1.2": {
         "en": "dimmer functional (not finished)\ncard and colors fixed, better defaults\nSizing fixen",
         "de": "dimmer funktionell (nicht fertig)\nkarte und farben fixiert, bessere standardeinstellungen\nSizing fixing",
@@ -80,19 +93,6 @@
         "pl": "Naprawiono rekursywne wyszukiwanie ikon na kanale, urządzeniu, instancji i adapterze.",
         "uk": "Виправлено пошук рекурсивних іконок на каналі, пристрої, інстанції та адаптері.",
         "zh-cn": "在频道、设备、实例和适配器上修正了递归图标搜索."
-      },
-      "1.4.9": {
-        "en": "Corrected blinds dialog\nAdded the invert option for blinds",
-        "de": "Jalousien-Dialog korrigiert\nHinzufügen der Invert-Option für Blinds",
-        "ru": "Диалог исправленных жалюзи\nДобавить опцию инвертора для жалюзи",
-        "pt": "Corrected blinds diálogo\nAdicionado a opção invert para blinds",
-        "nl": "Gecorrigeerde blinds-dialoog\nDe optie omkeren voor blinden toegevoegd",
-        "fr": "Boîte de dialogue des stores corrigés\nAjout de l'option inverse pour les stores",
-        "it": "Finestra di dialogo delle tende corrette\nAggiunto l'opzione invert per ciechi",
-        "es": "Diálogo de persianas corregidas\nAñadido la opción de invertido para ciegos",
-        "pl": "Poprawione okno dialogowe rolet\nDodano opcję odwrotną dla rolet",
-        "uk": "Виправлені жалюзі діалог\nДодано інвертний варіант для жалюзі",
-        "zh-cn": "已校正的盲点对话框\n添加百叶窗的反向选项"
       }
     },
     "titleLang": {

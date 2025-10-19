@@ -175,8 +175,7 @@ this.props.context.setValue('myStateOid', newValue);
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.1.3 (2025-10-19)
 
 - npm deployment adjusted
 
