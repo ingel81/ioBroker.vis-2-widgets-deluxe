@@ -30,18 +30,21 @@ Ein universelles Widget mit verschiedenen Modi zur Steuerung unterschiedlicher G
 #### Modi
 
 **Dimmer (Dialog)**
+
 - Dimmer-Steuerung mit Dialog-Fenster
 - Slider von 0-100%
 - Schnellwahl-Buttons für häufige Helligkeitsstufen
 - Individuell anpassbares Icon mit Status-Anzeige
 
 **Switch (Toggle)**
+
 - Einfacher Ein/Aus-Schalter
 - Direktes Umschalten per Klick
 - Visuelle Status-Rückmeldung
 - Anpassbare Icons für Ein/Aus-Zustand
 
 **Heating (KNX)**
+
 - Heizungssteuerung für KNX-Systeme
 - Sollwert-Einstellung
 - Betriebsmodus-Auswahl (Komfort, Standby, Nacht, Frost)
@@ -69,6 +72,8 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 ### **WORK IN PROGRESS**
 
 - translations
+- refactor & cleanup
+- docs
 
 ### 0.2.1 (2025-10-19)
 
