@@ -1,0 +1,154 @@
+import React from 'react';
+import { Box, Typography, Button, FormControl, Select, MenuItem } from '@mui/material';
+import { Add, Remove } from '@mui/icons-material';
+import type { HeatingMode } from '../types';
+
+export interface HeatingDialogProps {
+    setpointValue: number | null;
+    valveValue: number | null;
+    currentMode: number | null;
+    modes: HeatingMode[];
+    controlType: 'button' | 'dropdown';
+    primaryColor: string;
+    formatTemperature: (value: number | null) => string;
+    formatValvePosition: (value: number | null) => string;
+    getCurrentModeName: (mode: number | null) => string;
+    onIncrease: () => void;
+    onDecrease: () => void;
+    onModeSwitch: () => void;
+    onModeSelect: (value: number) => void;
+}
+
+export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
+    ({
+        setpointValue,
+        valveValue,
+        currentMode,
+        modes,
+        controlType,
+        primaryColor,
+        formatTemperature,
+        formatValvePosition,
+        getCurrentModeName,
+        onIncrease,
+        onDecrease,
+        onModeSwitch,
+        onModeSelect,
+    }) => {
+        return (
+            <Box sx={{ pt: 2, pb: 2 }}>
+                {/* Setpoint Temperature */}
+                <Typography
+                    variant="h3"
+                    align="center"
+                    sx={{ mb: 1, fontWeight: 'bold' }}
+                >
+                    {formatTemperature(setpointValue)}
+                </Typography>
+
+                {/* Valve Position */}
+                <Typography
+                    variant="body2"
+                    align="center"
+                    sx={{ mb: 3, color: 'text.secondary' }}
+                >
+                    Valve: {formatValvePosition(valveValue)}
+                </Typography>
+
+                {/* Setpoint Control Buttons */}
+                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 3 }}>
+                    <Button
+                        variant="outlined"
+                        onClick={onDecrease}
+                        sx={{
+                            minWidth: 60,
+                            height: 60,
+                            color: primaryColor,
+                            borderColor: primaryColor,
+                            '&:hover': {
+                                borderColor: primaryColor,
+                                backgroundColor: `${primaryColor}10`,
+                            },
+                        }}
+                    >
+                        <Remove sx={{ fontSize: 32 }} />
+                    </Button>
+                    <Button
+                        variant="outlined"
+                        onClick={onIncrease}
+                        sx={{
+                            minWidth: 60,
+                            height: 60,
+                            color: primaryColor,
+                            borderColor: primaryColor,
+                            '&:hover': {
+                                borderColor: primaryColor,
+                                backgroundColor: `${primaryColor}10`,
+                            },
+                        }}
+                    >
+                        <Add sx={{ fontSize: 32 }} />
+                    </Button>
+                </Box>
+
+                {/* Operating Mode */}
+                <Box sx={{ mb: 2 }}>
+                    <Typography
+                        variant="body2"
+                        sx={{ mb: 1, fontWeight: 'bold' }}
+                    >
+                        Operating Mode:
+                    </Typography>
+
+                    {controlType === 'button' ? (
+                        <Button
+                            fullWidth
+                            variant="outlined"
+                            onClick={onModeSwitch}
+                            sx={{
+                                color: primaryColor,
+                                borderColor: primaryColor,
+                                '&:hover': {
+                                    borderColor: primaryColor,
+                                    backgroundColor: `${primaryColor}10`,
+                                },
+                            }}
+                        >
+                            {getCurrentModeName(currentMode)}
+                        </Button>
+                    ) : (
+                        <FormControl fullWidth>
+                            <Select
+                                value={currentMode ?? 0}
+                                onChange={e => onModeSelect(Number(e.target.value))}
+                                sx={{
+                                    color: primaryColor,
+                                    '& .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: primaryColor,
+                                    },
+                                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: primaryColor,
+                                    },
+                                    '&.Mui-focused .MuiOutlinedInput-notchedOutline': {
+                                        borderColor: primaryColor,
+                                    },
+                                }}
+                            >
+                                {modes.map(mode => (
+                                    <MenuItem
+                                        key={mode.value}
+                                        value={mode.value}
+                                    >
+                                        {mode.label}
+                                    </MenuItem>
+                                ))}
+                            </Select>
+                        </FormControl>
+                    )}
+                </Box>
+            </Box>
+        );
+    },
+);
+
+HeatingDialog.displayName = 'HeatingDialog';
