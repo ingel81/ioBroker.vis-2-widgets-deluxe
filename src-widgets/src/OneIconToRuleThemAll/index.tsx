@@ -126,10 +126,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         await this.fetchOidName();
     }
 
-    componentDidUpdate(prevProps: VisRxWidgetProps): void {
-        // @ts-ignore - Type mismatch with base class
-        super.componentDidUpdate(prevProps);
-
+    componentDidUpdate(): void {
         // Handle mode-specific state updates
         switch (this.state.rxData.mode) {
             case FlexMode.HEATING_KNX:

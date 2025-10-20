@@ -181,10 +181,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
         }
     }
 
-    componentDidUpdate(prevProps: VisRxWidgetProps): void {
-        // @ts-ignore - Type mismatch with base class
-        super.componentDidUpdate(prevProps);
-
+    componentDidUpdate(): void {
         // Update local counter when state changes
         if (this.state.rxData.counterOid && this.state.rxData.showCounter) {
             const value = this.getPropertyValue('counterOid');
@@ -435,7 +432,7 @@ class HelloWorld extends Generic<HelloWorldRxData, HelloWorldState> {
                         mb: 2,
                     }}
                 >
-                    {this.state.rxData.message || 'Hello Deluxe11 World! 🚀'}
+                    {this.state.rxData.message || 'Hello Deluxe World! 🚀'}
                 </Typography>
 
                 {/* Edit Mode Indicator */}

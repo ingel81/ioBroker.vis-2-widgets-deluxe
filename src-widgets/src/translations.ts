@@ -7,6 +7,7 @@ const translations = {
         background_color: 'Background Color',
         font_size: 'Font Size',
         show_card: 'Show Card',
+        without_card: 'Without Card',
         counter_group: 'Counter Settings',
         show_counter: 'Show Counter',
         counter_state: 'Counter State',
@@ -121,6 +122,7 @@ const translations = {
         background_color: 'Hintergrundfarbe',
         font_size: 'Schriftgröße',
         show_card: 'Karte anzeigen',
+        without_card: 'Ohne Karte',
         counter_group: 'Zähler-Einstellungen',
         show_counter: 'Zähler anzeigen',
         counter_state: 'Zähler-Status',
@@ -227,15 +229,60 @@ const translations = {
         heating_valve_label: 'Ventil',
         heating_mode_label: 'Modus',
     },
-    ru: {},
-    pt: {},
-    nl: {},
-    fr: {},
-    it: {},
-    es: {},
-    pl: {},
-    uk: {},
-    'zh-cn': {},
+    ru: {
+        // Russian translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    pt: {
+        // Portuguese translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    nl: {
+        // Dutch translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    fr: {
+        // French translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    it: {
+        // Italian translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    es: {
+        // Spanish translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    pl: {
+        // Polish translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    uk: {
+        // Ukrainian translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
+    'zh-cn': {
+        // Chinese (Simplified) translations (fallback to English until properly translated)
+        set_label: 'Deluxe Widgets',
+        hello_world: 'Hello World',
+        one_icon_widget: 'One Icon To Rule Them All',
+    },
     prefix: 'vis_2_widgets_deluxe_',
 };
 

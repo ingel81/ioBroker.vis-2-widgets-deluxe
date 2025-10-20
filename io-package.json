@@ -122,7 +122,7 @@
       "zh-cn": "vis-2 的自定义豪华小部件"
     },
     "authors": [
-      "Your Name <your.email@example.com>"
+      "ingel81 <ingel81@sgeht.net>"
     ],
     "keywords": [
       "vis-2-widgets-deluxe",
@@ -130,9 +130,9 @@
     ],
     "platform": "Javascript/Node.js",
     "icon": "vis-2-widgets-deluxe.png",
-    "extIcon": "https://raw.githubusercontent.com/yourusername/ioBroker.vis-2-widgets-deluxe/master/admin/vis-2-widgets-deluxe.png",
+    "extIcon": "https://raw.githubusercontent.com/ingel81/ioBroker.vis-2-widgets-deluxe/master/admin/vis-2-widgets-deluxe.png",
     "enabled": true,
-    "readme": "https://github.com/yourusername/ioBroker.vis-2-widgets-deluxe/blob/master/README.md",
+    "readme": "https://github.com/ingel81/ioBroker.vis-2-widgets-deluxe/blob/master/README.md",
     "loglevel": "info",
     "mode": "none",
     "singleton": true,
