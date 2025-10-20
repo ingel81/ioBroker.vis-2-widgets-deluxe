@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "news": {
+      "0.2.2": {
+        "en": "translations\nrefactor & cleanup\ndocs",
+        "de": "übersetzungen\nrefactor und reinigung\ndocs",
+        "ru": "переводы\nрефактор и очистка\nдокументы",
+        "pt": "traduções\nrefator & limpeza\ndogs",
+        "nl": "vertalingen\nrefactor & opruimen\ndocs",
+        "fr": "traductions\nrefactor & nettoyage\ndocs",
+        "it": "traduzioni\nrefactor & cleanup\ndocs",
+        "es": "traducciones\nrefactor \" limpieza \"\ndocs",
+        "pl": "tłumaczenia\nrefactor & cleanup\ndoki",
+        "uk": "переклади\nрефактор & очищення\nдокс",
+        "zh-cn": "翻译\n重构清理( c)\n文档"
+      },
       "0.2.1": {
         "en": "fix deps",
         "de": "deps",
@@ -80,19 +93,6 @@
         "pl": "Poprawiony widżet \"Actual\"",
         "uk": "Виправлено \"Actual\" віджет",
         "zh-cn": "更正“ 实际” 部件"
-      },
-      "1.5.3": {
-        "en": "Added support for older Android devices",
-        "de": "Unterstützung für ältere Android-Geräte hinzugefügt",
-        "ru": "Добавлена поддержка старых Android-устройств",
-        "pt": "Adicionado suporte para dispositivos Android mais antigos",
-        "nl": "Toegevoegd ondersteuning voor oudere Android-apparaten",
-        "fr": "Ajout du support pour les anciens appareils Android",
-        "it": "Aggiunto il supporto per i dispositivi Android più vecchi",
-        "es": "Añadido soporte para dispositivos Android más antiguos",
-        "pl": "Dodano wsparcie dla starszych urządzeń Android",
-        "uk": "Додано підтримку для старих пристроїв Android",
-        "zh-cn": "对较老的Android设备添加支持"
       }
     },
     "titleLang": {
