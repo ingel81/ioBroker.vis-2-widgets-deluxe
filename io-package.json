@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.3.1",
+    "version": "0.3.2",
     "news": {
+      "0.3.2": {
+        "en": "Heating (KNX): Dialog-Beschriftungen \"Valve\" und \"Operating Mode\" nun übersetzt (DE/EN)\nHeating (KNX): Default-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nHeating (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nDialog: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "de": "Heizung (KNX): Dialog-Beschriftungen \"Valve\" und \"Operating Mode\" nun übersetzt (DE/EN)\nHeizung (KNX): Standard-Modi-JSON (Komfort, Standby, Nacht, Frost)\nHeizung (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nDialog: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "ru": "Нагрев (KNX): Диалог-Beschriftungen \"Valve\" und \"Operating Mode\" nun übersetzt (DE/EN)\nОтопление (KNX): Default-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nОтопление (KNX): Стандартная икона auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nДиалог: Neue Standard-Primärfarbe rgba (48,142,134,1)",
+        "pt": "Aquecimento (KNX): Janela- Beschriftungen \"Valve\" und \"Modo Operacional\" nun übersetzt (DE/EN)\nAquecimento (KNX): Modi- JSON padrão aktualisiert (Komfort, standby, Nacht, Frost)\nAquecimento (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Eintellung \"Icon-Rotation\" (0-360°) für alle Modi\nDiálogo: Neue Standard- Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "nl": "Verwarming (KNX): dialoogvenster \"Valve\" und \"Operating Mode\" nun übersetzt (DE/EN)\nVerwarming (KNX): Standaard-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nVerwarming (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nDialoog: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "fr": "Chauffage (KNX): Dialog-Beschriftungen \"Valve\" und \"Mode d'exploitation\" nun übersetzt (DE/EN)\nChauffage (KNX): par défaut-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nChauffage (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Eintellung \"Icon-Rotation\" (0-360°) für alle Modi\nBoîte de dialogue: Neue Standard-Primärfarbe rgba(48.142,134,1) (Teal/Türkis)",
+        "it": "Riscaldamento (KNX): Dialog-Beschriftungen \"Valve\" und \"Modalità operativa\" suora übersetzt (DE/EN)\nRiscaldamento (KNX): Default-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nRiscaldamento (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nDialogo: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "es": "Calefacción (KNX): Dialog-Beschriftungen \"Valve\" und nun übersetzt (DE/EN)\nCalefacción (KNX): Default-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nCalefacción (KNX): Standard-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nDialog: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "pl": "Ogrzewanie (KNX): Dialog- Beschriftungen \"Valve\" und \"Operating Mode\" nun übersetzt (DE / EN)\nOgrzewanie (KNX): Default- Modit- JSON aktualisiert (Komfort, Standby, Nacht, Frost)\nOgrzewanie (KNX): Standard- Icon auf Heizkörper- Symbol geändert\nAllgemein: Neue Einstellung \"Icon- Rotation\" (0- 360 °) für alle Modi\nOkno dialogowe: Neue Standard - Primärfarbe rgba (48,142,134,1) (Teal / Türkis)",
+        "uk": "Опалення (KNX): Dialog-Beschriftungen \"Valve\" und \"Operating Mode\" nun übersetzt (DE/EN)\nОпалення (KNX): За замовчуванням-Modi-JSON aktualisiert (Комфорт, Стендбі, Nacht, Frost)\nОпалення (KNX): Стандарт-Icon auf Heizkörper-Symbol geändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi\nДіалог: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)",
+        "zh-cn": "加热( KNX): 对话- Beschriftungen \"Valve\" und \"Operating Mode\" 修女 übersetzt(DE/EN)\n加热( KNX): 默认- Modi- JSON aktualisiert(科姆福特、待命、纳赫特、弗罗斯特)\n加热(KNX):标准-Icon auf Heizkörper-Symbol gändert\nAllgemein: Neue Einstellung \"Icon-Rotation\" (0-360°) für alle Modi (英语)\n对话:Neue Standard-Primärfarbe rgba(48,142,134,1)(Teal/Türkis)"
+      },
       "0.3.1": {
         "en": "Heating (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"increase\"/\"decrease\", etc.) - Standard: true/false\nHeating (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
         "de": "Heizung (KNX): Wechselverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"increase\"/\"decrease\", etc.) - Standard: true/false\nHeizung (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
@@ -80,19 +93,6 @@
         "pl": "npm dopasowane",
         "uk": "npm розгортання регульовано",
         "zh-cn": "npm 部署调整"
-      },
-      "0.1.2": {
-        "en": "dimmer functional (not finished)\ncard and colors fixed, better defaults\nSizing fixen",
-        "de": "dimmer funktionell (nicht fertig)\nkarte und farben fixiert, bessere standardeinstellungen\nSizing fixing",
-        "ru": "диммер функциональный (не законченный)\nкарты и цвета фиксированные, лучшие по умолчанию\nФиксированный размер",
-        "pt": "dimmer funcional (não terminado)\ncartão e cores fixos, melhores padrões\nCorreção de dimensionamento",
-        "nl": "dimmer functioneel (niet voltooid)\nkaart en kleuren vast, betere standaardinstellingen\nSizefixen",
-        "fr": "variateur fonctionnel (non terminé)\ncarte et couleurs fixes, meilleurs par défaut\nFixation de calibrage",
-        "it": "dimmer funzionale (non finito)\nscheda e colori fissi, migliori di default\nSistema di dimensionamento",
-        "es": "dimmer funcional (no terminado)\ntarjeta y colores fijos, mejores predeterminados\nSizing fixen",
-        "pl": "przyciemniacz funkcjonalny (niegotowy)\nkarta i kolory stałe, lepsze domyślne\nMocowanie mocujące",
-        "uk": "занурення функціональних (не готових)\nкарти і кольори фіксовані, кращі за замовчуванням\nЗастібка застібка",
-        "zh-cn": "dimmer 函数( 未完成)\n已修复的卡片和颜色, 更好的默认值\n大小固定"
       }
     },
     "titleLang": {

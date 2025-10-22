@@ -68,7 +68,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.2 (2025-10-22)
 
 - Heating (KNX): Dialog-Beschriftungen "Valve" und "Operating Mode" nun übersetzt (DE/EN)
 - Heating (KNX): Default-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)
