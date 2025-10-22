@@ -169,7 +169,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'heating_modes_config',
                         type: 'text',
                         default:
-                            '[{"label":"Auto","value":0},{"label":"Comfort","value":1},{"label":"Standby","value":2},{"label":"Night","value":3},{"label":"Frost","value":4}]',
+                            '[{"label":"Auto","statusValue":32,"controlValue":0},{"label":"Comfort","statusValue":33,"controlValue":1},{"label":"Standby","statusValue":34,"controlValue":2},{"label":"Night","statusValue":35,"controlValue":3},{"label":"Frost","statusValue":36,"controlValue":4}]',
                         tooltip: 'heating_modes_config_tooltip',
                     },
                 ],

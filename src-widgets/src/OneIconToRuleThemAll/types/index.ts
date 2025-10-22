@@ -128,5 +128,7 @@ export type ParsedValue = boolean | number | string;
  */
 export interface HeatingMode {
     label: string;
-    value: number;
+    statusValue: number; // Value received from status OID (for display/comparison)
+    controlValue: number; // Value to send to control OID (for switching)
+    value?: number; // Deprecated: backwards compatibility (used as both status and control if others not set)
 }

@@ -107,9 +107,10 @@ const translations = {
         heating_mode_control_dropdown: 'Dropdown (Select)',
         heating_mode_control_buttons: 'Buttons (Individual)',
         heating_modes_config: 'Operating Modes',
-        heating_modes_config_tooltip: 'JSON configuration: [{"label":"Auto","value":0},{"label":"Comfort","value":1}]',
+        heating_modes_config_tooltip:
+            'JSON: [{"label":"Auto","statusValue":32,"controlValue":0}] - statusValue: received from status OID, controlValue: sent to control OID. Use "value" for both if they are the same (backwards compatible).',
         heating_modes_config_default:
-            '[{"label":"Auto","value":0},{"label":"Comfort","value":1},{"label":"Standby","value":2},{"label":"Night","value":3},{"label":"Frost","value":4}]',
+            '[{"label":"Auto","statusValue":32,"controlValue":0},{"label":"Comfort","statusValue":33,"controlValue":1},{"label":"Standby","statusValue":34,"controlValue":2},{"label":"Night","statusValue":35,"controlValue":3},{"label":"Frost","statusValue":36,"controlValue":4}]',
         heating_setpoint_label: 'Setpoint',
         heating_valve_label: 'Valve',
         heating_mode_label: 'Mode',
@@ -223,9 +224,10 @@ const translations = {
         heating_mode_control_dropdown: 'Dropdown (Auswahl)',
         heating_mode_control_buttons: 'Tasten (Einzeln)',
         heating_modes_config: 'Betriebsmodi',
-        heating_modes_config_tooltip: 'JSON-Konfiguration: [{"label":"Auto","value":0},{"label":"Komfort","value":1}]',
+        heating_modes_config_tooltip:
+            'JSON: [{"label":"Auto","statusValue":32,"controlValue":0}] - statusValue: vom Status-OID empfangen, controlValue: an Control-OID gesendet. "value" für beide verwenden wenn gleich (rückwärtskompatibel).',
         heating_modes_config_default:
-            '[{"label":"Auto","value":0},{"label":"Komfort","value":1},{"label":"Standby","value":2},{"label":"Nacht","value":3},{"label":"Frost","value":4}]',
+            '[{"label":"Auto","statusValue":32,"controlValue":0},{"label":"Komfort","statusValue":33,"controlValue":1},{"label":"Standby","statusValue":34,"controlValue":2},{"label":"Nacht","statusValue":35,"controlValue":3},{"label":"Frost","statusValue":36,"controlValue":4}]',
         heating_setpoint_label: 'Sollwert',
         heating_valve_label: 'Ventil',
         heating_mode_label: 'Modus',

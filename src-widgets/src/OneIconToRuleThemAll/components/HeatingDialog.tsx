@@ -120,9 +120,11 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                         <FormControl fullWidth>
                             <Select
                                 value={
-                                    currentMode !== null && modes.some(m => m.value === currentMode)
-                                        ? currentMode
-                                        : (modes[0]?.value ?? 0)
+                                    currentMode !== null && modes.some(m => m.statusValue === currentMode)
+                                        ? (modes.find(m => m.statusValue === currentMode)?.controlValue ??
+                                          modes[0]?.controlValue ??
+                                          0)
+                                        : (modes[0]?.controlValue ?? 0)
                                 }
                                 onChange={e => onModeSelect(Number(e.target.value))}
                                 sx={{
@@ -140,8 +142,8 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                             >
                                 {modes.map(mode => (
                                     <MenuItem
-                                        key={mode.value}
-                                        value={mode.value}
+                                        key={mode.statusValue}
+                                        value={mode.controlValue}
                                     >
                                         {mode.label}
                                     </MenuItem>
@@ -151,12 +153,12 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                     ) : (
                         <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
                             {modes.map(mode => {
-                                const isActive = currentMode === mode.value;
+                                const isActive = currentMode === mode.statusValue;
                                 return (
                                     <Button
-                                        key={mode.value}
+                                        key={mode.statusValue}
                                         variant={isActive ? 'contained' : 'outlined'}
-                                        onClick={() => onModeSelect(mode.value)}
+                                        onClick={() => onModeSelect(mode.controlValue)}
                                         sx={{
                                             flex: '1 1 calc(50% - 4px)',
                                             minWidth: '80px',

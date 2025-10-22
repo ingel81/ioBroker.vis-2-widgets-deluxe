@@ -30,24 +30,30 @@ export class HeatingModeLogic {
     }
 
     /**
-     * Parse modes from JSON configuration
+     * Parse modes from JSON configuration with backwards compatibility
      */
     getModes(): HeatingMode[] {
         try {
             const parsed = JSON.parse(this.config.modesConfig || '[]');
             if (Array.isArray(parsed)) {
-                return parsed;
+                // Ensure backwards compatibility: if statusValue/controlValue missing, use value
+                return parsed.map(mode => ({
+                    label: mode.label,
+                    statusValue: mode.statusValue ?? mode.value ?? 0,
+                    controlValue: mode.controlValue ?? mode.value ?? 0,
+                    value: mode.value, // Keep for backwards compat
+                }));
             }
         } catch (error) {
             console.error('[HeatingMode] Error parsing modes config:', error);
         }
         // Default fallback
         return [
-            { label: 'Auto', value: 0 },
-            { label: 'Comfort', value: 1 },
-            { label: 'Standby', value: 2 },
-            { label: 'Night', value: 3 },
-            { label: 'Frost', value: 4 },
+            { label: 'Auto', statusValue: 32, controlValue: 0 },
+            { label: 'Comfort', statusValue: 33, controlValue: 1 },
+            { label: 'Standby', statusValue: 34, controlValue: 2 },
+            { label: 'Night', statusValue: 35, controlValue: 3 },
+            { label: 'Frost', statusValue: 36, controlValue: 4 },
         ];
     }
 
@@ -137,18 +143,18 @@ export class HeatingModeLogic {
     handleModeSwitch(currentMode: number | null, editMode: boolean): void {
         if (this.config.modeControlOid && !editMode) {
             const modes = this.getModes();
-            const currentIndex = modes.findIndex(m => m.value === currentMode);
+            const currentIndex = modes.findIndex(m => m.statusValue === currentMode);
             const nextIndex = currentIndex >= 0 ? (currentIndex + 1) % modes.length : 0;
-            this.setValue(this.config.modeControlOid, modes[nextIndex].value);
+            this.setValue(this.config.modeControlOid, modes[nextIndex].controlValue);
         }
     }
 
     /**
-     * Handle mode select dropdown
+     * Handle mode select (receives controlValue from UI)
      */
-    handleModeSelect(value: number, editMode: boolean): void {
+    handleModeSelect(controlValue: number, editMode: boolean): void {
         if (this.config.modeControlOid && !editMode) {
-            this.setValue(this.config.modeControlOid, value);
+            this.setValue(this.config.modeControlOid, controlValue);
         }
     }
 
@@ -175,11 +181,11 @@ export class HeatingModeLogic {
     }
 
     /**
-     * Get current mode name from value
+     * Get current mode name from status value
      */
     getCurrentModeName(currentMode: number | null): string {
         const modes = this.getModes();
-        const mode = modes.find(m => m.value === currentMode);
+        const mode = modes.find(m => m.statusValue === currentMode);
         return mode?.label || `Mode ${currentMode ?? 'Unknown'}`;
     }
 
