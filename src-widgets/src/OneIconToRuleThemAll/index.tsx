@@ -51,6 +51,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         this.heatingMode = new HeatingModeLogic(
             {
                 setpointShiftOid: this.state.rxData.heatingSetpointShiftOid,
+                setpointIncreaseValue: this.state.rxData.heatingSetpointIncreaseValue,
+                setpointDecreaseValue: this.state.rxData.heatingSetpointDecreaseValue,
                 valvePositionOid: this.state.rxData.heatingValvePositionOid,
                 setpointOid: this.state.rxData.heatingSetpointOid,
                 modeStatusOid: this.state.rxData.heatingModeStatusOid,

@@ -3,6 +3,8 @@ import type { SocketLike } from '../types/socket';
 
 export interface HeatingModeConfig {
     setpointShiftOid?: string;
+    setpointIncreaseValue?: string;
+    setpointDecreaseValue?: string;
     valvePositionOid?: string;
     setpointOid?: string;
     modeStatusOid?: string;
@@ -120,11 +122,34 @@ export class HeatingModeLogic {
     }
 
     /**
+     * Parse string value to appropriate type (boolean, number, or string)
+     */
+    private parseValue(value: string): boolean | number | string {
+        // Try boolean
+        if (value === 'true') {
+            return true;
+        }
+        if (value === 'false') {
+            return false;
+        }
+
+        // Try number
+        const num = Number(value);
+        if (!isNaN(num)) {
+            return num;
+        }
+
+        // Return as string
+        return value;
+    }
+
+    /**
      * Handle setpoint increase button
      */
     handleIncrease(editMode: boolean): void {
         if (this.config.setpointShiftOid && !editMode) {
-            this.setValue(this.config.setpointShiftOid, true);
+            const value = this.parseValue(this.config.setpointIncreaseValue || 'true');
+            this.setValue(this.config.setpointShiftOid, value);
         }
     }
 
@@ -133,7 +158,8 @@ export class HeatingModeLogic {
      */
     handleDecrease(editMode: boolean): void {
         if (this.config.setpointShiftOid && !editMode) {
-            this.setValue(this.config.setpointShiftOid, false);
+            const value = this.parseValue(this.config.setpointDecreaseValue || 'false');
+            this.setValue(this.config.setpointShiftOid, value);
         }
     }
 

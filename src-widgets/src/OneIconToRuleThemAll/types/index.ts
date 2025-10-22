@@ -70,6 +70,8 @@ export interface OneIconToRuleThemAllRxData {
 
     // === MODE: HEATING_KNX ===
     heatingSetpointShiftOid?: string;
+    heatingSetpointIncreaseValue?: string;
+    heatingSetpointDecreaseValue?: string;
     heatingValvePositionOid?: string;
     heatingSetpointOid?: string;
     heatingModeStatusOid?: string;

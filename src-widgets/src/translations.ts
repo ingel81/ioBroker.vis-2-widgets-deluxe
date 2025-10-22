@@ -89,7 +89,13 @@ const translations = {
         one_icon_mode_heating_knx: 'Heating (KNX)',
         deluxe_heating_settings: 'Deluxe - Heating Settings',
         heating_setpoint_shift_oid: 'Setpoint Shift',
-        heating_setpoint_shift_oid_tooltip: 'KNX group address for setpoint shift (true=increase, false=decrease)',
+        heating_setpoint_shift_oid_tooltip: 'KNX group address for setpoint shift',
+        heating_setpoint_increase_value: 'Increase Value',
+        heating_setpoint_increase_value_tooltip:
+            'Value to send when increasing setpoint (e.g., true, 1, "increase"). Supports boolean, number, or string.',
+        heating_setpoint_decrease_value: 'Decrease Value',
+        heating_setpoint_decrease_value_tooltip:
+            'Value to send when decreasing setpoint (e.g., false, 0, "decrease"). Supports boolean, number, or string.',
         heating_valve_position_oid: 'Valve Position',
         heating_valve_position_oid_tooltip: 'KNX group address for valve position (%)',
         heating_setpoint_oid: 'Current Setpoint',
@@ -205,8 +211,13 @@ const translations = {
         one_icon_mode_heating_knx: 'Heizung (KNX)',
         deluxe_heating_settings: 'Deluxe - Heizungseinstellungen',
         heating_setpoint_shift_oid: 'Sollwertverschiebung',
-        heating_setpoint_shift_oid_tooltip:
-            'KNX-Gruppenadresse für Sollwertverschiebung (true=erhöhen, false=verringern)',
+        heating_setpoint_shift_oid_tooltip: 'KNX-Gruppenadresse für Sollwertverschiebung',
+        heating_setpoint_increase_value: 'Erhöhungswert',
+        heating_setpoint_increase_value_tooltip:
+            'Wert beim Erhöhen des Sollwerts (z.B. true, 1, "increase"). Unterstützt Boolean, Zahl oder String.',
+        heating_setpoint_decrease_value: 'Verringerungswert',
+        heating_setpoint_decrease_value_tooltip:
+            'Wert beim Verringern des Sollwerts (z.B. false, 0, "decrease"). Unterstützt Boolean, Zahl oder String.',
         heating_valve_position_oid: 'Ventilöffnung',
         heating_valve_position_oid_tooltip: 'KNX-Gruppenadresse für Ventilöffnung (%)',
         heating_setpoint_oid: 'Aktueller Sollwert',

@@ -122,6 +122,20 @@ export function getWidgetInfo(): RxWidgetInfo {
                         tooltip: 'heating_setpoint_shift_oid_tooltip',
                     },
                     {
+                        name: 'heatingSetpointIncreaseValue',
+                        label: 'heating_setpoint_increase_value',
+                        type: 'text',
+                        default: 'true',
+                        tooltip: 'heating_setpoint_increase_value_tooltip',
+                    },
+                    {
+                        name: 'heatingSetpointDecreaseValue',
+                        label: 'heating_setpoint_decrease_value',
+                        type: 'text',
+                        default: 'false',
+                        tooltip: 'heating_setpoint_decrease_value_tooltip',
+                    },
+                    {
                         name: 'heatingValvePositionOid',
                         label: 'heating_valve_position_oid',
                         type: 'id',
