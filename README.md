@@ -71,13 +71,13 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 ### **WORK IN PROGRESS**
 
 - Heating (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, "increase"/"decrease", etc.) - Standard: true/false
+- Heating (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit "value")
 
 ### 0.3.0 (2025-10-22)
 
 - Heating (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt
 - Heating (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an
 - Heating (KNX): Neue Steuerungsart "Buttons (Individual)" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus
-- Heating (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit "value")
 
 ### 0.2.2 (2025-10-20)
 
