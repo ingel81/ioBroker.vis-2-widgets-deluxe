@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "news": {
+      "0.3.1": {
+        "en": "Heating (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"increase\"/\"decrease\", etc.) - Standard: true/false\nHeating (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "de": "Heizung (KNX): Wechselverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"increase\"/\"decrease\", etc.) - Standard: true/false\nHeizung (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "ru": "Нагрев (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (истинный/ложный, 1/0, «увеличение»/«сокращение» и т.д.) Стандарт: истинный/ложный\nНагрев (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "pt": "Aquecimento (KNX): Sollwertverschiebungs-Werte monn konfigurierbar (verdadeiro/falso, 1/0, \"aumento\"/\"diminuição\", etc.) - Padrão: verdadeiro/falso\nAquecimento (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (uma mensagem OID) können nun unterschiedlich sein (rückwärtskompatibel mit \"valor\")",
+        "nl": "Verwarming (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"verhoging\"/\"daling,\" enz.) - Standaard: waar/onwaar\nVerwarming (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"waarde\")",
+        "fr": "Chauffage (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (vrai/faux, 1/0, \"augmentation\"/\"diminution\", etc.) - Standard: vrai/faux\nChauffage (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "it": "Riscaldamento (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"aumento\"/\"diminuzione\", ecc.) - Standard: vero/falso\nRiscaldamento (KNX): Modi-Konfiguration erweitert - statoValue (vom OID empfangen) und controlValue (un OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"valore\")",
+        "es": "Calefacción (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"aumento\"/\"disminución\", etc.) - Estándar: verdadero/falso\nCalefacción (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "pl": "Ogrzewanie (KNX): Sollwertverschiebungs- Werte zakonnica konfigurierbar (true / false, 1 / 0, \"wzrost\" / \"spadek\", itp.) - Standard: true / false\nOgrzewanie (KNX): Modimen- Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "uk": "Опалення (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"increase\"/\"decrease\", тощо) - Стандарт: true/false\nОпалення (KNX): Modi-Konfiguration erweitert - статусValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
+        "zh-cn": "加热( KNX): Sollwertverschiebungs- Werte 修女 konfigurierbar (真/假, 1/0, \"增加\"/\"减少\", 等) - 标准:真实/虚假\n加热(KNX):Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (OID senten) können 修女 unterschiedlich sein (rückwärtskompatibel mit \"值\")"
+      },
       "0.3.0": {
         "en": "Heating (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nHeating (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nHeating (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
         "de": "Heizung (KNX): reduziert - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nHeizung (KNX): Dropdown zeigt jetzt den aktuellen Modus an\nHeizung (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
@@ -80,19 +93,6 @@
         "pl": "przyciemniacz funkcjonalny (niegotowy)\nkarta i kolory stałe, lepsze domyślne\nMocowanie mocujące",
         "uk": "занурення функціональних (не готових)\nкарти і кольори фіксовані, кращі за замовчуванням\nЗастібка застібка",
         "zh-cn": "dimmer 函数( 未完成)\n已修复的卡片和颜色, 更好的默认值\n大小固定"
-      },
-      "0.1.1": {
-        "en": "Testrelease",
-        "de": "Testrease",
-        "ru": "Проверка",
-        "pt": "Ensaio de libertação",
-        "nl": "Testrelease",
-        "fr": "Libération d'essai",
-        "it": "Analisi",
-        "es": "Testrelease",
-        "pl": "Testrelease",
-        "uk": "Тестування",
-        "zh-cn": "试释"
       }
     },
     "titleLang": {

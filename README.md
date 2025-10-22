@@ -68,7 +68,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.1 (2025-10-22)
 
 - Heating (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, "increase"/"decrease", etc.) - Standard: true/false
 - Heating (KNX): Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit "value")
