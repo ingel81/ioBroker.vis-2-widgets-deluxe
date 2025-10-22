@@ -2,8 +2,7 @@ import type { HeatingMode, HeatingModeState } from '../types';
 import type { SocketLike } from '../types/socket';
 
 export interface HeatingModeConfig {
-    setpointIncreaseOid?: string;
-    setpointDecreaseOid?: string;
+    setpointShiftOid?: string;
     valvePositionOid?: string;
     setpointOid?: string;
     modeStatusOid?: string;
@@ -118,8 +117,8 @@ export class HeatingModeLogic {
      * Handle setpoint increase button
      */
     handleIncrease(editMode: boolean): void {
-        if (this.config.setpointIncreaseOid && !editMode) {
-            this.setValue(this.config.setpointIncreaseOid, 0);
+        if (this.config.setpointShiftOid && !editMode) {
+            this.setValue(this.config.setpointShiftOid, true);
         }
     }
 
@@ -127,8 +126,8 @@ export class HeatingModeLogic {
      * Handle setpoint decrease button
      */
     handleDecrease(editMode: boolean): void {
-        if (this.config.setpointDecreaseOid && !editMode) {
-            this.setValue(this.config.setpointDecreaseOid, 0);
+        if (this.config.setpointShiftOid && !editMode) {
+            this.setValue(this.config.setpointShiftOid, false);
         }
     }
 

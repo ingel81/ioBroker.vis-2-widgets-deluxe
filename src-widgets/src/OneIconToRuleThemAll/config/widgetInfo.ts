@@ -116,16 +116,10 @@ export function getWidgetInfo(): RxWidgetInfo {
                 hidden: 'data.mode !== "heating_knx"',
                 fields: [
                     {
-                        name: 'heatingSetpointIncreaseOid',
-                        label: 'heating_setpoint_increase_oid',
+                        name: 'heatingSetpointShiftOid',
+                        label: 'heating_setpoint_shift_oid',
                         type: 'id',
-                        tooltip: 'heating_setpoint_increase_oid_tooltip',
-                    },
-                    {
-                        name: 'heatingSetpointDecreaseOid',
-                        label: 'heating_setpoint_decrease_oid',
-                        type: 'id',
-                        tooltip: 'heating_setpoint_decrease_oid_tooltip',
+                        tooltip: 'heating_setpoint_shift_oid_tooltip',
                     },
                     {
                         name: 'heatingValvePositionOid',
@@ -165,6 +159,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         options: [
                             { value: 'button', label: 'heating_mode_control_button' },
                             { value: 'dropdown', label: 'heating_mode_control_dropdown' },
+                            { value: 'buttons', label: 'heating_mode_control_buttons' },
                         ],
                         default: 'button',
                         tooltip: 'heating_mode_control_type_tooltip',

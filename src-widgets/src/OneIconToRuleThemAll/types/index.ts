@@ -69,14 +69,13 @@ export interface OneIconToRuleThemAllRxData {
     switchOffValue?: string;
 
     // === MODE: HEATING_KNX ===
-    heatingSetpointIncreaseOid?: string;
-    heatingSetpointDecreaseOid?: string;
+    heatingSetpointShiftOid?: string;
     heatingValvePositionOid?: string;
     heatingSetpointOid?: string;
     heatingModeStatusOid?: string;
     heatingModeControlOid?: string;
     heatingShowUnits?: boolean;
-    heatingModeControlType?: 'button' | 'dropdown';
+    heatingModeControlType?: 'button' | 'dropdown' | 'buttons';
     heatingModesConfig?: string;
 
     [key: string]: unknown;

@@ -177,3 +177,5 @@ Immer `boxSizing: 'border-box'` für Container mit Padding verwenden!
 ---
 
 _Letzte Aktualisierung: 2025-10-20_
+
+- du brauchst hier nicht bauen...es läuft nebenher immer ein prozess der npm run dev ausführt

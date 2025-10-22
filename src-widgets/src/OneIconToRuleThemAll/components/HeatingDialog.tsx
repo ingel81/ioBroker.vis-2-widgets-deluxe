@@ -8,7 +8,7 @@ export interface HeatingDialogProps {
     valveValue: number | null;
     currentMode: number | null;
     modes: HeatingMode[];
-    controlType: 'button' | 'dropdown';
+    controlType: 'button' | 'dropdown' | 'buttons';
     primaryColor: string;
     formatTemperature: (value: number | null) => string;
     formatValvePosition: (value: number | null) => string;
@@ -116,10 +116,14 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                         >
                             {getCurrentModeName(currentMode)}
                         </Button>
-                    ) : (
+                    ) : controlType === 'dropdown' ? (
                         <FormControl fullWidth>
                             <Select
-                                value={currentMode ?? 0}
+                                value={
+                                    currentMode !== null && modes.some(m => m.value === currentMode)
+                                        ? currentMode
+                                        : (modes[0]?.value ?? 0)
+                                }
                                 onChange={e => onModeSelect(Number(e.target.value))}
                                 sx={{
                                     color: primaryColor,
@@ -144,6 +148,34 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                                 ))}
                             </Select>
                         </FormControl>
+                    ) : (
+                        <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1 }}>
+                            {modes.map(mode => {
+                                const isActive = currentMode === mode.value;
+                                return (
+                                    <Button
+                                        key={mode.value}
+                                        variant={isActive ? 'contained' : 'outlined'}
+                                        onClick={() => onModeSelect(mode.value)}
+                                        sx={{
+                                            flex: '1 1 calc(50% - 4px)',
+                                            minWidth: '80px',
+                                            color: isActive ? '#fff !important' : primaryColor,
+                                            backgroundColor: isActive ? `${primaryColor} !important` : 'transparent',
+                                            borderColor: `${primaryColor} !important`,
+                                            borderWidth: isActive ? '2px' : '1px',
+                                            fontWeight: isActive ? 'bold' : 'normal',
+                                            '&:hover': {
+                                                borderColor: `${primaryColor} !important`,
+                                                backgroundColor: isActive ? primaryColor : `${primaryColor}10`,
+                                            },
+                                        }}
+                                    >
+                                        {mode.label}
+                                    </Button>
+                                );
+                            })}
+                        </Box>
                     )}
                 </Box>
             </Box>

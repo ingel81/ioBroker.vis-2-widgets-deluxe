@@ -88,10 +88,8 @@ const translations = {
         // Heating KNX Specific
         one_icon_mode_heating_knx: 'Heating (KNX)',
         deluxe_heating_settings: 'Deluxe - Heating Settings',
-        heating_setpoint_increase_oid: 'Setpoint Increase',
-        heating_setpoint_increase_oid_tooltip: 'KNX group address for setpoint increase',
-        heating_setpoint_decrease_oid: 'Setpoint Decrease',
-        heating_setpoint_decrease_oid_tooltip: 'KNX group address for setpoint decrease',
+        heating_setpoint_shift_oid: 'Setpoint Shift',
+        heating_setpoint_shift_oid_tooltip: 'KNX group address for setpoint shift (true=increase, false=decrease)',
         heating_valve_position_oid: 'Valve Position',
         heating_valve_position_oid_tooltip: 'KNX group address for valve position (%)',
         heating_setpoint_oid: 'Current Setpoint',
@@ -103,9 +101,11 @@ const translations = {
         heating_show_units: 'Show Units',
         heating_show_units_tooltip: 'Display units (°C, %)',
         heating_mode_control_type: 'Mode Control Type',
-        heating_mode_control_type_tooltip: 'Button to cycle through modes or dropdown to select',
+        heating_mode_control_type_tooltip:
+            'How to control operating modes: cycle button, dropdown, or individual buttons',
         heating_mode_control_button: 'Button (Cycle)',
         heating_mode_control_dropdown: 'Dropdown (Select)',
+        heating_mode_control_buttons: 'Buttons (Individual)',
         heating_modes_config: 'Operating Modes',
         heating_modes_config_tooltip: 'JSON configuration: [{"label":"Auto","value":0},{"label":"Comfort","value":1}]',
         heating_modes_config_default:
@@ -203,10 +203,9 @@ const translations = {
         // Heating KNX Specific
         one_icon_mode_heating_knx: 'Heizung (KNX)',
         deluxe_heating_settings: 'Deluxe - Heizungseinstellungen',
-        heating_setpoint_increase_oid: 'Sollwerterhöhung',
-        heating_setpoint_increase_oid_tooltip: 'KNX-Gruppenadresse für Sollwerterhöhung',
-        heating_setpoint_decrease_oid: 'Sollwertverringerung',
-        heating_setpoint_decrease_oid_tooltip: 'KNX-Gruppenadresse für Sollwertverringerung',
+        heating_setpoint_shift_oid: 'Sollwertverschiebung',
+        heating_setpoint_shift_oid_tooltip:
+            'KNX-Gruppenadresse für Sollwertverschiebung (true=erhöhen, false=verringern)',
         heating_valve_position_oid: 'Ventilöffnung',
         heating_valve_position_oid_tooltip: 'KNX-Gruppenadresse für Ventilöffnung (%)',
         heating_setpoint_oid: 'Aktueller Sollwert',
@@ -218,9 +217,11 @@ const translations = {
         heating_show_units: 'Einheiten anzeigen',
         heating_show_units_tooltip: 'Einheiten anzeigen (°C, %)',
         heating_mode_control_type: 'Betriebsmodus-Steuerungstyp',
-        heating_mode_control_type_tooltip: 'Taste zum Durchschalten oder Dropdown zur Auswahl',
+        heating_mode_control_type_tooltip:
+            'Steuerung der Betriebsmodi: Durchschalt-Taste, Dropdown oder einzelne Tasten',
         heating_mode_control_button: 'Taste (Durchschalten)',
         heating_mode_control_dropdown: 'Dropdown (Auswahl)',
+        heating_mode_control_buttons: 'Tasten (Einzeln)',
         heating_modes_config: 'Betriebsmodi',
         heating_modes_config_tooltip: 'JSON-Konfiguration: [{"label":"Auto","value":0},{"label":"Komfort","value":1}]',
         heating_modes_config_default:

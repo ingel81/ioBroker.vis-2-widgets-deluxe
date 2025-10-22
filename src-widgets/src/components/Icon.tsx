@@ -16,19 +16,10 @@ interface IconProps {
 const Icon: React.FC<IconProps> = ({ src, style = {}, alt = 'icon', className, color }) => {
     const isSvgDataUrl = src.startsWith('data:image/svg');
 
-    // Helper function to colorize SVG
-    const colorizeSvg = (svgString: string, fillColor: string): string => {
-        // Remove existing fill attributes and styles
-        let colorized = svgString
-            .replace(/fill="[^"]*"/g, '')
-            .replace(/fill='[^']*'/g, '')
-            .replace(/fill:[^;"}]*/g, '')
-            .replace(/style="[^"]*"/g, '');
-
-        // Add fill to SVG root element
-        colorized = colorized.replace(/<svg/, `<svg fill="${fillColor}"`);
-
-        return colorized;
+    // Helper function to prepare SVG for color customization via CSS
+    const prepareSvg = (svgString: string): string => {
+        // Remove embedded <style> tags that override currentColor
+        return svgString.replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '');
     };
 
     const decodeSvg = (dataUrl: string): string => {
@@ -39,9 +30,9 @@ const Icon: React.FC<IconProps> = ({ src, style = {}, alt = 'icon', className, c
     };
 
     if (isSvgDataUrl && color) {
-        // SVG with color customization
+        // SVG with color customization via CSS color property
         const svgString = decodeSvg(src);
-        const colorizedSvg = colorizeSvg(svgString, color);
+        const preparedSvg = prepareSvg(svgString);
 
         return (
             <Box
@@ -50,13 +41,14 @@ const Icon: React.FC<IconProps> = ({ src, style = {}, alt = 'icon', className, c
                     display: 'inline-flex',
                     alignItems: 'center',
                     justifyContent: 'center',
+                    color: color, // Set CSS color for currentColor to work
                     '& svg': {
                         width: style.width || 28,
                         height: style.height || style.width || 28,
                     },
                     ...style,
                 }}
-                dangerouslySetInnerHTML={{ __html: colorizedSvg }}
+                dangerouslySetInnerHTML={{ __html: preparedSvg }}
             />
         );
     }
