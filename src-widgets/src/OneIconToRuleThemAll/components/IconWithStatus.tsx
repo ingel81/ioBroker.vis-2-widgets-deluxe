@@ -7,6 +7,7 @@ export interface IconWithStatusProps {
     iconInactive?: string;
     useDifferentInactiveIcon?: boolean;
     iconSize: number;
+    iconRotation?: number;
     activeColor: string;
     inactiveColor: string;
     isActive: boolean;
@@ -25,6 +26,7 @@ export const IconWithStatus: React.FC<IconWithStatusProps> = React.memo(
         iconInactive,
         useDifferentInactiveIcon,
         iconSize,
+        iconRotation = 0,
         activeColor,
         inactiveColor,
         isActive,
@@ -80,6 +82,7 @@ export const IconWithStatus: React.FC<IconWithStatusProps> = React.memo(
                                 height: iconSize,
                                 maxWidth: '100%',
                                 maxHeight: '100%',
+                                transform: `rotate(${iconRotation}deg)`,
                             }}
                         />
                     )}

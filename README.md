@@ -68,6 +68,14 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- Heating (KNX): Dialog-Beschriftungen "Valve" und "Operating Mode" nun übersetzt (DE/EN)
+- Heating (KNX): Default-Modi-JSON aktualisiert (Komfort, Standby, Nacht, Frost)
+- Heating (KNX): Standard-Icon auf Heizkörper-Symbol geändert
+- Allgemein: Neue Einstellung "Icon-Rotation" (0-360°) für alle Modi
+- Dialog: Neue Standard-Primärfarbe rgba(48,142,134,1) (Teal/Türkis)
+
 ### 0.3.1 (2025-10-22)
 
 - Heating (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, "increase"/"decrease", etc.) - Standard: true/false

@@ -51,11 +51,10 @@ export class HeatingModeLogic {
         }
         // Default fallback
         return [
-            { label: 'Auto', statusValue: 32, controlValue: 0 },
-            { label: 'Comfort', statusValue: 33, controlValue: 1 },
+            { label: 'Komfort', statusValue: 33, controlValue: 1 },
             { label: 'Standby', statusValue: 34, controlValue: 2 },
-            { label: 'Night', statusValue: 35, controlValue: 3 },
-            { label: 'Frost', statusValue: 36, controlValue: 4 },
+            { label: 'Nacht', statusValue: 36, controlValue: 3 },
+            { label: 'Frost', statusValue: 40, controlValue: 4 },
         ];
     }
 

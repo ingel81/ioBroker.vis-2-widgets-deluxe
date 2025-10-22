@@ -10,6 +10,8 @@ export interface HeatingDialogProps {
     modes: HeatingMode[];
     controlType: 'button' | 'dropdown' | 'buttons';
     primaryColor: string;
+    valveLabel: string;
+    operatingModeLabel: string;
     formatTemperature: (value: number | null) => string;
     formatValvePosition: (value: number | null) => string;
     getCurrentModeName: (mode: number | null) => string;
@@ -27,6 +29,8 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
         modes,
         controlType,
         primaryColor,
+        valveLabel,
+        operatingModeLabel,
         formatTemperature,
         formatValvePosition,
         getCurrentModeName,
@@ -52,7 +56,7 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                     align="center"
                     sx={{ mb: 3, color: 'text.secondary' }}
                 >
-                    Valve: {formatValvePosition(valveValue)}
+                    {valveLabel}: {formatValvePosition(valveValue)}
                 </Typography>
 
                 {/* Setpoint Control Buttons */}
@@ -97,7 +101,7 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                         variant="body2"
                         sx={{ mb: 1, fontWeight: 'bold' }}
                     >
-                        Operating Mode:
+                        {operatingModeLabel}:
                     </Typography>
 
                     {controlType === 'button' ? (

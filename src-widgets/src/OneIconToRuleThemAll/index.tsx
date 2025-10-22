@@ -13,6 +13,7 @@ import { DimmerDialog } from './components/DimmerDialog';
 import { IconWithStatus } from './components/IconWithStatus';
 import { CardWrapper } from './components/CardWrapper';
 import { getWidgetInfo } from './config/widgetInfo';
+import translations from '../translations';
 
 class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconToRuleThemAllState> {
     // Mode logic instances
@@ -193,6 +194,31 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
     // HELPERS
     // ========================================
 
+    private translate(key: string): string {
+        const lang = (this.props.context.lang || 'en') as 'en' | 'de';
+        const prefix = translations.prefix || 'vis_2_widgets_deluxe_';
+        const fullKey = `${prefix}${key}`;
+
+        // Try to get translation for current language
+        if (translations[lang] && typeof translations[lang] === 'object') {
+            const value = (translations[lang] as Record<string, string>)[fullKey];
+            if (value) {
+                return value;
+            }
+        }
+
+        // Fallback to English
+        if (translations.en && typeof translations.en === 'object') {
+            const value = (translations.en as Record<string, string>)[fullKey];
+            if (value) {
+                return value;
+            }
+        }
+
+        // Return key if no translation found
+        return key;
+    }
+
     private async fetchOidName(): Promise<void> {
         const oid = this.state.rxData.controlOid || this.state.rxData.heatingSetpointOid;
         if (!oid) {
@@ -297,6 +323,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         modes={this.heatingMode.getModes()}
                         controlType={this.state.rxData.heatingModeControlType || 'button'}
                         primaryColor={primaryColor}
+                        valveLabel={this.translate('heating_valve_label')}
+                        operatingModeLabel={this.translate('heating_mode_label')}
                         formatTemperature={v => this.heatingMode.formatTemperature(v)}
                         formatValvePosition={v => this.heatingMode.formatValvePosition(v)}
                         getCurrentModeName={m => this.heatingMode.getCurrentModeName(m)}
@@ -363,6 +391,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     iconInactive={this.state.rxData.iconInactive}
                     useDifferentInactiveIcon={this.state.rxData.useDifferentInactiveIcon}
                     iconSize={this.state.rxData.iconSize}
+                    iconRotation={this.state.rxData.iconRotation}
                     activeColor={this.state.rxData.activeColor}
                     inactiveColor={this.state.rxData.inactiveColor}
                     isActive={this.getIsActive()}

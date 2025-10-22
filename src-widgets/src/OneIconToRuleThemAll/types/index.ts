@@ -32,6 +32,7 @@ export interface OneIconToRuleThemAllRxData {
     // === ICON SETTINGS ===
     icon: string;
     iconSize: number;
+    iconRotation?: number;
     useDifferentInactiveIcon?: boolean;
     iconInactive?: string;
     activeColor: string;

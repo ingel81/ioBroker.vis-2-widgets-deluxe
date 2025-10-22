@@ -1,6 +1,6 @@
 import type { RxWidgetInfo } from '@iobroker/types-vis-2';
-import { modeHasDialog, modeHasPercentage, MODE_DEFINITIONS } from '../types/constants';
 import { FlexMode, type OneIconToRuleThemAllRxData } from '../types';
+import { MODE_DEFINITIONS, modeHasDialog, modeHasPercentage } from '../types/constants';
 
 export function getWidgetInfo(): RxWidgetInfo {
     return {
@@ -183,7 +183,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'heating_modes_config',
                         type: 'text',
                         default:
-                            '[{"label":"Auto","statusValue":32,"controlValue":0},{"label":"Comfort","statusValue":33,"controlValue":1},{"label":"Standby","statusValue":34,"controlValue":2},{"label":"Night","statusValue":35,"controlValue":3},{"label":"Frost","statusValue":36,"controlValue":4}]',
+                            '[{"label":"Komfort","statusValue":33,"controlValue":1},{"label":"Standby","statusValue":34,"controlValue":2},{"label":"Nacht","statusValue":36,"controlValue":3},{"label":"Frost","statusValue":40,"controlValue":4}]',
                         tooltip: 'heating_modes_config_tooltip',
                     },
                 ],
@@ -220,6 +220,13 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'icon_size',
                         type: 'number',
                         default: 48,
+                    },
+                    {
+                        name: 'iconRotation',
+                        label: 'icon_rotation',
+                        type: 'number',
+                        default: 0,
+                        tooltip: 'icon_rotation_tooltip',
                     },
                     {
                         name: 'activeColor',
@@ -302,7 +309,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         name: 'dialogPrimaryColor',
                         label: 'dialog_primary_color',
                         type: 'color',
-                        default: '#2196F3',
+                        default: 'rgba(48,142,134,1)',
                         tooltip: 'dialog_primary_color_tooltip',
                     },
                     {
