@@ -68,7 +68,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.0 (2025-10-22)
 
 - Heating (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)
 - Heating (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an

@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.2.2",
+    "version": "0.3.0",
     "news": {
+      "0.3.0": {
+        "en": "Heating (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nHeating (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nHeating (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "de": "Heizung (KNX): reduziert - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nHeizung (KNX): Dropdown zeigt jetzt den aktuellen Modus an\nHeizung (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "ru": "Нагрев (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nНагрев (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nНагрев (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "pt": "Aquecimento (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nAquecimento (KNX):\nAquecimento (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "nl": "Verwarming (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nVerwarming (KNX): Dropdown zet jetzt korrekten aktuellen Modus en\nVerwarming (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "fr": "Chauffage (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nChauffage (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nChauffage (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visualer Hervorhebung des aktiven Modus",
+        "it": "Riscaldamento (KNX): Sollwertverschiebung verainfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nRiscaldamento (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nRiscaldamento (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "es": "Calefacción (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nCalefacción (KNX): Bajar zeigt jetzt korrekten aktuellen Modus an\nCalefacción (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "pl": "Ogrzewanie (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true = erhöhen, false = verringern)\nOgrzewanie (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus\nOgrzewanie (KNX): Neue Steuerungsart \"Buttons (Indywidualne)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "uk": "Опалення (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nОпалення (KNX): Попадання zeigt jetzt korrekten aktuellen Modus\nОпалення (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
+        "zh-cn": "加热( KNX): Sollwertverschiebung verreinfacht - nur noch ein Datenpunkt (real=erhöhen, 假=verringern) (中文(简体) )\n加热( KNX): 下沉的 zeigt 喷气式喷气式喷气式发动机\n暖气(KNX):Neue Steurungsart \"按钮(英语:Buttons (Individual))\" - einzelne Buttons für Jeden Betriebsmodors mit visueller Hervorhebung des akiten Modus(英语:Hervorhebung des aktiven Modus) 热气(英语:Neue Steurhebung) 热气(英语:Neue Steurungsart) 热气(英语:Neue Steurhungs) 热气流(英语:Neuel Ste) 热气流(英语:Neuel Ste) 热气流(英语:"
+      },
       "0.2.2": {
         "en": "translations\nrefactor & cleanup\ndocs",
         "de": "übersetzungen\nrefactor und reinigung\ndocs",
@@ -80,19 +93,6 @@
         "pl": "Testrelease",
         "uk": "Тестування",
         "zh-cn": "试释"
-      },
-      "1.6.0": {
-        "en": "Corrected \"Actual\" widget",
-        "de": "Korrigiert \"Aktuell\" Widget",
-        "ru": "Исправленный «Актуальный» виджет",
-        "pt": "Elemento \"Real\" corrigido",
-        "nl": "Gecorrigeerd \"actual\" widget",
-        "fr": "Widget \"réel\" corrigé",
-        "it": "Corretto widget \"In realtà\"",
-        "es": "Widget \"Actual\" corregido",
-        "pl": "Poprawiony widżet \"Actual\"",
-        "uk": "Виправлено \"Actual\" віджет",
-        "zh-cn": "更正“ 实际” 部件"
       }
     },
     "titleLang": {
