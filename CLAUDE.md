@@ -145,6 +145,21 @@ import { Icon } from '@iobroker/adapter-react-v5';
 
 Immer `boxSizing: 'border-box'` für Container mit Padding verwenden!
 
+### i18n / Übersetzungen
+
+**Präfix wird automatisch hinzugefügt!** vis-2 Framework fügt `translations.prefix` (z.B. `vis_2_widgets_deluxe_`) zu allen Keys hinzu.
+
+```typescript
+// translations.ts
+{ en: { heating_valve_label: 'Valve' }, prefix: 'vis_2_widgets_deluxe_' }
+
+// Zur Laufzeit wird Key zu: 'vis_2_widgets_deluxe_heating_valve_label'
+private translate(key: string) {
+    const fullKey = `${translations.prefix}${key}`;
+    return translations[lang][fullKey];
+}
+```
+
 ## Troubleshooting
 
 **Änderungen nicht sichtbar?**
@@ -153,6 +168,13 @@ Immer `boxSizing: 'border-box'` für Container mit Padding verwenden!
 2. ~20 Sekunden warten
 3. Browser aktualisieren (F5)
 4. Ggf. Hard Refresh (Ctrl+Shift+R)
+
+**Module Federation Cache hartnäckig?**
+
+1. `./.dev-server/default/iob stop vis-2`
+2. Browser **komplett schließen** (alle Fenster)
+3. `./.dev-server/default/iob start vis-2` (warten ~20s)
+4. Browser neu öffnen
 
 **Widget nicht in Palette?**
 
@@ -166,6 +188,15 @@ Immer `boxSizing: 'border-box'` für Container mit Padding verwenden!
 - `npm run lint` - ESLint-Fehler
 - Konsole prüfen
 
+**Übersetzungen debuggen?**
+
+Browser Console:
+```javascript
+// Verfügbare Keys prüfen
+Object.keys(translations.de).filter(k => k.includes('valve'))
+// Erwartetes Ergebnis: ['vis_2_widgets_deluxe_heating_valve_label']
+```
+
 ## Commit-Richtlinien
 
 **⚠️ WICHTIG**: Commits nur auf Anweisung durchführen!
@@ -176,6 +207,6 @@ Immer `boxSizing: 'border-box'` für Container mit Padding verwenden!
 
 ---
 
-_Letzte Aktualisierung: 2025-10-20_
+_Letzte Aktualisierung: 2025-10-22_
 
 - du brauchst hier nicht bauen...es läuft nebenher immer ein prozess der npm run dev ausführt

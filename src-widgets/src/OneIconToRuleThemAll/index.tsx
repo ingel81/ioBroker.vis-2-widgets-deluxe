@@ -8,9 +8,12 @@ import { FlexMode, type OneIconToRuleThemAllRxData, type OneIconToRuleThemAllSta
 import { HeatingModeLogic } from './modes/HeatingMode';
 import { DimmerModeLogic } from './modes/DimmerMode';
 import { SwitchModeLogic } from './modes/SwitchMode';
+import { WindowShutterModeLogic } from './modes/WindowShutterMode';
 import { HeatingDialog } from './components/HeatingDialog';
 import { DimmerDialog } from './components/DimmerDialog';
+import { WindowShutterDialog } from './components/WindowShutterDialog';
 import { IconWithStatus } from './components/IconWithStatus';
+import { WindowShutterIcon } from './components/WindowShutterIcon';
 import { CardWrapper } from './components/CardWrapper';
 import { getWidgetInfo } from './config/widgetInfo';
 import translations from '../translations';
@@ -20,6 +23,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
     private heatingMode!: HeatingModeLogic;
     private dimmerMode!: DimmerModeLogic;
     private switchMode!: SwitchModeLogic;
+    private windowShutterMode!: WindowShutterModeLogic;
 
     constructor(props: VisRxWidgetProps) {
         super(props);
@@ -39,6 +43,12 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             switch: {
                 isOn: false,
             },
+            windowShutter: {
+                shutterPosition: null,
+                paneStates: [],
+                hasOpenPanes: false,
+                hasTiltedPanes: false,
+            },
         };
 
         this.initializeModes();
@@ -47,6 +57,44 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
     // ========================================
     // INITIALIZATION
     // ========================================
+
+    /**
+     * Build pane configs from rxData
+     */
+    private buildPaneConfigs(): {
+        paneCount: number;
+        paneConfigs: Array<{
+            openOid?: string;
+            tiltOid?: string;
+            sensorMode: 'twoOids' | 'oneOid' | 'oneOidWithTilt';
+            hingeType: 'left' | 'right' | 'top';
+            ratio: number;
+        }>;
+    } {
+        const paneCount = this.state.rxData.windowPaneCount || 1;
+        const paneConfigs = [];
+
+        // Debug: Show all windowPane keys in rxData
+        const windowPaneKeys = Object.keys(this.state.rxData).filter(key => key.startsWith('windowPane'));
+        console.log('[buildPaneConfigs] All windowPane keys in rxData:', windowPaneKeys);
+
+        for (let i = 1; i <= paneCount; i++) {
+            // Important: Fields from indexFrom/indexTo groups are named: {fieldName}{index}
+            // NOT {groupName}{index}_{fieldName}
+            const ratio = (this.state.rxData[`ratio${i}`] as number) ?? 1;
+            console.log(`[buildPaneConfigs] Pane ${i}: ratio${i} =`, this.state.rxData[`ratio${i}`], '→', ratio);
+            paneConfigs.push({
+                openOid: this.state.rxData[`openOid${i}`] as string | undefined,
+                tiltOid: this.state.rxData[`tiltOid${i}`] as string | undefined,
+                sensorMode:
+                    (this.state.rxData[`sensorMode${i}`] as 'twoOids' | 'oneOid' | 'oneOidWithTilt') || 'oneOid',
+                hingeType: (this.state.rxData[`hingeType${i}`] as 'left' | 'right' | 'top') || 'left',
+                ratio,
+            });
+        }
+        console.log('[buildPaneConfigs] Final paneConfigs:', paneConfigs);
+        return { paneCount, paneConfigs };
+    }
 
     private initializeModes(): void {
         this.heatingMode = new HeatingModeLogic(
@@ -88,6 +136,25 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             updates => this.setState({ switch: { ...this.state.switch, ...updates } }),
             (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
         );
+
+        const { paneCount, paneConfigs } = this.buildPaneConfigs();
+
+        this.windowShutterMode = new WindowShutterModeLogic(
+            {
+                shutterPositionOid: this.state.rxData.shutterPositionOid,
+                shutterUpOid: this.state.rxData.shutterUpOid,
+                shutterDownOid: this.state.rxData.shutterDownOid,
+                shutterStopOid: this.state.rxData.shutterStopOid,
+                shutterInvert: this.state.rxData.shutterInvert,
+                shutterMin: this.state.rxData.shutterMin,
+                shutterMax: this.state.rxData.shutterMax,
+                windowPaneCount: paneCount,
+                paneConfigs,
+            },
+            this.props.context.socket,
+            updates => this.setState({ windowShutter: { ...this.state.windowShutter, ...updates } }),
+            (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
+        );
     }
 
     // ========================================
@@ -122,13 +189,17 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             case FlexMode.SWITCH:
                 await this.switchMode.initialize();
                 break;
+
+            case FlexMode.WINDOW_SHUTTER:
+                await this.windowShutterMode.initialize();
+                break;
         }
 
         // Fetch OID name for dialog title
         await this.fetchOidName();
     }
 
-    componentDidUpdate(): void {
+    componentDidUpdate(prevProps: VisRxWidgetProps, prevState: OneIconToRuleThemAllState): void {
         // Handle mode-specific state updates
         switch (this.state.rxData.mode) {
             case FlexMode.HEATING_KNX:
@@ -182,12 +253,200 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     }
                 }
                 break;
+
+            case FlexMode.WINDOW_SHUTTER: {
+                // Check if window shutter configuration changed
+                const prevRxData = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                const configChanged =
+                    this.state.rxData.windowPaneCount !== prevRxData.windowPaneCount ||
+                    this.state.rxData.shutterPositionOid !== prevRxData.shutterPositionOid ||
+                    this.state.rxData.shutterInvert !== prevRxData.shutterInvert ||
+                    this.state.rxData.shutterMin !== prevRxData.shutterMin ||
+                    this.state.rxData.shutterMax !== prevRxData.shutterMax;
+
+                console.log('[componentDidUpdate] WINDOW_SHUTTER configChanged:', configChanged);
+
+                // Check if any pane config changed
+                let paneConfigChanged = false;
+                if (!configChanged) {
+                    const paneCount = this.state.rxData.windowPaneCount || 1;
+                    for (let i = 1; i <= paneCount; i++) {
+                        const ratioChanged = this.state.rxData[`ratio${i}`] !== prevRxData[`ratio${i}`];
+                        if (ratioChanged) {
+                            console.log(
+                                `[componentDidUpdate] ratio${i} changed:`,
+                                prevRxData[`ratio${i}`],
+                                '→',
+                                this.state.rxData[`ratio${i}`],
+                            );
+                        }
+                        if (
+                            this.state.rxData[`openOid${i}`] !== prevRxData[`openOid${i}`] ||
+                            this.state.rxData[`tiltOid${i}`] !== prevRxData[`tiltOid${i}`] ||
+                            this.state.rxData[`sensorMode${i}`] !== prevRxData[`sensorMode${i}`] ||
+                            this.state.rxData[`hingeType${i}`] !== prevRxData[`hingeType${i}`] ||
+                            ratioChanged
+                        ) {
+                            paneConfigChanged = true;
+                            break;
+                        }
+                    }
+                }
+
+                console.log('[componentDidUpdate] paneConfigChanged:', paneConfigChanged);
+
+                // Reinitialize window shutter mode if config changed
+                if (configChanged || paneConfigChanged) {
+                    console.log('[componentDidUpdate] Reinitializing windowShutterMode...');
+                    const { paneCount, paneConfigs } = this.buildPaneConfigs();
+                    this.windowShutterMode = new WindowShutterModeLogic(
+                        {
+                            shutterPositionOid: this.state.rxData.shutterPositionOid,
+                            shutterUpOid: this.state.rxData.shutterUpOid,
+                            shutterDownOid: this.state.rxData.shutterDownOid,
+                            shutterStopOid: this.state.rxData.shutterStopOid,
+                            shutterInvert: this.state.rxData.shutterInvert,
+                            shutterMin: this.state.rxData.shutterMin,
+                            shutterMax: this.state.rxData.shutterMax,
+                            windowPaneCount: paneCount,
+                            paneConfigs,
+                        },
+                        this.props.context.socket,
+                        updates => {
+                            console.log('[windowShutterMode setState callback] updates:', updates);
+                            this.setState({ windowShutter: { ...this.state.windowShutter, ...updates } });
+                        },
+                        (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
+                    );
+                    // Re-initialize to load new values from ioBroker
+                    void this.windowShutterMode.initialize().then(() => {
+                        // Force paneStates recalculation even in edit mode (no OIDs)
+                        const paneStates = paneConfigs.map(config => ({
+                            state: 'closed' as const,
+                            ratio: config.ratio,
+                            hinge: config.hingeType,
+                        }));
+                        console.log('[componentDidUpdate] Setting new paneStates:', paneStates);
+                        this.setState({
+                            windowShutter: {
+                                ...this.state.windowShutter,
+                                paneStates,
+                            },
+                        });
+                    });
+                } else {
+                    // No config change - check for OID value changes
+                    // 1. Check shutter position
+                    if (this.state.rxData.shutterPositionOid) {
+                        const positionValue = this.getPropertyValue('shutterPositionOid');
+                        if (positionValue !== null && positionValue !== undefined) {
+                            const numValue = Number(positionValue);
+                            // Normalize using shutterMin/Max/Invert
+                            const min = this.state.rxData.shutterMin ?? 0;
+                            const max = this.state.rxData.shutterMax ?? 100;
+                            let normalized = ((numValue - min) / (max - min)) * 100;
+                            if (this.state.rxData.shutterInvert) {
+                                normalized = 100 - normalized;
+                            }
+                            normalized = Math.max(0, Math.min(100, normalized));
+
+                            if (normalized !== this.state.windowShutter.shutterPosition) {
+                                console.log(
+                                    '[componentDidUpdate] Shutter position changed:',
+                                    numValue,
+                                    '→ normalized:',
+                                    normalized,
+                                );
+                                this.setState({
+                                    windowShutter: { ...this.state.windowShutter, shutterPosition: normalized },
+                                });
+                            }
+                        }
+                    }
+
+                    // 2. Check pane states (open/tilt sensors)
+                    const paneCount = this.state.rxData.windowPaneCount || 1;
+                    let anyPaneStateChanged = false;
+                    const newPaneStates = [];
+
+                    for (let i = 1; i <= paneCount; i++) {
+                        const openOidKey = `openOid${i}`;
+                        const tiltOidKey = `tiltOid${i}`;
+                        const sensorMode =
+                            (this.state.rxData[`sensorMode${i}`] as 'twoOids' | 'oneOid' | 'oneOidWithTilt') ||
+                            'oneOid';
+                        const hingeType = (this.state.rxData[`hingeType${i}`] as 'left' | 'right' | 'top') || 'left';
+                        const ratio = (this.state.rxData[`ratio${i}`] as number) ?? 1;
+
+                        let state: 'closed' | 'open' | 'tilt' = 'closed';
+
+                        if (sensorMode === 'twoOids') {
+                            // Two separate OIDs for open and tilt
+                            const openValue = this.state.rxData[openOidKey] ? this.getPropertyValue(openOidKey) : false;
+                            const tiltValue = this.state.rxData[tiltOidKey] ? this.getPropertyValue(tiltOidKey) : false;
+
+                            if (this.toBool(openValue)) {
+                                state = 'open';
+                            } else if (this.toBool(tiltValue)) {
+                                state = 'tilt';
+                            }
+                            console.log(
+                                `[componentDidUpdate] Pane ${i} (twoOids): open=${String(openValue)}, tilt=${String(tiltValue)} → ${state}`,
+                            );
+                        } else if (sensorMode === 'oneOidWithTilt') {
+                            // One OID with numeric values: 0=closed, 1=tilted, 2=open
+                            const value = this.state.rxData[openOidKey] ? this.getPropertyValue(openOidKey) : 0;
+                            const numValue = Number(value);
+
+                            if (numValue >= 2) {
+                                state = 'open';
+                            } else if (numValue >= 1) {
+                                state = 'tilt';
+                            }
+                            console.log(
+                                `[componentDidUpdate] Pane ${i} (oneOidWithTilt): value=${numValue} → ${state}`,
+                            );
+                        } else {
+                            // One OID binary: 0=closed, 1=open
+                            const value = this.state.rxData[openOidKey] ? this.getPropertyValue(openOidKey) : false;
+                            state = this.toBool(value) ? 'open' : 'closed';
+                            console.log(`[componentDidUpdate] Pane ${i} (oneOid): value=${String(value)} → ${state}`);
+                        }
+
+                        newPaneStates.push({ state, ratio, hinge: hingeType });
+
+                        // Check if this pane's state changed
+                        const oldState = this.state.windowShutter.paneStates?.[i - 1];
+                        if (!oldState || oldState.state !== state) {
+                            anyPaneStateChanged = true;
+                        }
+                    }
+
+                    if (anyPaneStateChanged) {
+                        console.log('[componentDidUpdate] Pane states changed:', newPaneStates);
+                        const hasOpenPanes = newPaneStates.some(p => p.state === 'open');
+                        const hasTiltedPanes = newPaneStates.some(p => p.state === 'tilt');
+
+                        this.setState({
+                            windowShutter: {
+                                ...this.state.windowShutter,
+                                paneStates: newPaneStates,
+                                hasOpenPanes,
+                                hasTiltedPanes,
+                            },
+                        });
+                    }
+                }
+                break;
+            }
         }
     }
 
     componentWillUnmount(): void {
         // Cleanup dimmer timeout
         this.dimmerMode.destroy();
+        // Cleanup window shutter mode
+        this.windowShutterMode.destroy();
     }
 
     // ========================================
@@ -218,6 +477,19 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         // Return key if no translation found
         return key;
     }
+
+    private toBool = (value: unknown): boolean => {
+        if (typeof value === 'boolean') {
+            return value;
+        }
+        if (typeof value === 'number') {
+            return value > 0;
+        }
+        if (typeof value === 'string') {
+            return value === 'true' || value === '1';
+        }
+        return false;
+    };
 
     private async fetchOidName(): Promise<void> {
         const oid = this.state.rxData.controlOid || this.state.rxData.heatingSetpointOid;
@@ -253,6 +525,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         switch (this.state.rxData.mode) {
             case FlexMode.DIMMER_DIALOG:
             case FlexMode.HEATING_KNX:
+            case FlexMode.WINDOW_SHUTTER:
                 this.setState({ dialog: true });
                 break;
 
@@ -278,6 +551,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 return this.dimmerMode.isActive(this.state.dimmer.localValue);
             case FlexMode.SWITCH:
                 return this.switchMode.isActive(this.state.switch.isOn);
+            case FlexMode.WINDOW_SHUTTER:
+                return this.windowShutterMode.isActive(this.state.windowShutter);
             default:
                 return false;
         }
@@ -354,6 +629,41 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     />
                 );
 
+            case FlexMode.WINDOW_SHUTTER:
+                return (
+                    <WindowShutterDialog
+                        panes={this.state.windowShutter.paneStates}
+                        shutterPosition={this.state.windowShutter.shutterPosition ?? 0}
+                        shutterInvert={this.state.rxData.shutterInvert ?? false}
+                        primaryColor={primaryColor}
+                        paneClosedColor={this.state.rxData.windowPaneClosedColor || '#999999'}
+                        paneOpenColor={this.state.rxData.windowPaneOpenColor || '#FFC107'}
+                        paneTiltColor={this.state.rxData.windowPaneTiltColor || '#FF9800'}
+                        onShutterChange={value => this.windowShutterMode.setShutterPosition(value)}
+                        onShutterUp={
+                            this.state.rxData.shutterUpOid || this.state.rxData.shutterPositionOid
+                                ? () => this.windowShutterMode.shutterUp()
+                                : undefined
+                        }
+                        onShutterDown={
+                            this.state.rxData.shutterDownOid || this.state.rxData.shutterPositionOid
+                                ? () => this.windowShutterMode.shutterDown()
+                                : undefined
+                        }
+                        onShutterStop={
+                            this.state.rxData.shutterStopOid ? () => this.windowShutterMode.shutterStop() : undefined
+                        }
+                        windowStatusLabel={this.translate('window_shutter_status')}
+                        shutterLabel={this.translate('window_shutter_label')}
+                        upLabel={this.translate('window_shutter_up')}
+                        downLabel={this.translate('window_shutter_down')}
+                        stopLabel={this.translate('window_shutter_stop')}
+                        closedLabel={this.translate('window_pane_state_closed')}
+                        tiltedLabel={this.translate('window_pane_state_tilted')}
+                        openLabel={this.translate('window_pane_state_open')}
+                    />
+                );
+
             default:
                 return <></>;
         }
@@ -386,21 +696,39 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 borderRadiusBR={this.state.rxData.cardBorderRadiusBR}
                 usedInWidget={props.widget.usedInWidget}
             >
-                <IconWithStatus
-                    icon={this.state.rxData.icon}
-                    iconInactive={this.state.rxData.iconInactive}
-                    useDifferentInactiveIcon={this.state.rxData.useDifferentInactiveIcon}
-                    iconSize={this.state.rxData.iconSize}
-                    iconRotation={this.state.rxData.iconRotation}
-                    activeColor={this.state.rxData.activeColor}
-                    inactiveColor={this.state.rxData.inactiveColor}
-                    isActive={this.getIsActive()}
-                    onClick={this.handleClick}
-                    editMode={this.state.editMode}
-                    topText={this.getTopText()}
-                    bottomText={this.getBottomText()}
-                    statusFontSize={this.state.rxData.statusFontSize}
-                />
+                {this.state.rxData.mode === FlexMode.WINDOW_SHUTTER ? (
+                    <WindowShutterIcon
+                        panes={this.state.windowShutter.paneStates}
+                        shutterPosition={this.state.windowShutter.shutterPosition ?? 0}
+                        iconRotation={this.state.rxData.iconRotation ?? 0}
+                        frameColor={this.state.rxData.windowFrameColor || '#8B6F47'}
+                        paneFrameColor={this.state.rxData.windowPaneFrameColor || '#999999'}
+                        glassColor={this.state.rxData.windowGlassColor || '#87CEEB'}
+                        handleColor={this.state.rxData.windowHandleColor || '#333333'}
+                        paneOpenColor={this.state.rxData.windowPaneOpenColor || '#FFC107'}
+                        paneTiltColor={this.state.rxData.windowPaneTiltColor || '#FF9800'}
+                        shutterColor={this.state.rxData.windowShutterColor || '#666666'}
+                        backgroundColor={this.state.rxData.windowBackgroundColorClosed || '#E0E0E0'}
+                        onClick={this.handleClick}
+                        editMode={this.state.editMode}
+                    />
+                ) : (
+                    <IconWithStatus
+                        icon={this.state.rxData.icon}
+                        iconInactive={this.state.rxData.iconInactive}
+                        useDifferentInactiveIcon={this.state.rxData.useDifferentInactiveIcon}
+                        iconSize={this.state.rxData.iconSize}
+                        iconRotation={this.state.rxData.iconRotation}
+                        activeColor={this.state.rxData.activeColor}
+                        inactiveColor={this.state.rxData.inactiveColor}
+                        isActive={this.getIsActive()}
+                        onClick={this.handleClick}
+                        editMode={this.state.editMode}
+                        topText={this.getTopText()}
+                        bottomText={this.getBottomText()}
+                        statusFontSize={this.state.rxData.statusFontSize}
+                    />
+                )}
 
                 {this.state.dialog && (
                     <Dialog

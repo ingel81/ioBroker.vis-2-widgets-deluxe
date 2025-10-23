@@ -123,6 +123,74 @@ const translations = {
         heating_setpoint_label: 'Setpoint',
         heating_valve_label: 'Valve',
         heating_mode_label: 'Mode',
+
+        // Window Shutter Mode
+        one_icon_mode_window_shutter: 'Window & Shutter',
+        deluxe_window_shutter_settings: 'Window & Shutter Settings',
+        deluxe_window_shutter_colors: 'Window & Shutter Colors',
+
+        // Shutter
+        shutter_position_oid: 'Shutter Position',
+        shutter_position_oid_tooltip: 'State for shutter position (0-100%)',
+        shutter_up_oid: 'Shutter Up',
+        shutter_up_oid_tooltip: 'Command to move shutter up (optional)',
+        shutter_down_oid: 'Shutter Down',
+        shutter_down_oid_tooltip: 'Command to move shutter down (optional)',
+        shutter_stop_oid: 'Shutter Stop',
+        shutter_stop_oid_tooltip: 'Command to stop shutter movement (optional)',
+        shutter_invert: 'Invert position',
+        shutter_invert_tooltip:
+            'Enable if your hardware sends 0=closed/down and 100=open/up (default is 0=open/up, 100=closed/down)',
+        shutter_min: 'Min Position',
+        shutter_min_tooltip: 'Minimum position value from hardware',
+        shutter_max: 'Max Position',
+        shutter_max_tooltip: 'Maximum position value from hardware',
+
+        // Window Panes
+        window_pane_count: 'Number of Window Panes',
+        window_pane_count_tooltip: 'How many window panes (1-20)',
+        window_pane: 'Window Pane',
+        window_pane_open_oid: 'Open Sensor',
+        window_pane_open_oid_tooltip: 'State for open detection',
+        window_pane_tilt_oid: 'Tilt Sensor (optional)',
+        window_pane_tilt_oid_tooltip: 'State for tilt detection (only for twoOids mode)',
+        window_pane_sensor_mode: 'Sensor Mode',
+        window_pane_sensor_mode_tooltip: 'How the sensor works',
+        window_pane_sensor_mode_one_oid: 'One OID (0=closed, 1=open)',
+        window_pane_sensor_mode_one_oid_with_tilt: 'One OID with Tilt (0=closed, 1=tilted, 2=open)',
+        window_pane_sensor_mode_two_oids: 'Two OIDs (separate open + tilt)',
+        window_pane_hinge_type: 'Hinge Type',
+        window_pane_hinge_type_tooltip: 'Where is the hinge located',
+        window_pane_hinge_left: 'Left',
+        window_pane_hinge_right: 'Right',
+        window_pane_hinge_top: 'Top',
+        window_pane_ratio: 'Pane Width Ratio',
+        window_pane_ratio_tooltip: 'Relative width (1 = normal, 2 = double width)',
+
+        // Display
+        window_icon_size: 'Icon Size',
+        window_icon_size_tooltip: 'Size of the window/shutter icon',
+        window_orientation: 'Window Orientation',
+        window_orientation_tooltip: 'Rotation angle in degrees (0° = vertical, 90° = horizontal)',
+
+        // Colors
+        window_frame_color: 'Frame Color',
+        window_pane_closed_color: 'Closed Color',
+        window_pane_open_color: 'Open Color (Highlight)',
+        window_pane_tilt_color: 'Tilted Color (Highlight)',
+        window_shutter_color: 'Shutter Color',
+        window_background_closed: 'Background (All Closed)',
+        window_background_active: 'Background (Something Open)',
+
+        // Dialog
+        window_shutter_status: 'Window Status',
+        window_shutter_label: 'Shutter',
+        window_shutter_up: 'Up',
+        window_shutter_down: 'Down',
+        window_shutter_stop: 'Stop',
+        window_pane_state_closed: 'Closed',
+        window_pane_state_tilted: 'Tilted',
+        window_pane_state_open: 'Open',
     },
     de: {
         set_label: 'Deluxe Widgets',
@@ -249,6 +317,74 @@ const translations = {
         heating_setpoint_label: 'Sollwert',
         heating_valve_label: 'Ventil',
         heating_mode_label: 'Modus',
+
+        // Window Shutter Mode
+        one_icon_mode_window_shutter: 'Fenster & Rolladen',
+        deluxe_window_shutter_settings: 'Fenster & Rolladen Einstellungen',
+        deluxe_window_shutter_colors: 'Fenster & Rolladen Farben',
+
+        // Shutter
+        shutter_position_oid: 'Rolladen Position',
+        shutter_position_oid_tooltip: 'Status für Rolladen Position (0-100%)',
+        shutter_up_oid: 'Rolladen Hoch',
+        shutter_up_oid_tooltip: 'Befehl zum Hochfahren (optional)',
+        shutter_down_oid: 'Rolladen Runter',
+        shutter_down_oid_tooltip: 'Befehl zum Runterfahren (optional)',
+        shutter_stop_oid: 'Rolladen Stop',
+        shutter_stop_oid_tooltip: 'Befehl zum Stoppen (optional)',
+        shutter_invert: 'Position invertieren',
+        shutter_invert_tooltip:
+            'Aktivieren wenn Hardware 0=geschlossen/unten und 100=offen/oben sendet (Standard ist 0=offen/oben, 100=geschlossen/unten)',
+        shutter_min: 'Min Position',
+        shutter_min_tooltip: 'Minimaler Positionswert der Hardware',
+        shutter_max: 'Max Position',
+        shutter_max_tooltip: 'Maximaler Positionswert der Hardware',
+
+        // Window Panes
+        window_pane_count: 'Anzahl Fensterflügel',
+        window_pane_count_tooltip: 'Wie viele Fensterflügel (1-20)',
+        window_pane: 'Fensterflügel',
+        window_pane_open_oid: 'Öffnungssensor',
+        window_pane_open_oid_tooltip: 'Status für Öffnungserkennung',
+        window_pane_tilt_oid: 'Kippsensor (optional)',
+        window_pane_tilt_oid_tooltip: 'Status für Kipperkennung (nur für twoOids Modus)',
+        window_pane_sensor_mode: 'Sensor-Modus',
+        window_pane_sensor_mode_tooltip: 'Wie der Sensor funktioniert',
+        window_pane_sensor_mode_one_oid: 'Eine OID (0=zu, 1=offen)',
+        window_pane_sensor_mode_one_oid_with_tilt: 'Eine OID mit Kipp (0=zu, 1=gekippt, 2=offen)',
+        window_pane_sensor_mode_two_oids: 'Zwei OIDs (getrennt offen + gekippt)',
+        window_pane_hinge_type: 'Anschlag-Typ',
+        window_pane_hinge_type_tooltip: 'Wo befindet sich der Anschlag',
+        window_pane_hinge_left: 'Links',
+        window_pane_hinge_right: 'Rechts',
+        window_pane_hinge_top: 'Oben',
+        window_pane_ratio: 'Flügel-Breite',
+        window_pane_ratio_tooltip: 'Relative Breite (1 = normal, 2 = doppelt so breit)',
+
+        // Display
+        window_icon_size: 'Icon-Größe',
+        window_icon_size_tooltip: 'Größe des Fenster/Rolladen-Icons',
+        window_orientation: 'Fenster-Ausrichtung',
+        window_orientation_tooltip: 'Rotationswinkel in Grad (0° = vertikal, 90° = horizontal)',
+
+        // Colors
+        window_frame_color: 'Rahmenfarbe',
+        window_pane_closed_color: 'Farbe geschlossen',
+        window_pane_open_color: 'Farbe offen (Highlight)',
+        window_pane_tilt_color: 'Farbe gekippt (Highlight)',
+        window_shutter_color: 'Rolladenfarbe',
+        window_background_closed: 'Hintergrund (alles zu)',
+        window_background_active: 'Hintergrund (etwas offen)',
+
+        // Dialog
+        window_shutter_status: 'Fensterstatus',
+        window_shutter_label: 'Rolladen',
+        window_shutter_up: 'Auf',
+        window_shutter_down: 'Zu',
+        window_shutter_stop: 'Stop',
+        window_pane_state_closed: 'Geschlossen',
+        window_pane_state_tilted: 'Gekippt',
+        window_pane_state_open: 'Offen',
     },
     ru: {
         // Russian translations (fallback to English until properly translated)

@@ -68,6 +68,18 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- Window/Shutter Mode: Vollständige Implementierung mit Rolladen- und Fenstersteuerung
+- Window/Shutter Mode: Mehrfach-Flügel-Unterstützung (1-4 Fensterflügel) mit individuellen Zuständen
+- Window/Shutter Mode: Perspektivische Darstellung geöffneter Fenster (nach innen öffnend)
+- Window/Shutter Mode: Rolladen-Animation mit festen Lamellenhöhen (kein Stauchen/Strecken)
+- Window/Shutter Mode: Intelligente Griff-Visualisierung (Drehpunkt und Rotation je nach Status)
+- Window/Shutter Mode: Hybrid Alpha-Opacity-Steuerung (automatisch oder manuell via RGBA/Hex8)
+- Window/Shutter Mode: Subtile Glas-Einfärbung bei geöffneten/gekippten Fenstern
+- Window/Shutter Mode: Neutraler Hintergrund (kein globales Highlighting mehr)
+- Code: ESLint-Fehler behoben, Return-Types hinzugefügt, Code-Qualität verbessert
+
 ### 0.3.2 (2025-10-22)
 
 - Heating (KNX): Dialog-Beschriftungen "Valve" und "Operating Mode" nun übersetzt (DE/EN)

@@ -25,6 +25,13 @@ export const MODE_DEFINITIONS: Record<FlexMode, ModeDefinition> = {
         hasPercentage: false,
         description: 'KNX heating control with setpoint and mode',
     },
+    [FlexMode.WINDOW_SHUTTER]: {
+        id: FlexMode.WINDOW_SHUTTER,
+        label: 'Window & Shutter',
+        hasDialog: true,
+        hasPercentage: true,
+        description: 'Window and shutter control with multiple panes',
+    },
 };
 
 /**

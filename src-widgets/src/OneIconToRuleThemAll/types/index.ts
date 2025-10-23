@@ -7,6 +7,7 @@ export enum FlexMode {
     DIMMER_DIALOG = 'dimmer_dialog',
     SWITCH = 'switch',
     HEATING_KNX = 'heating_knx',
+    WINDOW_SHUTTER = 'window_shutter',
 }
 
 /**
@@ -81,6 +82,33 @@ export interface OneIconToRuleThemAllRxData {
     heatingModeControlType?: 'button' | 'dropdown' | 'buttons';
     heatingModesConfig?: string;
 
+    // === MODE: WINDOW_SHUTTER ===
+    // Rolladen-OIDs
+    shutterPositionOid?: string;
+    shutterUpOid?: string;
+    shutterDownOid?: string;
+    shutterStopOid?: string;
+
+    // Rolladen-Config
+    shutterInvert?: boolean;
+    shutterMin?: number;
+    shutterMax?: number;
+
+    // Fenster-Geometrie
+    windowPaneCount?: number;
+
+    // Farb-Konfiguration
+    windowFrameColor?: string; // Gesamtrahmen
+    windowPaneFrameColor?: string; // Flügel-Rahmen
+    windowGlassColor?: string; // Glasscheiben
+    windowHandleColor?: string; // Griffe
+    windowPaneClosedColor?: string; // Status: geschlossen
+    windowPaneOpenColor?: string; // Status: offen
+    windowPaneTiltColor?: string; // Status: gekippt
+    windowShutterColor?: string; // Rolladen
+    windowBackgroundColorClosed?: string; // Hintergrund inaktiv
+    windowBackgroundColorActive?: string; // Hintergrund aktiv
+
     [key: string]: unknown;
 }
 
@@ -95,6 +123,7 @@ export interface OneIconToRuleThemAllState extends VisRxWidgetState {
     heating: HeatingModeState;
     dimmer: DimmerModeState;
     switch: SwitchModeState;
+    windowShutter: WindowShutterModeState;
 }
 
 /**
@@ -119,6 +148,20 @@ export interface DimmerModeState {
  */
 export interface SwitchModeState {
     isOn: boolean;
+}
+
+/**
+ * Window shutter mode state
+ */
+export interface WindowShutterModeState {
+    shutterPosition: number | null;
+    paneStates: Array<{
+        state: 'closed' | 'open' | 'tilt';
+        ratio: number;
+        hinge: 'left' | 'right' | 'top';
+    }>;
+    hasOpenPanes: boolean;
+    hasTiltedPanes: boolean;
 }
 
 /**

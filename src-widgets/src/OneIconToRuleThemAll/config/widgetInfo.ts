@@ -26,6 +26,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                             { value: 'dimmer_dialog', label: 'one_icon_mode_dimmer_dialog' },
                             { value: 'switch', label: 'one_icon_mode_switch' },
                             { value: 'heating_knx', label: 'one_icon_mode_heating_knx' },
+                            { value: 'window_shutter', label: 'one_icon_mode_window_shutter' },
                         ],
                         default: 'switch',
                         tooltip: 'one_icon_mode_tooltip',
@@ -35,7 +36,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'control_state',
                         type: 'id',
                         tooltip: 'control_state_tooltip',
-                        hidden: 'data.mode === "heating_knx"',
+                        hidden: 'data.mode === "heating_knx" || data.mode === "window_shutter"',
                     },
                     {
                         name: 'showCard',
@@ -189,12 +190,202 @@ export function getWidgetInfo(): RxWidgetInfo {
                 ],
             },
 
+            // --- WINDOW SHUTTER MODE ---
+            {
+                name: 'mode_window_shutter',
+                label: 'deluxe_window_shutter_settings',
+                hidden: 'data.mode !== "window_shutter"',
+                fields: [
+                    // Rolladen-OIDs
+                    {
+                        name: 'shutterPositionOid',
+                        label: 'shutter_position_oid',
+                        type: 'id',
+                        tooltip: 'shutter_position_oid_tooltip',
+                    },
+                    {
+                        name: 'shutterUpOid',
+                        label: 'shutter_up_oid',
+                        type: 'id',
+                        tooltip: 'shutter_up_oid_tooltip',
+                    },
+                    {
+                        name: 'shutterDownOid',
+                        label: 'shutter_down_oid',
+                        type: 'id',
+                        tooltip: 'shutter_down_oid_tooltip',
+                    },
+                    {
+                        name: 'shutterStopOid',
+                        label: 'shutter_stop_oid',
+                        type: 'id',
+                        tooltip: 'shutter_stop_oid_tooltip',
+                    },
+
+                    // Rolladen-Config
+                    {
+                        name: 'shutterInvert',
+                        label: 'shutter_invert',
+                        type: 'checkbox',
+                        default: false,
+                        tooltip: 'shutter_invert_tooltip',
+                    },
+                    {
+                        name: 'shutterMin',
+                        label: 'shutter_min',
+                        type: 'number',
+                        default: 0,
+                        tooltip: 'shutter_min_tooltip',
+                    },
+                    {
+                        name: 'shutterMax',
+                        label: 'shutter_max',
+                        type: 'number',
+                        default: 100,
+                        tooltip: 'shutter_max_tooltip',
+                    },
+
+                    // Fenster
+                    {
+                        name: 'windowPaneCount',
+                        label: 'window_pane_count',
+                        type: 'number',
+                        default: 1,
+                        min: 1,
+                        max: 20,
+                        tooltip: 'window_pane_count_tooltip',
+                    },
+
+                    // Display Settings
+                    {
+                        name: 'iconRotation',
+                        label: 'window_orientation',
+                        type: 'number',
+                        default: 0,
+                        tooltip: 'window_orientation_tooltip',
+                    },
+                ],
+            },
+
+            // --- WINDOW PANES (Dynamic) ---
+            {
+                name: 'windowPane',
+                label: 'window_pane',
+                hidden: 'data.mode !== "window_shutter"',
+                indexFrom: 1,
+                indexTo: 'windowPaneCount',
+                fields: [
+                    {
+                        name: 'openOid',
+                        label: 'window_pane_open_oid',
+                        type: 'id',
+                        tooltip: 'window_pane_open_oid_tooltip',
+                        noInit: true,
+                        default: '',
+                    },
+                    {
+                        name: 'tiltOid',
+                        label: 'window_pane_tilt_oid',
+                        type: 'id',
+                        tooltip: 'window_pane_tilt_oid_tooltip',
+                        noInit: true,
+                        default: '',
+                    },
+                    {
+                        name: 'sensorMode',
+                        label: 'window_pane_sensor_mode',
+                        type: 'select',
+                        options: [
+                            { value: 'oneOid', label: 'window_pane_sensor_mode_one_oid' },
+                            { value: 'oneOidWithTilt', label: 'window_pane_sensor_mode_one_oid_with_tilt' },
+                            { value: 'twoOids', label: 'window_pane_sensor_mode_two_oids' },
+                        ],
+                        default: 'oneOid',
+                        tooltip: 'window_pane_sensor_mode_tooltip',
+                    },
+                    {
+                        name: 'hingeType',
+                        label: 'window_pane_hinge_type',
+                        type: 'select',
+                        options: [
+                            { value: 'left', label: 'window_pane_hinge_left' },
+                            { value: 'right', label: 'window_pane_hinge_right' },
+                            { value: 'top', label: 'window_pane_hinge_top' },
+                        ],
+                        default: 'left',
+                        tooltip: 'window_pane_hinge_type_tooltip',
+                    },
+                    {
+                        name: 'ratio',
+                        label: 'window_pane_ratio',
+                        type: 'slider',
+                        min: 0.1,
+                        max: 4,
+                        step: 0.1,
+                        default: 1,
+                        tooltip: 'window_pane_ratio_tooltip',
+                    },
+                ],
+            },
+
+            // --- WINDOW SHUTTER COLORS ---
+            {
+                name: 'window_shutter_colors',
+                label: 'deluxe_window_shutter_colors',
+                hidden: 'data.mode !== "window_shutter"',
+                fields: [
+                    {
+                        name: 'windowFrameColor',
+                        label: 'window_frame_color',
+                        type: 'color',
+                        default: '#555555',
+                    },
+                    {
+                        name: 'windowPaneClosedColor',
+                        label: 'window_pane_closed_color',
+                        type: 'color',
+                        default: '#999999',
+                    },
+                    {
+                        name: 'windowPaneOpenColor',
+                        label: 'window_pane_open_color',
+                        type: 'color',
+                        default: '#FFC107',
+                    },
+                    {
+                        name: 'windowPaneTiltColor',
+                        label: 'window_pane_tilt_color',
+                        type: 'color',
+                        default: '#FF9800',
+                    },
+                    {
+                        name: 'windowShutterColor',
+                        label: 'window_shutter_color',
+                        type: 'color',
+                        default: '#666666',
+                    },
+                    {
+                        name: 'windowBackgroundColorClosed',
+                        label: 'window_background_closed',
+                        type: 'color',
+                        default: '#E0E0E0',
+                    },
+                    {
+                        name: 'windowBackgroundColorActive',
+                        label: 'window_background_active',
+                        type: 'color',
+                        default: '#FFEB3B',
+                    },
+                ],
+            },
+
             // ================================================
-            // GROUP 3: ICON SETTINGS (Always visible)
+            // GROUP 3: ICON SETTINGS (Hidden for window_shutter)
             // ================================================
             {
                 name: 'icon',
                 label: 'deluxe_icon_settings',
+                hidden: 'data.mode === "window_shutter"',
                 fields: [
                     {
                         name: 'icon',
