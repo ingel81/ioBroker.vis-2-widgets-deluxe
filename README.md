@@ -68,7 +68,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.3.3 (2025-10-23)
 
 - Window/Shutter Mode: Vollständige Implementierung mit Rolladen- und Fenstersteuerung
 - Window/Shutter Mode: Mehrfach-Flügel-Unterstützung (1-4 Fensterflügel) mit individuellen Zuständen
