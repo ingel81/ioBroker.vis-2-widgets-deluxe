@@ -68,6 +68,13 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### 0.3.5 (2025-11-02)
+
+- **Fix: npm Package Build korrigiert**
+  - customWidgets.js wurde in v0.3.4 fehlerhaft veröffentlicht (GitHub Action Build-Fehler)
+  - Vollständiger Rebuild und Re-Deploy auf npm
+  - Module Federation Container jetzt korrekt
+
 ### 0.3.4 (2025-11-02)
 
 - **Window/Shutter Mode: KNX Rolladen-Steuerung verbessert**

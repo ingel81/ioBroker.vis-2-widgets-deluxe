@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.3.4",
+    "version": "0.3.5",
     "news": {
+      "0.3.5": {
+        "en": "Fix: Corrected npm package build (customWidgets.js was broken in v0.3.4)",
+        "de": "Fix: npm Package Build korrigiert (customWidgets.js war in v0.3.4 defekt)"
+      },
       "0.3.4": {
         "en": "Window/Shutter Mode: KNX shutter control improved (Up/Down button logic, configurable command values, single-OID support)\nDialog UI: Centralized button styles, consistent colors\nWindow/Shutter Mode: Perspective glass distortion for open windows",
         "de": "Window/Shutter Modus: KNX Rolladen-Steuerung verbessert (Hoch/Runter-Logik, konfigurierbare Befehle, Single-OID Unterstützung)\nDialog UI: Zentrale Button-Styles, einheitliche Farben\nWindow/Shutter Modus: Perspektivische Glas-Verzerrung bei geöffneten Fenstern"
