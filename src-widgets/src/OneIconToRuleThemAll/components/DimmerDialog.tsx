@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Slider, Button, ButtonGroup } from '@mui/material';
 import { PowerSettingsNew } from '@mui/icons-material';
+import { getOutlinedButtonStyle } from './shared/buttonStyles';
 
 export interface DimmerDialogProps {
     localValue: number;
@@ -77,14 +78,7 @@ export const DimmerDialog: React.FC<DimmerDialogProps> = React.memo(
                                 <Button
                                     key={btn.value}
                                     onClick={() => onQuickSet(btn.value)}
-                                    sx={{
-                                        color: primaryColor,
-                                        borderColor: primaryColor,
-                                        '&:hover': {
-                                            borderColor: primaryColor,
-                                            backgroundColor: `${primaryColor}10`,
-                                        },
-                                    }}
+                                    sx={getOutlinedButtonStyle(primaryColor)}
                                 >
                                     {btn.icon || btn.label}
                                 </Button>
@@ -99,14 +93,7 @@ export const DimmerDialog: React.FC<DimmerDialogProps> = React.memo(
                                 <Button
                                     key={btn.value}
                                     onClick={() => onQuickSet(btn.value)}
-                                    sx={{
-                                        color: primaryColor,
-                                        borderColor: primaryColor,
-                                        '&:hover': {
-                                            borderColor: primaryColor,
-                                            backgroundColor: `${primaryColor}10`,
-                                        },
-                                    }}
+                                    sx={getOutlinedButtonStyle(primaryColor)}
                                 >
                                     {btn.label}
                                 </Button>

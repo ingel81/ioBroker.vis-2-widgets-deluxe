@@ -145,6 +145,12 @@ const translations = {
         shutter_min_tooltip: 'Minimum position value from hardware',
         shutter_max: 'Max Position',
         shutter_max_tooltip: 'Maximum position value from hardware',
+        shutter_up_value: 'Up Value',
+        shutter_up_value_tooltip: 'Value to send for UP command (default: 0 for KNX, use 1 if needed)',
+        shutter_down_value: 'Down Value',
+        shutter_down_value_tooltip: 'Value to send for DOWN command (default: 1 for KNX, use 0 if needed)',
+        shutter_stop_value: 'Stop Value',
+        shutter_stop_value_tooltip: 'Value to send for STOP command (default: 1)',
 
         // Window Panes
         window_pane_count: 'Number of Window Panes',
@@ -339,6 +345,12 @@ const translations = {
         shutter_min_tooltip: 'Minimaler Positionswert der Hardware',
         shutter_max: 'Max Position',
         shutter_max_tooltip: 'Maximaler Positionswert der Hardware',
+        shutter_up_value: 'Hoch-Wert',
+        shutter_up_value_tooltip: 'Wert für HOCH-Befehl (Standard: 0 für KNX, 1 falls benötigt)',
+        shutter_down_value: 'Runter-Wert',
+        shutter_down_value_tooltip: 'Wert für RUNTER-Befehl (Standard: 1 für KNX, 0 falls benötigt)',
+        shutter_stop_value: 'Stop-Wert',
+        shutter_stop_value_tooltip: 'Wert für STOP-Befehl (Standard: 1)',
 
         // Window Panes
         window_pane_count: 'Anzahl Fensterflügel',

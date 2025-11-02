@@ -11,6 +11,11 @@ export interface WindowShutterModeConfig {
     shutterMin?: number;
     shutterMax?: number;
 
+    // Rolladen-Werte (für KNX-Kompatibilität)
+    shutterUpValue?: number | boolean; // Wert für "Hoch" (default: 0 für KNX)
+    shutterDownValue?: number | boolean; // Wert für "Runter" (default: 1 für KNX)
+    shutterStopValue?: number | boolean; // Wert für "Stop" (default: 1)
+
     // Fenster-Flügel
     windowPaneCount?: number;
     paneConfigs: Array<{
@@ -254,10 +259,14 @@ export class WindowShutterModeLogic {
      */
     shutterUp(): void {
         if (this.config.shutterUpOid) {
-            this.setValue(this.config.shutterUpOid, true);
+            // Dedizierte Up-OID verwenden (präferiert)
+            // Konfigurierbarer Wert (default: 0 für KNX, falls nicht gesetzt)
+            const upValue = this.config.shutterUpValue ?? 0;
+            this.setValue(this.config.shutterUpOid, upValue);
         } else if (this.config.shutterPositionOid) {
-            // Fallback: Position auf 100% setzen
-            this.setShutterPosition(100);
+            // Fallback: Position auf 0% setzen (0 = Rolladen OBEN)
+            // setShutterPosition() berücksichtigt shutterInvert automatisch
+            this.setShutterPosition(0);
         }
     }
 
@@ -266,10 +275,14 @@ export class WindowShutterModeLogic {
      */
     shutterDown(): void {
         if (this.config.shutterDownOid) {
-            this.setValue(this.config.shutterDownOid, true);
+            // Dedizierte Down-OID verwenden (präferiert)
+            // Konfigurierbarer Wert (default: 1 für KNX, falls nicht gesetzt)
+            const downValue = this.config.shutterDownValue ?? 1;
+            this.setValue(this.config.shutterDownOid, downValue);
         } else if (this.config.shutterPositionOid) {
-            // Fallback: Position auf 0% setzen
-            this.setShutterPosition(0);
+            // Fallback: Position auf 100% setzen (100 = Rolladen UNTEN)
+            // setShutterPosition() berücksichtigt shutterInvert automatisch
+            this.setShutterPosition(100);
         }
     }
 
@@ -278,7 +291,9 @@ export class WindowShutterModeLogic {
      */
     shutterStop(): void {
         if (this.config.shutterStopOid) {
-            this.setValue(this.config.shutterStopOid, true);
+            // Konfigurierbarer Stop-Wert (default: 1)
+            const stopValue = this.config.shutterStopValue ?? 1;
+            this.setValue(this.config.shutterStopOid, stopValue);
         }
     }
 

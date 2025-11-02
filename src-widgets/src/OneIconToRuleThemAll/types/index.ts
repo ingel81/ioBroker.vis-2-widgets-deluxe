@@ -94,6 +94,11 @@ export interface OneIconToRuleThemAllRxData {
     shutterMin?: number;
     shutterMax?: number;
 
+    // Rolladen-Werte (für KNX-Kompatibilität)
+    shutterUpValue?: number | boolean; // Wert für "Hoch" (default: 0 für KNX)
+    shutterDownValue?: number | boolean; // Wert für "Runter" (default: 1 für KNX)
+    shutterStopValue?: number | boolean; // Wert für "Stop" (default: 1)
+
     // Fenster-Geometrie
     windowPaneCount?: number;
 

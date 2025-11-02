@@ -244,6 +244,27 @@ export function getWidgetInfo(): RxWidgetInfo {
                         default: 100,
                         tooltip: 'shutter_max_tooltip',
                     },
+                    {
+                        name: 'shutterUpValue',
+                        label: 'shutter_up_value',
+                        type: 'number',
+                        default: 0,
+                        tooltip: 'shutter_up_value_tooltip',
+                    },
+                    {
+                        name: 'shutterDownValue',
+                        label: 'shutter_down_value',
+                        type: 'number',
+                        default: 1,
+                        tooltip: 'shutter_down_value_tooltip',
+                    },
+                    {
+                        name: 'shutterStopValue',
+                        label: 'shutter_stop_value',
+                        type: 'number',
+                        default: 1,
+                        tooltip: 'shutter_stop_value_tooltip',
+                    },
 
                     // Fenster
                     {

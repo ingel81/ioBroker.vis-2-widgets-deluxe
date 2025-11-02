@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, Typography, Slider, Button, ButtonGroup, Divider, Chip } from '@mui/material';
 import { ArrowUpward, ArrowDownward, Stop } from '@mui/icons-material';
+import { getOutlinedButtonStyle, getButtonGroupStyle } from './shared/buttonStyles';
 
 export interface WindowShutterDialogProps {
     panes: Array<{
@@ -201,24 +202,13 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                     <ButtonGroup
                         fullWidth
                         variant="outlined"
-                        sx={{
-                            '& .MuiButton-root': {
-                                minHeight: 48,
-                            },
-                        }}
+                        sx={getButtonGroupStyle(48)}
                     >
                         {onShutterUp && (
                             <Button
                                 onClick={onShutterUp}
                                 startIcon={<ArrowUpward />}
-                                sx={{
-                                    color: primaryColor,
-                                    borderColor: primaryColor,
-                                    '&:hover': {
-                                        borderColor: primaryColor,
-                                        backgroundColor: `${primaryColor}10`,
-                                    },
-                                }}
+                                sx={getOutlinedButtonStyle(primaryColor)}
                             >
                                 {upLabel}
                             </Button>
@@ -228,14 +218,7 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             <Button
                                 onClick={onShutterStop}
                                 startIcon={<Stop />}
-                                sx={{
-                                    color: '#FF5722',
-                                    borderColor: '#FF5722',
-                                    '&:hover': {
-                                        borderColor: '#FF5722',
-                                        backgroundColor: '#FF572210',
-                                    },
-                                }}
+                                sx={getOutlinedButtonStyle(primaryColor)}
                             >
                                 {stopLabel}
                             </Button>
@@ -245,14 +228,7 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             <Button
                                 onClick={onShutterDown}
                                 startIcon={<ArrowDownward />}
-                                sx={{
-                                    color: primaryColor,
-                                    borderColor: primaryColor,
-                                    '&:hover': {
-                                        borderColor: primaryColor,
-                                        backgroundColor: `${primaryColor}10`,
-                                    },
-                                }}
+                                sx={getOutlinedButtonStyle(primaryColor)}
                             >
                                 {downLabel}
                             </Button>
