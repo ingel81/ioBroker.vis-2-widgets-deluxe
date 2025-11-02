@@ -1,8 +1,12 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.3.3",
+    "version": "0.3.4",
     "news": {
+      "0.3.4": {
+        "en": "Window/Shutter Mode: KNX shutter control improved (Up/Down button logic, configurable command values, single-OID support)\nDialog UI: Centralized button styles, consistent colors\nWindow/Shutter Mode: Perspective glass distortion for open windows",
+        "de": "Window/Shutter Modus: KNX Rolladen-Steuerung verbessert (Hoch/Runter-Logik, konfigurierbare Befehle, Single-OID Unterstützung)\nDialog UI: Zentrale Button-Styles, einheitliche Farben\nWindow/Shutter Modus: Perspektivische Glas-Verzerrung bei geöffneten Fenstern"
+      },
       "0.3.3": {
         "en": "Window/Shutter Mode: Vollständige Implementierung mit Rolladen- und Fenstersteuerung\nWindow/Shutter Mode: Mehrfach-Flügel-Unterstützung (1-4 Fensterflügel) mit individuellen Zuständen\nWindow/Shutter Mode: Perspektivische Darstellung geöffneter Fenster (nach innen öffnend)\nWindow/Shutter Mode: Rolladen-Animation mit festen Lamellenhöhen (kein Stauchen/Strecken)\nWindow/Shutter Mode: Intelligente Griff-Visualisierung (Drehpunkt und Rotation je nach Status)\nWindow/Shutter Mode: Hybrid Alpha-Opacity-Steuerung (automatisch oder manuell via RGBA/Hex8)\nWindow/Shutter Mode: Subtile Glas-Einfärbung bei geöffneten/gekippten Fenstern\nWindow/Shutter Mode: Neutraler Hintergrund (kein globales Highlighting mehr)\nCode: ESLint-Fehler behoben, Return-Types hinzugefügt, Code-Qualität verbessert",
         "de": "Window/Shutter Mode: Vollständige Implementierung mit Rolladen- und Fenstersteuerung\nFenster/Shutter Modus: Mehrfach-Flügel-Unterstützung (1-4 Fensterflügel) mit individueller :\nFenster-/Shuttermodus: Perspektivische Darstellungs-Plug-Fenster (nach innen öffnend)\nFenster-/Schneidmodus: Rolladen-Animation mit fester Mundhöhen (kein Stauchen/Strecken)\nFenster-/Schneidmodus: Intelligente Griff-Visualisierung (Drehpunkt und Rotation je nach Status)\nWindow/Shutter Mode: Hybrid Alpha-Opacity-Steuerung (automatisch oder manuell via RGBA/Hex8)\nFenster/Schneidmodus: Subtile Glas-Ein bei geöffnetenen/gekippten Fenstern\nFenster-/Schneidmodus: Neutraler Hintergrund (kein globales Highlighting mehr)\nCode: ESLint-Fehler behoben, Return-besserTypes hinzugefügt, Code-Qualität",

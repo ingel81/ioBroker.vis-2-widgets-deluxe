@@ -68,8 +68,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS**
+### 0.3.4 (2025-11-02)
 
 - **Window/Shutter Mode: KNX Rolladen-Steuerung verbessert**
   - Hoch/Runter Button-Logik korrigiert (0% = Rolladen oben, 100% = Rolladen unten)
