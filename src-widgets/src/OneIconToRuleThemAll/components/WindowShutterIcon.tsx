@@ -309,8 +309,52 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
                 opacity = hasAlpha(glassColor) ? 1.0 : 0.3;
             }
 
-            // Glas bleibt auch bei geöffnetem Zustand ein einfaches Rechteck
-            // (nur der Rahmen wird perspektivisch verzerrt)
+            // Wenn offen: Glas perspektivisch verzerren (parallel zum Rahmen)
+            if (pane.state === 'open') {
+                const growFactor = 0.2; // Gleicher Faktor wie beim Rahmen
+
+                let points: string;
+
+                if (pane.hinge === 'left') {
+                    // Scharnier LINKS bleibt fest → Rechte Seite kommt zu uns
+                    const grow = glassHeight * growFactor;
+                    points = `
+                        ${glassX},${glassY}
+                        ${glassX + glassWidth},${glassY - grow}
+                        ${glassX + glassWidth},${glassY + glassHeight + grow}
+                        ${glassX},${glassY + glassHeight}
+                    `;
+                } else if (pane.hinge === 'right') {
+                    // Scharnier RECHTS bleibt fest → Linke Seite kommt zu uns
+                    const grow = glassHeight * growFactor;
+                    points = `
+                        ${glassX},${glassY - grow}
+                        ${glassX + glassWidth},${glassY}
+                        ${glassX + glassWidth},${glassY + glassHeight}
+                        ${glassX},${glassY + glassHeight + grow}
+                    `;
+                } else {
+                    // Scharnier OBEN bleibt fest → Untere Seite kommt zu uns
+                    const grow = glassWidth * growFactor;
+                    points = `
+                        ${glassX},${glassY}
+                        ${glassX + glassWidth},${glassY}
+                        ${glassX + glassWidth + grow},${glassY + glassHeight}
+                        ${glassX - grow},${glassY + glassHeight}
+                    `;
+                }
+
+                return (
+                    <polygon
+                        key={`glass-${idx}`}
+                        points={points}
+                        fill={fillColor}
+                        opacity={opacity}
+                    />
+                );
+            }
+
+            // Geschlossen oder gekippt: normales Rechteck
             return (
                 <rect
                     key={`glass-${idx}`}

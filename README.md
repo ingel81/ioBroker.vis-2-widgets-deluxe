@@ -68,6 +68,27 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+
+### **WORK IN PROGRESS**
+
+- **Window/Shutter Mode: KNX Rolladen-Steuerung verbessert**
+  - Hoch/Runter Button-Logik korrigiert (0% = Rolladen oben, 100% = Rolladen unten)
+  - Dedizierte OIDs für Hoch/Runter/Stop werden präferiert verwendet (Fallback auf Position-OID)
+  - Neue konfigurierbare Werte: `shutterUpValue`, `shutterDownValue`, `shutterStopValue` (default: 0/1/1 für KNX MDT)
+  - Automatische Erkennung: Wenn beide OIDs identisch sind (KNX-typisch), werden unterschiedliche Werte gesendet
+  - Unterstützung für KNX Single-OID Steuerung (z.B. MDT: eine OID für Hoch/Runter mit Wert 0/1)
+  - Widget-Config: 3 neue Felder zur Steuerung der Befehlswerte (EN/DE Übersetzungen)
+- **Dialog-UI: Zentrale Button-Styles**
+  - Neue zentrale `buttonStyles.ts` für konsistente Button-Styles über alle Dialoge
+  - WindowShutterDialog und DimmerDialog verwenden gemeinsame Style-Funktionen
+  - Stop-Button verwendet jetzt `primaryColor` statt hartkodiertem Rot (#FF5722)
+  - Reduzierte Code-Duplikation, einfachere Wartbarkeit
+- **Window/Shutter Mode: Perspektivische Glas-Verzerrung bei geöffneten Fenstern**
+  - Glas wird bei `state='open'` perspektivisch verzerrt (parallel zum Rahmen)
+  - Gleicher `growFactor` wie Rahmen für natürliche 3D-Darstellung
+  - Scharnier-abhängige Verzerrung (left/right/top hinge)
+  - Verbesserte visuelle Tiefenwirkung für realistische Öffnungsdarstellung
+
 ### 0.3.3 (2025-10-23)
 
 - Window/Shutter Mode: Vollständige Implementierung mit Rolladen- und Fenstersteuerung
