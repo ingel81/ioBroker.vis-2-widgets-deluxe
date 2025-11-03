@@ -13,8 +13,9 @@ Leitfaden für Claude Code (claude.ai/code) beim Arbeiten mit diesem Repository.
 
 ## 📚 Dokumentation
 
-- **[.claude/docs/DEVELOPMENT.md](./.claude/docs/DEVELOPMENT.md)** - Umfassende Entwicklungsdokumentation (Workflow, Commands, Troubleshooting)
+- **[.claude/docs/DEVELOPMENT.md](./.claude/docs/DEVELOPMENT.md)** - Umfassende Entwicklungsdokumentation (Workflow, Commands)
 - **[.claude/docs/WIDGET_ARCHITECTURE.md](./.claude/docs/WIDGET_ARCHITECTURE.md)** - Modulare Widget-Architektur Richtlinien
+- **[.claude/docs/TROUBLESHOOTING.md](./.claude/docs/TROUBLESHOOTING.md)** - Häufige Probleme und Lösungen
 
 ## Quick Start
 
@@ -162,40 +163,13 @@ private translate(key: string) {
 
 ## Troubleshooting
 
-**Änderungen nicht sichtbar?**
+Für häufige Probleme siehe **[TROUBLESHOOTING.md](./.claude/docs/TROUBLESHOOTING.md)**.
 
-1. Auf "vis-2 restarted" warten
-2. ~20 Sekunden warten
-3. Browser aktualisieren (F5)
-4. Ggf. Hard Refresh (Ctrl+Shift+R)
+**Quick-Fixes:**
 
-**Module Federation Cache hartnäckig?**
-
-1. `./.dev-server/default/iob stop vis-2`
-2. Browser **komplett schließen** (alle Fenster)
-3. `./.dev-server/default/iob start vis-2` (warten ~20s)
-4. Browser neu öffnen
-
-**Widget nicht in Palette?**
-
-1. `io-package.json` components prüfen
-2. `vite.config.ts` exposes prüfen
-3. `npm run build` ausführen
-
-**Build-Fehler?**
-
-- `npm run check` - TypeScript-Fehler
-- `npm run lint` - ESLint-Fehler
-- Konsole prüfen
-
-**Übersetzungen debuggen?**
-
-Browser Console:
-```javascript
-// Verfügbare Keys prüfen
-Object.keys(translations.de).filter(k => k.includes('valve'))
-// Erwartetes Ergebnis: ['vis_2_widgets_deluxe_heating_valve_label']
-```
+- **Widget-Settings werden nicht übernommen?** → Browser komplett neu laden (F5)
+- **Code-Änderungen nicht sichtbar?** → 20s warten nach "vis-2 restarted", dann F5
+- **Cache-Problem?** → vis-2 stoppen, Browser schließen, vis-2 starten, Browser öffnen
 
 ## Commit-Richtlinien
 
