@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.3.5",
+    "version": "0.3.6",
     "news": {
+      "0.3.6": {
+        "en": "Test-Release",
+        "de": "Test-Release",
+        "ru": "Освобождение от испытаний",
+        "pt": "Liberação do ensaio",
+        "nl": "Test-release",
+        "fr": "Essai de libération",
+        "it": "Test-Release",
+        "es": "Test-Release",
+        "pl": "Test- Release",
+        "uk": "Тест-реліз",
+        "zh-cn": "试放"
+      },
       "0.3.5": {
         "en": "Fix: Corrected npm package build (customWidgets.js was broken in v0.3.4)",
         "de": "Fix: npm Package Build korrigiert (customWidgets.js war in v0.3.4 defekt)"
@@ -62,45 +75,6 @@
         "pl": "Ogrzewanie (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true = erhöhen, false = verringern)\nOgrzewanie (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus\nOgrzewanie (KNX): Neue Steuerungsart \"Buttons (Indywidualne)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
         "uk": "Опалення (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nОпалення (KNX): Попадання zeigt jetzt korrekten aktuellen Modus\nОпалення (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
         "zh-cn": "加热( KNX): Sollwertverschiebung verreinfacht - nur noch ein Datenpunkt (real=erhöhen, 假=verringern) (中文(简体) )\n加热( KNX): 下沉的 zeigt 喷气式喷气式喷气式发动机\n暖气(KNX):Neue Steurungsart \"按钮(英语:Buttons (Individual))\" - einzelne Buttons für Jeden Betriebsmodors mit visueller Hervorhebung des akiten Modus(英语:Hervorhebung des aktiven Modus) 热气(英语:Neue Steurhebung) 热气(英语:Neue Steurungsart) 热气(英语:Neue Steurhungs) 热气流(英语:Neuel Ste) 热气流(英语:Neuel Ste) 热气流(英语:"
-      },
-      "0.2.2": {
-        "en": "translations\nrefactor & cleanup\ndocs",
-        "de": "übersetzungen\nrefactor und reinigung\ndocs",
-        "ru": "переводы\nрефактор и очистка\nдокументы",
-        "pt": "traduções\nrefator & limpeza\ndogs",
-        "nl": "vertalingen\nrefactor & opruimen\ndocs",
-        "fr": "traductions\nrefactor & nettoyage\ndocs",
-        "it": "traduzioni\nrefactor & cleanup\ndocs",
-        "es": "traducciones\nrefactor \" limpieza \"\ndocs",
-        "pl": "tłumaczenia\nrefactor & cleanup\ndoki",
-        "uk": "переклади\nрефактор & очищення\nдокс",
-        "zh-cn": "翻译\n重构清理( c)\n文档"
-      },
-      "0.2.1": {
-        "en": "fix deps",
-        "de": "deps",
-        "ru": "фиксировать дефисы",
-        "pt": "corrigir deps",
-        "nl": "fix deps",
-        "fr": "fixer les dépes",
-        "it": "correzione deps",
-        "es": "arreglos",
-        "pl": "fix deps",
-        "uk": "фіксувати депс",
-        "zh-cn": "修补道具"
-      },
-      "0.2.0": {
-        "en": "new general purpose widget >> \"one icon to rule them all\"\ndimmer widget removed\nrefactor & cleanup",
-        "de": "neuer allgemeiner zweck widget >> \"eine ikone, um sie alle zu regieren\"\ndimmer widget entfernt\nrefactor und reinigung",
-        "ru": "новый виджет общего назначения >> «одна икона, чтобы править всеми»\nвиджет dimmer удален\nрефактор и очистка",
-        "pt": "novo widget de propósito geral >> \"um ícone para governar todos\"\nwidget de dimmer removido\nrefator & limpeza",
-        "nl": "nieuw widget voor algemeen gebruik >> \"een pictogram om ze allemaal te regeren\"\ndimmer-widget verwijderd\nrefactor & opruimen",
-        "fr": "nouveau widget général >> \"une icône pour les gouverner tous\"\nwidget dimmer enlevé\nrefactor & nettoyage",
-        "it": "nuovo widget di scopo generale \"una icona per governarli tutti\"\ndimmer widget rimosso\nrefactor & cleanup",
-        "es": "nuevo widget de propósito general \"un icono para gobernarlos a todos\"\ndimmer widget eliminado\nrefactor \" limpieza \"",
-        "pl": "nowy widget ogólnego przeznaczenia > > \"jedna ikona rządzić nimi wszystkimi\"\nprzyciemniacz widget usunięty\nrefactor & cleanup",
-        "uk": "новий віджет загального призначення >> \"ікона підкорення всіх\"\ndimmer віджет видалити\nрефактор & очищення",
-        "zh-cn": "新通用部件 qq \"一个统治他们的圣像\"\ndimmer 部件已删除\n重构清理( c)"
       }
     },
     "titleLang": {
