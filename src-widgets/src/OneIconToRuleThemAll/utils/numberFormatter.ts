@@ -11,10 +11,7 @@ export interface NumberFormatOptions {
 /**
  * Formats a number with configurable options
  */
-export function formatNumber(
-    value: number | null | undefined,
-    options: NumberFormatOptions = {},
-): string {
+export function formatNumber(value: number | null | undefined, options: NumberFormatOptions = {}): string {
     const decimals = options.decimals ?? 0;
     const decimalMode = options.decimalMode ?? DecimalMode.ROUND;
     const decimalSeparator = options.decimalSeparator ?? DecimalSeparator.DOT;
@@ -69,7 +66,7 @@ export function formatNumber(
 
     // 6. Append unit (with space)
     if (unit) {
-        result += ' ' + unit;
+        result += ` ${unit}`;
     }
 
     return result;

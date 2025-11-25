@@ -15,10 +15,7 @@ export interface ColorThresholdConfig {
  *   value <= thresholdHigh -> colorMedium
  *   value >  thresholdHigh -> colorHigh
  */
-export function getColorByThreshold(
-    value: number | null,
-    config: ColorThresholdConfig,
-): string | null {
+export function getColorByThreshold(value: number | null, config: ColorThresholdConfig): string | null {
     // Disabled or no value
     if (!config.enabled || value === null) {
         return null;
@@ -29,9 +26,8 @@ export function getColorByThreshold(
         return config.colorLow;
     } else if (value <= config.thresholdHigh) {
         return config.colorMedium;
-    } else {
-        return config.colorHigh;
     }
+    return config.colorHigh;
 }
 
 /**

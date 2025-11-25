@@ -6,11 +6,7 @@
  * @param fallback - Fallback string when no mapping found
  * @returns Mapped string or fallback
  */
-export function mapValue(
-    value: unknown,
-    mapping: Record<string, string> | undefined,
-    fallback: string,
-): string {
+export function mapValue(value: unknown, mapping: Record<string, string> | undefined, fallback: string): string {
     // No mapping defined
     if (!mapping || Object.keys(mapping).length === 0) {
         return fallback;

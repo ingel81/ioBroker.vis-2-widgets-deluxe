@@ -1,5 +1,5 @@
 import type { SocketLike } from '../types/socket';
-import type { StringDisplayModeConfig, StringDisplayModeState, TextTransform } from '../types';
+import type { StringDisplayModeConfig, StringDisplayModeState } from '../types';
 import { mapValue, parseValueMapping } from '../utils/valueMapper';
 
 /**
@@ -115,7 +115,13 @@ export class StringDisplayModeLogic {
             return null;
         }
 
-        return String(value);
+        // Handle objects specially to avoid [object Object]
+        if (typeof value === 'object') {
+            return JSON.stringify(value);
+        }
+
+        // At this point, value is a primitive (string, number, boolean, etc.)
+        return String(value as string | number | boolean | symbol | bigint);
     }
 
     /**
@@ -139,7 +145,7 @@ export class StringDisplayModeLogic {
     private applyTextTransform(value: string): string {
         const transform = this.config.textTransform ?? 'none';
 
-        switch (transform as TextTransform | 'none') {
+        switch (transform) {
             case 'uppercase':
                 return value.toUpperCase();
             case 'lowercase':
@@ -164,10 +170,9 @@ export class StringDisplayModeLogic {
         }
 
         if (ellipsis) {
-            return value.substring(0, maxLength - 3) + '...';
-        } else {
-            return value.substring(0, maxLength);
+            return `${value.substring(0, maxLength - 3)}...`;
         }
+        return value.substring(0, maxLength);
     }
 
     /**

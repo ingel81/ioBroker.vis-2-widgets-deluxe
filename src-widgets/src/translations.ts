@@ -245,7 +245,8 @@ const translations = {
         string_display_prefix: 'Prefix',
         string_display_suffix: 'Suffix',
         string_display_value_mapping: 'Value Mapping (JSON)',
-        string_display_value_mapping_tooltip: 'JSON object for value mapping, e.g., {"online":"Online","offline":"Offline"}',
+        string_display_value_mapping_tooltip:
+            'JSON object for value mapping, e.g., {"online":"Online","offline":"Offline"}',
 
         // Display Common Settings
         deluxe_display_common_settings: 'Deluxe - Display Settings',
@@ -511,7 +512,8 @@ const translations = {
         string_display_prefix: 'Präfix',
         string_display_suffix: 'Suffix',
         string_display_value_mapping: 'Wert-Mapping (JSON)',
-        string_display_value_mapping_tooltip: 'JSON-Objekt für Wert-Mapping, z.B. {"online":"Online","offline":"Offline"}',
+        string_display_value_mapping_tooltip:
+            'JSON-Objekt für Wert-Mapping, z.B. {"online":"Online","offline":"Offline"}',
 
         // Display Common Settings
         deluxe_display_common_settings: 'Deluxe - Anzeigeeinstellungen',

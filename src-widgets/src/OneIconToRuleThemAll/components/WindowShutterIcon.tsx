@@ -91,13 +91,6 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
         const totalRatio = panes.reduce((sum, pane) => sum + pane.ratio, 0);
         const paneWidths = panes.map(pane => (pane.ratio / totalRatio) * 90); // 90 = inner width
 
-        // Debug logging (can be removed later)
-        console.log('[WindowShutterIcon] containerSize:', containerSize);
-        console.log('[WindowShutterIcon] rotation:', iconRotation, 'deg');
-        console.log('[WindowShutterIcon] cos/sin:', cos, sin);
-        console.log('[WindowShutterIcon] scale1/scale2:', scale1, scale2);
-        console.log('[WindowShutterIcon] scaleFactor:', scaleFactor);
-
         // Calculate cumulative positions
         let currentX = 5; // Start padding
         const panePositions = paneWidths.map(width => {

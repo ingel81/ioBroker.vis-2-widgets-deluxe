@@ -95,15 +95,10 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         const paneCount = this.state.rxData.windowPaneCount || 1;
         const paneConfigs = [];
 
-        // Debug: Show all windowPane keys in rxData
-        const windowPaneKeys = Object.keys(this.state.rxData).filter(key => key.startsWith('windowPane'));
-        console.log('[buildPaneConfigs] All windowPane keys in rxData:', windowPaneKeys);
-
         for (let i = 1; i <= paneCount; i++) {
             // Important: Fields from indexFrom/indexTo groups are named: {fieldName}{index}
             // NOT {groupName}{index}_{fieldName}
             const ratio = (this.state.rxData[`ratio${i}`] as number) ?? 1;
-            console.log(`[buildPaneConfigs] Pane ${i}: ratio${i} =`, this.state.rxData[`ratio${i}`], '→', ratio);
             paneConfigs.push({
                 openOid: this.state.rxData[`openOid${i}`] as string | undefined,
                 tiltOid: this.state.rxData[`tiltOid${i}`] as string | undefined,
@@ -113,7 +108,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 ratio,
             });
         }
-        console.log('[buildPaneConfigs] Final paneConfigs:', paneConfigs);
         return { paneCount, paneConfigs };
     }
 
@@ -294,7 +288,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             const viewportHeight = window.innerHeight;
 
             // Get body/document dimensions (total scrollable area)
-            const bodyWidth = document.body.scrollWidth;
             const bodyHeight = document.body.scrollHeight;
 
             // Find the actual scroll container (vis-2 uses an inner container!)
@@ -317,16 +310,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     scrollContainer = el;
                     scrollX = el.scrollLeft;
                     scrollY = el.scrollTop;
-                    console.log(
-                        '[moveDialogIntoView] Found scrollable container: ' +
-                            JSON.stringify({
-                                element: el.tagName,
-                                className: el.className,
-                                scrollTop: el.scrollTop,
-                                scrollHeight: el.scrollHeight,
-                                clientHeight: el.clientHeight,
-                            }),
-                    );
                     break;
                 }
             }
@@ -335,10 +318,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             if (!scrollContainer) {
                 scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
                 scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-                console.log(
-                    '[moveDialogIntoView] Using window scroll (no container found): ' +
-                        JSON.stringify({ scrollX, scrollY }),
-                );
             }
 
             // Get dialog dimensions
@@ -386,27 +365,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 }
             }
 
-            console.log(
-                '[moveDialogIntoView] Attempt ' +
-                    attempt +
-                    ': ' +
-                    JSON.stringify({
-                        viewport: { w: viewportWidth, h: viewportHeight },
-                        body: { w: bodyWidth, h: bodyHeight },
-                        effective: { w: effectiveWidth, h: effectiveHeight },
-                        isMobile: isMobile,
-                        scroll: { x: scrollX, y: scrollY },
-                        dialogOriginal: { w: dialogWidth, h: dialogHeight },
-                        dialogFinal: { w: finalWidth, h: finalHeight },
-                        position: {
-                            left: finalLeft,
-                            top: finalTop,
-                            rightEdge: finalLeft + finalWidth,
-                            maxRight: scrollX + effectiveWidth,
-                        },
-                    }),
-            );
-
             // Apply positioning with fixed width/height to prevent overflow
             dialogPaper.style.setProperty('position', 'absolute', 'important');
             dialogPaper.style.setProperty('top', `${finalTop}px`, 'important');
@@ -418,17 +376,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             dialogPaper.style.setProperty('transform', 'none', 'important');
             dialogPaper.style.setProperty('margin', '0', 'important');
             dialogPaper.style.setProperty('overflow', 'auto', 'important');
-
-            console.log(
-                '[moveDialogIntoView] Positioned: ' +
-                    JSON.stringify({
-                        isMobile: isMobile,
-                        top: finalTop,
-                        left: finalLeft,
-                        width: finalWidth,
-                        maxHeight: finalHeight,
-                    }),
-            );
         };
 
         tryPositioning(1);
@@ -579,22 +526,12 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     this.state.rxData.windowBackgroundColorClosed !== prevRxData.windowBackgroundColorClosed ||
                     this.state.rxData.windowBackgroundColorActive !== prevRxData.windowBackgroundColorActive;
 
-                console.log('[componentDidUpdate] WINDOW_SHUTTER configChanged:', configChanged);
-
                 // Check if any pane config changed
                 let paneConfigChanged = false;
                 if (!configChanged) {
                     const paneCount = this.state.rxData.windowPaneCount || 1;
                     for (let i = 1; i <= paneCount; i++) {
                         const ratioChanged = this.state.rxData[`ratio${i}`] !== prevRxData[`ratio${i}`];
-                        if (ratioChanged) {
-                            console.log(
-                                `[componentDidUpdate] ratio${i} changed:`,
-                                prevRxData[`ratio${i}`],
-                                '→',
-                                this.state.rxData[`ratio${i}`],
-                            );
-                        }
                         if (
                             this.state.rxData[`openOid${i}`] !== prevRxData[`openOid${i}`] ||
                             this.state.rxData[`tiltOid${i}`] !== prevRxData[`tiltOid${i}`] ||
@@ -608,11 +545,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     }
                 }
 
-                console.log('[componentDidUpdate] paneConfigChanged:', paneConfigChanged);
-
                 // Reinitialize window shutter mode if config changed
                 if (configChanged || paneConfigChanged) {
-                    console.log('[componentDidUpdate] Reinitializing windowShutterMode...');
                     const { paneCount, paneConfigs } = this.buildPaneConfigs();
                     this.windowShutterMode = new WindowShutterModeLogic(
                         {
@@ -631,7 +565,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         },
                         this.props.context.socket,
                         updates => {
-                            console.log('[windowShutterMode setState callback] updates:', updates);
                             this.setState({ windowShutter: { ...this.state.windowShutter, ...updates } });
                         },
                         (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
@@ -644,7 +577,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                             ratio: config.ratio,
                             hinge: config.hingeType,
                         }));
-                        console.log('[componentDidUpdate] Setting new paneStates:', paneStates);
                         this.setState({
                             windowShutter: {
                                 ...this.state.windowShutter,
@@ -669,12 +601,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                             normalized = Math.max(0, Math.min(100, normalized));
 
                             if (normalized !== this.state.windowShutter.shutterPosition) {
-                                console.log(
-                                    '[componentDidUpdate] Shutter position changed:',
-                                    numValue,
-                                    '→ normalized:',
-                                    normalized,
-                                );
                                 this.setState({
                                     windowShutter: { ...this.state.windowShutter, shutterPosition: normalized },
                                 });
@@ -708,9 +634,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                             } else if (this.toBool(tiltValue)) {
                                 state = 'tilt';
                             }
-                            console.log(
-                                `[componentDidUpdate] Pane ${i} (twoOids): open=${String(openValue)}, tilt=${String(tiltValue)} → ${state}`,
-                            );
                         } else if (sensorMode === 'oneOidWithTilt') {
                             // One OID with numeric values: 0=closed, 1=tilted, 2=open
                             const value = this.state.rxData[openOidKey] ? this.getPropertyValue(openOidKey) : 0;
@@ -721,14 +644,10 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                             } else if (numValue >= 1) {
                                 state = 'tilt';
                             }
-                            console.log(
-                                `[componentDidUpdate] Pane ${i} (oneOidWithTilt): value=${numValue} → ${state}`,
-                            );
                         } else {
                             // One OID binary: 0=closed, 1=open
                             const value = this.state.rxData[openOidKey] ? this.getPropertyValue(openOidKey) : false;
                             state = this.toBool(value) ? 'open' : 'closed';
-                            console.log(`[componentDidUpdate] Pane ${i} (oneOid): value=${String(value)} → ${state}`);
                         }
 
                         newPaneStates.push({ state, ratio, hinge: hingeType });
@@ -741,7 +660,6 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     }
 
                     if (anyPaneStateChanged) {
-                        console.log('[componentDidUpdate] Pane states changed:', newPaneStates);
                         const hasOpenPanes = newPaneStates.some(p => p.state === 'open');
                         const hasTiltedPanes = newPaneStates.some(p => p.state === 'tilt');
 
@@ -929,7 +847,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     const targetView = this.state.rxData.displayTargetView;
                     if (targetView) {
                         // Navigation to another view
-                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
                         (window as any).vis?.changeView?.(targetView);
                     }
                 }

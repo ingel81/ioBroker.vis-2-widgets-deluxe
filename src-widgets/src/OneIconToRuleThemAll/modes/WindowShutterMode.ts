@@ -157,17 +157,14 @@ export class WindowShutterModeLogic {
      * Get current state of all panes
      */
     private getPaneStates(): WindowShutterModeState['paneStates'] {
-        const result = this.config.paneConfigs.map(paneConfig => {
+        return this.config.paneConfigs.map(paneConfig => {
             const state = this.getPaneState(paneConfig);
-            console.log('[WindowShutterMode.getPaneStates] paneConfig:', paneConfig, '→ ratio:', paneConfig.ratio);
             return {
                 state,
                 ratio: paneConfig.ratio,
                 hinge: paneConfig.hingeType,
             };
         });
-        console.log('[WindowShutterMode.getPaneStates] Final paneStates:', result);
-        return result;
     }
 
     /**

@@ -145,7 +145,7 @@ export class NumericDisplayModeLogic {
 
         let result = `${prefix}${value}${suffix}`;
         if (unit) {
-            result += ' ' + unit;
+            result = `${result} ${unit}`;
         }
         return result;
     }
