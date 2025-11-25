@@ -202,7 +202,164 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         await this.fetchOidName();
     }
 
+    /**
+     * Move dialog paper into visible viewport
+     * Mobile: left-aligned with 10px padding
+     * Desktop: centered with 40px padding
+     */
+    private moveDialogIntoView(): void {
+        // Try multiple times with increasing delays
+        const tryPositioning = (attempt: number): void => {
+            const dialogPaper = document.querySelector('.MuiDialog-paper') as HTMLElement;
+            if (!dialogPaper) {
+                if (attempt < 5) {
+                    setTimeout(() => tryPositioning(attempt + 1), 100 * attempt);
+                } else {
+                    console.warn('[moveDialogIntoView] ERROR: Dialog paper not found after 5 attempts');
+                }
+                return;
+            }
+
+            // Get viewport dimensions (visible area)
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+
+            // Get body/document dimensions (total scrollable area)
+            const bodyWidth = document.body.scrollWidth;
+            const bodyHeight = document.body.scrollHeight;
+
+            // Find the actual scroll container (vis-2 uses an inner container!)
+            let scrollX = 0;
+            let scrollY = 0;
+            let scrollContainer: Element | null = null;
+
+            // Find ALL scrollable elements, even if scrollTop is 0
+            const allElements = Array.from(document.querySelectorAll('*'));
+            for (const el of allElements) {
+                const computedStyle = window.getComputedStyle(el);
+                const isScrollable =
+                    (computedStyle.overflowY === 'auto' || computedStyle.overflowY === 'scroll' || computedStyle.overflow === 'auto' || computedStyle.overflow === 'scroll') &&
+                    el.scrollHeight > el.clientHeight;
+
+                if (isScrollable) {
+                    scrollContainer = el;
+                    scrollX = el.scrollLeft;
+                    scrollY = el.scrollTop;
+                    console.log(
+                        '[moveDialogIntoView] Found scrollable container: ' +
+                            JSON.stringify({
+                                element: el.tagName,
+                                className: el.className,
+                                scrollTop: el.scrollTop,
+                                scrollHeight: el.scrollHeight,
+                                clientHeight: el.clientHeight,
+                            }),
+                    );
+                    break;
+                }
+            }
+
+            // Fallback to window scroll
+            if (!scrollContainer) {
+                scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
+                scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+                console.log('[moveDialogIntoView] Using window scroll (no container found): ' + JSON.stringify({ scrollX, scrollY }));
+            }
+
+            // Get dialog dimensions
+            const dialogWidth = dialogPaper.offsetWidth;
+            const dialogHeight = dialogPaper.offsetHeight;
+
+            // Calculate effective dimensions
+            // HEIGHT: Use body height (viewport can be artificially tall in vis-2)
+            // WIDTH: Use viewport width (the actual visible area, body can be wider due to scrollbars)
+            const effectiveHeight = Math.min(bodyHeight, viewportHeight);
+            const effectiveWidth = viewportWidth; // Always use viewport width for horizontal!
+
+            // Calculate dialog dimensions with constraints
+            const isMobile = effectiveWidth < 700;
+
+            let finalWidth: number;
+            let finalHeight: number;
+            let finalLeft: number;
+            let finalTop: number;
+
+            if (isMobile) {
+                // MOBILE: Full width with small padding, aligned left
+                const mobilePadding = 10;
+                finalWidth = Math.min(dialogWidth, effectiveWidth - (mobilePadding * 2));
+                finalHeight = Math.min(dialogHeight, effectiveHeight - 40);
+                finalLeft = scrollX + mobilePadding;
+                finalTop = Math.max(scrollY + 20, scrollY + (effectiveHeight - finalHeight) / 2);
+            } else {
+                // DESKTOP: Centered with more padding
+                const desktopPadding = 40;
+                finalWidth = Math.min(dialogWidth, effectiveWidth - (desktopPadding * 2));
+                finalHeight = Math.min(dialogHeight, effectiveHeight - (desktopPadding * 2));
+
+                const centerX = scrollX + (effectiveWidth - finalWidth) / 2;
+                const centerY = scrollY + (effectiveHeight - finalHeight) / 2;
+
+                finalLeft = Math.max(scrollX + desktopPadding, centerX);
+                finalTop = Math.max(scrollY + desktopPadding, centerY);
+
+                // Ensure right edge is within bounds
+                const rightEdge = finalLeft + finalWidth;
+                const maxRight = scrollX + effectiveWidth - desktopPadding;
+                if (rightEdge > maxRight) {
+                    finalLeft = maxRight - finalWidth;
+                }
+            }
+
+            console.log(
+                '[moveDialogIntoView] Attempt ' +
+                    attempt +
+                    ': ' +
+                    JSON.stringify({
+                        viewport: { w: viewportWidth, h: viewportHeight },
+                        body: { w: bodyWidth, h: bodyHeight },
+                        effective: { w: effectiveWidth, h: effectiveHeight },
+                        isMobile: isMobile,
+                        scroll: { x: scrollX, y: scrollY },
+                        dialogOriginal: { w: dialogWidth, h: dialogHeight },
+                        dialogFinal: { w: finalWidth, h: finalHeight },
+                        position: { left: finalLeft, top: finalTop, rightEdge: finalLeft + finalWidth, maxRight: scrollX + effectiveWidth },
+                    }),
+            );
+
+            // Apply positioning with fixed width/height to prevent overflow
+            dialogPaper.style.setProperty('position', 'absolute', 'important');
+            dialogPaper.style.setProperty('top', `${finalTop}px`, 'important');
+            dialogPaper.style.setProperty('left', `${finalLeft}px`, 'important');
+            dialogPaper.style.setProperty('width', `${finalWidth}px`, 'important');
+            dialogPaper.style.setProperty('max-width', `${finalWidth}px`, 'important');
+            dialogPaper.style.setProperty('height', 'auto', 'important');
+            dialogPaper.style.setProperty('max-height', `${finalHeight}px`, 'important');
+            dialogPaper.style.setProperty('transform', 'none', 'important');
+            dialogPaper.style.setProperty('margin', '0', 'important');
+            dialogPaper.style.setProperty('overflow', 'auto', 'important');
+
+            console.log(
+                '[moveDialogIntoView] Positioned: ' +
+                    JSON.stringify({
+                        isMobile: isMobile,
+                        top: finalTop,
+                        left: finalLeft,
+                        width: finalWidth,
+                        maxHeight: finalHeight,
+                    }),
+            );
+        };
+
+        tryPositioning(1);
+    }
+
     componentDidUpdate(prevProps: VisRxWidgetProps, prevState: OneIconToRuleThemAllState): void {
+        // Move dialog into view when it opens
+        if (!prevState.dialog && this.state.dialog) {
+            this.moveDialogIntoView();
+        }
+
         // Handle mode-specific state updates
         switch (this.state.rxData.mode) {
             case FlexMode.HEATING_KNX:
