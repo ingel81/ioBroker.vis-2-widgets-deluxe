@@ -65,12 +65,23 @@ Ein universelles Widget mit verschiedenen Modi zur Steuerung unterschiedlicher G
 - Rolladen-Animation mit Lamellenvisualisierung
 - KNX-kompatible Steuerung (Hoch/Runter/Stop)
 
+**Numeric / String Display**
+
+![Numeric Display](docs/screen_numeric.png)
+
+- Zahlen- und Textanzeige mit flexiblem Layout
+- Formatierung: Dezimalstellen, Tausender-Trennzeichen, Prefix/Suffix, Unit
+- Text-Transformation: uppercase, lowercase, capitalize
+- Value-Mapping für benutzerdefinierte Anzeigewerte
+- Farb-Schwellwerte: 3-Zonen Farbcodierung
+- Click-Action: Navigation zu anderer View
+
 #### Allgemeine Features
 
 - **Anpassbares Design**: Farben, Icons, Größen
 - **Echtzeit-Updates**: Sofortige Darstellung von Zustandsänderungen
 - **Material-UI**: Modernes, responsives Design
-- **Mehrsprachig**: Unterstützung für Deutsch, Englisch, Russisch
+- **Mehrsprachig**: Unterstützung für Deutsch und Englisch
 
 ### Hello World Widget
 
@@ -85,14 +96,10 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 
 ### **WORK IN PROGRESS**
 
-- **Numeric Display Mode**: Zahlenanzeige mit Formatierung (Dezimalstellen, Tausender-Trennzeichen, Prefix/Suffix, Unit)
-- **String Display Mode**: Textanzeige mit Transformation (uppercase, lowercase, capitalize) und Value-Mapping
-- **Farb-Schwellwerte**: 3-Zonen Farbcodierung basierend auf Werten
-- **Flexible Layouts**: Icon-Position (oben/unten/links/rechts), konfigurierbarer Icon-Text Abstand
-- **View-Picker**: Ziel-View per Dialog auswählbar (statt Textfeld)
-- **Click-Action**: Navigation zu anderer View bei Klick
-- Bessere Dialogpositionierung
-- deps aktualisiert
+- Neue Modi: Numeric Display, String Display
+- Flexible Layouts und Farb-Schwellwerte
+- View-Navigation per Klick
+- Dependencies aktualisiert
 
 ### 0.3.6 (2025-11-03)
 
