@@ -8,6 +8,66 @@ export enum FlexMode {
     SWITCH = 'switch',
     HEATING_KNX = 'heating_knx',
     WINDOW_SHUTTER = 'window_shutter',
+    // Display-Modi (read-only)
+    NUMERIC_DISPLAY = 'numeric_display',
+    STRING_DISPLAY = 'string_display',
+}
+
+/**
+ * Icon position for display modes
+ */
+export enum IconPosition {
+    LEFT = 'left',
+    RIGHT = 'right',
+    TOP = 'top',
+    BOTTOM = 'bottom',
+}
+
+/**
+ * Decimal rounding mode
+ */
+export enum DecimalMode {
+    ROUND = 'round',
+    FLOOR = 'floor',
+    CEIL = 'ceil',
+    TRUNC = 'trunc',
+}
+
+/**
+ * Decimal separator
+ */
+export enum DecimalSeparator {
+    DOT = '.',
+    COMMA = ',',
+}
+
+/**
+ * Thousand separator
+ */
+export enum ThousandSeparator {
+    NONE = 'none',
+    DOT = '.',
+    COMMA = ',',
+    APOSTROPHE = "'",
+    SPACE = ' ',
+}
+
+/**
+ * Text transformation
+ */
+export enum TextTransform {
+    NONE = 'none',
+    UPPERCASE = 'uppercase',
+    LOWERCASE = 'lowercase',
+    CAPITALIZE = 'capitalize',
+}
+
+/**
+ * Click action for display modes
+ */
+export enum ClickAction {
+    NONE = 'none',
+    NAVIGATE = 'navigate',
 }
 
 /**
@@ -114,7 +174,91 @@ export interface OneIconToRuleThemAllRxData {
     windowBackgroundColorClosed?: string; // Hintergrund inaktiv
     windowBackgroundColorActive?: string; // Hintergrund aktiv
 
+    // === MODE: DISPLAY (Common) ===
+    displayIconPosition?: IconPosition;
+    displayClickAction?: ClickAction;
+    displayTargetView?: string;
+    displayValueFontSize?: number;
+    displayIconTextGap?: number;
+
+    // === MODE: NUMERIC_DISPLAY ===
+    numericDisplayValueOid?: string;
+    numericDisplayDecimals?: number;
+    numericDisplayDecimalMode?: DecimalMode;
+    numericDisplayDecimalSeparator?: DecimalSeparator;
+    numericDisplayThousandSeparator?: ThousandSeparator;
+    numericDisplayUnit?: string;
+    numericDisplayPrefix?: string;
+    numericDisplaySuffix?: string;
+    numericDisplayUseColorThresholds?: boolean;
+    numericDisplayThresholdLow?: number;
+    numericDisplayThresholdHigh?: number;
+    numericDisplayColorLow?: string;
+    numericDisplayColorMedium?: string;
+    numericDisplayColorHigh?: string;
+    numericDisplayValueMapping?: string;
+
+    // === MODE: STRING_DISPLAY ===
+    stringDisplayValueOid?: string;
+    stringDisplayMaxLength?: number;
+    stringDisplayEllipsis?: boolean;
+    stringDisplayTextTransform?: TextTransform;
+    stringDisplayPrefix?: string;
+    stringDisplaySuffix?: string;
+    stringDisplayValueMapping?: string;
+
     [key: string]: unknown;
+}
+
+/**
+ * NumericDisplayMode config
+ */
+export interface NumericDisplayModeConfig {
+    valueOid?: string;
+    decimals?: number;
+    decimalMode?: DecimalMode;
+    decimalSeparator?: DecimalSeparator;
+    thousandSeparator?: ThousandSeparator;
+    unit?: string;
+    prefix?: string;
+    suffix?: string;
+    valueMapping?: string; // JSON string
+    useColorThresholds?: boolean;
+    thresholdLow?: number;
+    thresholdHigh?: number;
+    colorLow?: string;
+    colorMedium?: string;
+    colorHigh?: string;
+}
+
+/**
+ * NumericDisplayMode state
+ */
+export interface NumericDisplayModeState {
+    value: number | null;
+    formattedValue: string;
+    currentColor: string;
+}
+
+/**
+ * StringDisplayMode config
+ */
+export interface StringDisplayModeConfig {
+    valueOid?: string;
+    maxLength?: number;
+    ellipsis?: boolean;
+    textTransform?: TextTransform;
+    prefix?: string;
+    suffix?: string;
+    valueMapping?: string; // JSON string
+}
+
+/**
+ * StringDisplayMode state
+ */
+export interface StringDisplayModeState {
+    value: string | null;
+    formattedValue: string;
 }
 
 /**
@@ -129,6 +273,8 @@ export interface OneIconToRuleThemAllState extends VisRxWidgetState {
     dimmer: DimmerModeState;
     switch: SwitchModeState;
     windowShutter: WindowShutterModeState;
+    numericDisplay: NumericDisplayModeState;
+    stringDisplay: StringDisplayModeState;
 }
 
 /**

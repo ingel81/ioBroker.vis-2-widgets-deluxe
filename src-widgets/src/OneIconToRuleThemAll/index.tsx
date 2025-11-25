@@ -4,15 +4,25 @@ import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
 
 import Generic from '../Generic';
-import { FlexMode, type OneIconToRuleThemAllRxData, type OneIconToRuleThemAllState } from './types';
+import {
+    FlexMode,
+    IconPosition,
+    ClickAction,
+    type OneIconToRuleThemAllRxData,
+    type OneIconToRuleThemAllState,
+} from './types';
 import { HeatingModeLogic } from './modes/HeatingMode';
 import { DimmerModeLogic } from './modes/DimmerMode';
 import { SwitchModeLogic } from './modes/SwitchMode';
 import { WindowShutterModeLogic } from './modes/WindowShutterMode';
+import { NumericDisplayModeLogic } from './modes/NumericDisplayMode';
+import { StringDisplayModeLogic } from './modes/StringDisplayMode';
 import { HeatingDialog } from './components/HeatingDialog';
 import { DimmerDialog } from './components/DimmerDialog';
 import { WindowShutterDialog } from './components/WindowShutterDialog';
 import { IconWithStatus } from './components/IconWithStatus';
+import { HorizontalDisplay } from './components/HorizontalDisplay';
+import { VerticalDisplay } from './components/VerticalDisplay';
 import { WindowShutterIcon } from './components/WindowShutterIcon';
 import { CardWrapper } from './components/CardWrapper';
 import { getWidgetInfo } from './config/widgetInfo';
@@ -24,6 +34,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
     private dimmerMode!: DimmerModeLogic;
     private switchMode!: SwitchModeLogic;
     private windowShutterMode!: WindowShutterModeLogic;
+    private numericDisplayMode!: NumericDisplayModeLogic;
+    private stringDisplayMode!: StringDisplayModeLogic;
 
     constructor(props: VisRxWidgetProps) {
         super(props);
@@ -48,6 +60,15 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 paneStates: [],
                 hasOpenPanes: false,
                 hasTiltedPanes: false,
+            },
+            numericDisplay: {
+                value: null,
+                formattedValue: '--',
+                currentColor: '',
+            },
+            stringDisplay: {
+                value: null,
+                formattedValue: '--',
             },
         };
 
@@ -158,6 +179,46 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             updates => this.setState({ windowShutter: { ...this.state.windowShutter, ...updates } }),
             (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
         );
+
+        // NumericDisplayMode
+        this.numericDisplayMode = new NumericDisplayModeLogic(
+            {
+                valueOid: this.state.rxData.numericDisplayValueOid,
+                decimals: this.state.rxData.numericDisplayDecimals ?? 0,
+                decimalMode: this.state.rxData.numericDisplayDecimalMode,
+                decimalSeparator: this.state.rxData.numericDisplayDecimalSeparator,
+                thousandSeparator: this.state.rxData.numericDisplayThousandSeparator,
+                unit: this.state.rxData.numericDisplayUnit,
+                prefix: this.state.rxData.numericDisplayPrefix,
+                suffix: this.state.rxData.numericDisplaySuffix,
+                useColorThresholds: this.state.rxData.numericDisplayUseColorThresholds ?? false,
+                thresholdLow: this.state.rxData.numericDisplayThresholdLow,
+                thresholdHigh: this.state.rxData.numericDisplayThresholdHigh,
+                colorLow: this.state.rxData.numericDisplayColorLow,
+                colorMedium: this.state.rxData.numericDisplayColorMedium,
+                colorHigh: this.state.rxData.numericDisplayColorHigh,
+                valueMapping: this.state.rxData.numericDisplayValueMapping,
+            },
+            this.props.context.socket,
+            updates => this.setState({ numericDisplay: { ...this.state.numericDisplay, ...updates } }),
+            (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
+        );
+
+        // StringDisplayMode
+        this.stringDisplayMode = new StringDisplayModeLogic(
+            {
+                valueOid: this.state.rxData.stringDisplayValueOid,
+                maxLength: this.state.rxData.stringDisplayMaxLength ?? 50,
+                ellipsis: this.state.rxData.stringDisplayEllipsis ?? true,
+                textTransform: this.state.rxData.stringDisplayTextTransform,
+                prefix: this.state.rxData.stringDisplayPrefix,
+                suffix: this.state.rxData.stringDisplaySuffix,
+                valueMapping: this.state.rxData.stringDisplayValueMapping,
+            },
+            this.props.context.socket,
+            updates => this.setState({ stringDisplay: { ...this.state.stringDisplay, ...updates } }),
+            (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
+        );
     }
 
     // ========================================
@@ -195,6 +256,14 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
 
             case FlexMode.WINDOW_SHUTTER:
                 await this.windowShutterMode.initialize();
+                break;
+
+            case FlexMode.NUMERIC_DISPLAY:
+                await this.numericDisplayMode.initialize();
+                break;
+
+            case FlexMode.STRING_DISPLAY:
+                await this.stringDisplayMode.initialize();
                 break;
         }
 
@@ -602,6 +671,67 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 }
                 break;
             }
+
+            case FlexMode.NUMERIC_DISPLAY: {
+                // OID Value Change
+                if (this.state.rxData.numericDisplayValueOid) {
+                    const value = this.getPropertyValue('numericDisplayValueOid');
+                    if (value !== null && value !== undefined) {
+                        const numValue = Number(value);
+                        if (numValue !== this.state.numericDisplay.value) {
+                            this.numericDisplayMode.handleStateChange(
+                                this.state.rxData.numericDisplayValueOid,
+                                value,
+                            );
+                        }
+                    }
+                }
+
+                // Config change -> Reinitialize
+                const prevRxDataNumeric = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                const numericConfigChanged =
+                    this.state.rxData.numericDisplayValueOid !== prevRxDataNumeric.numericDisplayValueOid ||
+                    this.state.rxData.numericDisplayDecimals !== prevRxDataNumeric.numericDisplayDecimals ||
+                    this.state.rxData.numericDisplayUnit !== prevRxDataNumeric.numericDisplayUnit ||
+                    this.state.rxData.numericDisplayUseColorThresholds !==
+                        prevRxDataNumeric.numericDisplayUseColorThresholds ||
+                    this.state.rxData.numericDisplayValueMapping !== prevRxDataNumeric.numericDisplayValueMapping;
+
+                if (numericConfigChanged) {
+                    this.initializeModes();
+                    void this.numericDisplayMode.initialize();
+                }
+                break;
+            }
+
+            case FlexMode.STRING_DISPLAY: {
+                // OID Value Change
+                if (this.state.rxData.stringDisplayValueOid) {
+                    const value = this.getPropertyValue('stringDisplayValueOid');
+                    if (value !== null && value !== undefined) {
+                        if (value !== this.state.stringDisplay.value) {
+                            this.stringDisplayMode.handleStateChange(
+                                this.state.rxData.stringDisplayValueOid,
+                                value,
+                            );
+                        }
+                    }
+                }
+
+                // Config change -> Reinitialize
+                const prevRxDataString = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                const stringConfigChanged =
+                    this.state.rxData.stringDisplayValueOid !== prevRxDataString.stringDisplayValueOid ||
+                    this.state.rxData.stringDisplayMaxLength !== prevRxDataString.stringDisplayMaxLength ||
+                    this.state.rxData.stringDisplayTextTransform !== prevRxDataString.stringDisplayTextTransform ||
+                    this.state.rxData.stringDisplayValueMapping !== prevRxDataString.stringDisplayValueMapping;
+
+                if (stringConfigChanged) {
+                    this.initializeModes();
+                    void this.stringDisplayMode.initialize();
+                }
+                break;
+            }
         }
     }
 
@@ -695,6 +825,22 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             case FlexMode.SWITCH:
                 this.switchMode.toggle(this.state.switch.isOn, this.state.editMode);
                 break;
+
+            case FlexMode.NUMERIC_DISPLAY:
+            case FlexMode.STRING_DISPLAY: {
+                const clickAction = this.state.rxData.displayClickAction ?? ClickAction.NONE;
+
+                if (clickAction === ClickAction.NAVIGATE) {
+                    const targetView = this.state.rxData.displayTargetView;
+                    if (targetView) {
+                        // Navigation to another view
+                        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                        (window as any).vis?.changeView?.(targetView);
+                    }
+                }
+                // ClickAction.NONE -> Noop
+                break;
+            }
         }
     };
 
@@ -716,20 +862,41 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 return this.switchMode.isActive(this.state.switch.isOn);
             case FlexMode.WINDOW_SHUTTER:
                 return this.windowShutterMode.isActive(this.state.windowShutter);
+            case FlexMode.NUMERIC_DISPLAY:
+                return this.numericDisplayMode.isActive(this.state.numericDisplay);
+            case FlexMode.STRING_DISPLAY:
+                return this.stringDisplayMode.isActive(this.state.stringDisplay);
             default:
                 return false;
         }
     }
 
     private getTopText(): string | undefined {
-        if (this.state.rxData.mode === FlexMode.HEATING_KNX) {
+        const mode = this.state.rxData.mode;
+        const iconPos = this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+
+        if (mode === FlexMode.HEATING_KNX) {
             return this.heatingMode.formatTemperature(this.state.heating.setpointValue);
         }
+
+        // Display modes: Show value as topText when icon is at bottom (vertical layout only)
+        if (mode === FlexMode.NUMERIC_DISPLAY || mode === FlexMode.STRING_DISPLAY) {
+            // Only use top/bottom text for vertical layouts
+            if (iconPos === IconPosition.BOTTOM) {
+                return mode === FlexMode.NUMERIC_DISPLAY
+                    ? this.state.numericDisplay.formattedValue
+                    : this.state.stringDisplay.formattedValue;
+            }
+        }
+
         return undefined;
     }
 
     private getBottomText(): string | undefined {
-        switch (this.state.rxData.mode) {
+        const mode = this.state.rxData.mode;
+        const iconPos = this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+
+        switch (mode) {
             case FlexMode.HEATING_KNX:
                 return this.heatingMode.formatValvePosition(this.state.heating.valveValue);
             case FlexMode.DIMMER_DIALOG:
@@ -744,6 +911,70 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         : this.state.rxData.statusOffText || 'OFF';
                 }
                 break;
+            case FlexMode.NUMERIC_DISPLAY:
+            case FlexMode.STRING_DISPLAY:
+                // Show value as bottomText only for vertical layout with icon on top
+                if (iconPos === IconPosition.TOP) {
+                    return mode === FlexMode.NUMERIC_DISPLAY
+                        ? this.state.numericDisplay.formattedValue
+                        : this.state.stringDisplay.formattedValue;
+                }
+                break;
+        }
+        return undefined;
+    }
+
+    /**
+     * Check if display mode uses horizontal layout
+     */
+    private isHorizontalDisplayLayout(): boolean {
+        const mode = this.state.rxData.mode;
+        const iconPos = this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+
+        if (mode !== FlexMode.NUMERIC_DISPLAY && mode !== FlexMode.STRING_DISPLAY) {
+            return false;
+        }
+
+        return iconPos === IconPosition.LEFT || iconPos === IconPosition.RIGHT;
+    }
+
+    /**
+     * Check if display mode uses vertical layout (top/bottom)
+     */
+    private isVerticalDisplayLayout(): boolean {
+        const mode = this.state.rxData.mode;
+        const iconPos = this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+
+        if (mode !== FlexMode.NUMERIC_DISPLAY && mode !== FlexMode.STRING_DISPLAY) {
+            return false;
+        }
+
+        return iconPos === IconPosition.TOP || iconPos === IconPosition.BOTTOM;
+    }
+
+    /**
+     * Get the display value for horizontal layouts
+     */
+    private getDisplayValue(): string {
+        const mode = this.state.rxData.mode;
+
+        if (mode === FlexMode.NUMERIC_DISPLAY) {
+            return this.state.numericDisplay.formattedValue;
+        } else if (mode === FlexMode.STRING_DISPLAY) {
+            return this.state.stringDisplay.formattedValue;
+        }
+
+        return '--';
+    }
+
+    /**
+     * Get text color for display modes (based on thresholds)
+     */
+    private getDisplayTextColor(): string | undefined {
+        if (this.state.rxData.mode === FlexMode.NUMERIC_DISPLAY) {
+            if (this.state.numericDisplay.currentColor) {
+                return this.state.numericDisplay.currentColor;
+            }
         }
         return undefined;
     }
@@ -875,6 +1106,40 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
                     />
+                ) : this.isHorizontalDisplayLayout() ? (
+                    <HorizontalDisplay
+                        icon={this.state.rxData.icon}
+                        iconSize={this.state.rxData.iconSize}
+                        iconRotation={this.state.rxData.iconRotation}
+                        iconColor={this.getIsActive() ? this.state.rxData.activeColor : this.state.rxData.inactiveColor}
+                        value={this.getDisplayValue()}
+                        valueColor={this.getDisplayTextColor()}
+                        valueFontSize={this.state.rxData.displayValueFontSize ?? this.state.rxData.statusFontSize ?? 14}
+                        iconTextGap={this.state.rxData.displayIconTextGap ?? 8}
+                        iconPosition={
+                            (this.state.rxData.displayIconPosition as IconPosition.LEFT | IconPosition.RIGHT) ??
+                            IconPosition.LEFT
+                        }
+                        onClick={this.handleClick}
+                        editMode={this.state.editMode}
+                    />
+                ) : this.isVerticalDisplayLayout() ? (
+                    <VerticalDisplay
+                        icon={this.state.rxData.icon}
+                        iconSize={this.state.rxData.iconSize}
+                        iconRotation={this.state.rxData.iconRotation}
+                        iconColor={this.getIsActive() ? this.state.rxData.activeColor : this.state.rxData.inactiveColor}
+                        value={this.getDisplayValue()}
+                        valueColor={this.getDisplayTextColor()}
+                        valueFontSize={this.state.rxData.displayValueFontSize ?? this.state.rxData.statusFontSize ?? 14}
+                        iconTextGap={this.state.rxData.displayIconTextGap ?? 8}
+                        iconPosition={
+                            (this.state.rxData.displayIconPosition as IconPosition.TOP | IconPosition.BOTTOM) ??
+                            IconPosition.TOP
+                        }
+                        onClick={this.handleClick}
+                        editMode={this.state.editMode}
+                    />
                 ) : (
                     <IconWithStatus
                         icon={this.state.rxData.icon}
@@ -889,7 +1154,9 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         editMode={this.state.editMode}
                         topText={this.getTopText()}
                         bottomText={this.getBottomText()}
-                        statusFontSize={this.state.rxData.statusFontSize}
+                        statusFontSize={this.state.rxData.displayValueFontSize ?? this.state.rxData.statusFontSize}
+                        topTextColor={this.getDisplayTextColor()}
+                        bottomTextColor={this.getDisplayTextColor()}
                     />
                 )}
 

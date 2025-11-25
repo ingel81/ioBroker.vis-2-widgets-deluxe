@@ -18,6 +18,10 @@ export interface IconWithStatusProps {
     topText?: string;
     bottomText?: string;
     statusFontSize?: number;
+
+    // Custom text colors (for threshold-based coloring)
+    topTextColor?: string;
+    bottomTextColor?: string;
 }
 
 export const IconWithStatus: React.FC<IconWithStatusProps> = React.memo(
@@ -35,6 +39,8 @@ export const IconWithStatus: React.FC<IconWithStatusProps> = React.memo(
         topText,
         bottomText,
         statusFontSize = 12,
+        topTextColor,
+        bottomTextColor,
     }) => {
         // Choose icon based on state
         const displayIcon = !isActive && useDifferentInactiveIcon && iconInactive ? iconInactive : icon;
@@ -98,7 +104,7 @@ export const IconWithStatus: React.FC<IconWithStatusProps> = React.memo(
                             left: 0,
                             right: 0,
                             textAlign: 'center',
-                            color: iconColor,
+                            color: topTextColor || iconColor,
                             pointerEvents: 'none',
                             fontSize: `${statusFontSize}px`,
                             fontWeight: 'bold',
@@ -118,7 +124,7 @@ export const IconWithStatus: React.FC<IconWithStatusProps> = React.memo(
                             left: 0,
                             right: 0,
                             textAlign: 'center',
-                            color: iconColor,
+                            color: bottomTextColor || iconColor,
                             pointerEvents: 'none',
                             fontSize: `${statusFontSize}px`,
                         }}

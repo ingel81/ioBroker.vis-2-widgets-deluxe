@@ -32,6 +32,20 @@ export const MODE_DEFINITIONS: Record<FlexMode, ModeDefinition> = {
         hasPercentage: true,
         description: 'Window and shutter control with multiple panes',
     },
+    [FlexMode.NUMERIC_DISPLAY]: {
+        id: FlexMode.NUMERIC_DISPLAY,
+        label: 'Numeric Display',
+        hasDialog: false,
+        hasPercentage: false,
+        description: 'Read-only numeric value display with formatting',
+    },
+    [FlexMode.STRING_DISPLAY]: {
+        id: FlexMode.STRING_DISPLAY,
+        label: 'String Display',
+        hasDialog: false,
+        hasPercentage: false,
+        description: 'Read-only text display with transformation',
+    },
 };
 
 /**

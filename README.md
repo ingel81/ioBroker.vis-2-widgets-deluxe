@@ -71,6 +71,12 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 
 ### **WORK IN PROGRESS**
 
+- **Numeric Display Mode**: Zahlenanzeige mit Formatierung (Dezimalstellen, Tausender-Trennzeichen, Prefix/Suffix, Unit)
+- **String Display Mode**: Textanzeige mit Transformation (uppercase, lowercase, capitalize) und Value-Mapping
+- **Farb-Schwellwerte**: 3-Zonen Farbcodierung basierend auf Werten
+- **Flexible Layouts**: Icon-Position (oben/unten/links/rechts), konfigurierbarer Icon-Text Abstand
+- **View-Picker**: Ziel-View per Dialog auswählbar (statt Textfeld)
+- **Click-Action**: Navigation zu anderer View bei Klick
 - Bessere Dialogpositionierung
 
 ### 0.3.6 (2025-11-03)

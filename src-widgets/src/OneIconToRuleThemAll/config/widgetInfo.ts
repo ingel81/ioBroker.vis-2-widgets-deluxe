@@ -27,6 +27,8 @@ export function getWidgetInfo(): RxWidgetInfo {
                             { value: 'switch', label: 'one_icon_mode_switch' },
                             { value: 'heating_knx', label: 'one_icon_mode_heating_knx' },
                             { value: 'window_shutter', label: 'one_icon_mode_window_shutter' },
+                            { value: 'numeric_display', label: 'one_icon_mode_numeric_display' },
+                            { value: 'string_display', label: 'one_icon_mode_string_display' },
                         ],
                         default: 'switch',
                         tooltip: 'one_icon_mode_tooltip',
@@ -36,7 +38,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'control_state',
                         type: 'id',
                         tooltip: 'control_state_tooltip',
-                        hidden: 'data.mode === "heating_knx" || data.mode === "window_shutter"',
+                        hidden: 'data.mode === "heating_knx" || data.mode === "window_shutter" || data.mode === "numeric_display" || data.mode === "string_display"',
                     },
                     {
                         name: 'showCard',
@@ -396,6 +398,261 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'window_background_active',
                         type: 'color',
                         default: '#FFEB3B',
+                    },
+                ],
+            },
+
+            // --- NUMERIC DISPLAY MODE ---
+            {
+                name: 'mode_numeric_display',
+                label: 'deluxe_numeric_display_settings',
+                hidden: 'data.mode !== "numeric_display"',
+                fields: [
+                    {
+                        name: 'numericDisplayValueOid',
+                        label: 'numeric_display_value_oid',
+                        type: 'id',
+                        tooltip: 'numeric_display_value_oid_tooltip',
+                    },
+                    {
+                        name: 'numericDisplayDecimals',
+                        label: 'numeric_display_decimals',
+                        type: 'number',
+                        default: 0,
+                        min: 0,
+                        max: 5,
+                    },
+                    {
+                        name: 'numericDisplayDecimalMode',
+                        label: 'numeric_display_decimal_mode',
+                        type: 'select',
+                        default: 'round',
+                        options: [
+                            { value: 'round', label: 'numeric_display_decimal_mode_round' },
+                            { value: 'floor', label: 'numeric_display_decimal_mode_floor' },
+                            { value: 'ceil', label: 'numeric_display_decimal_mode_ceil' },
+                            { value: 'trunc', label: 'numeric_display_decimal_mode_trunc' },
+                        ],
+                    },
+                    {
+                        name: 'numericDisplayDecimalSeparator',
+                        label: 'numeric_display_decimal_separator',
+                        type: 'select',
+                        default: '.',
+                        options: [
+                            { value: '.', label: 'numeric_display_separator_dot' },
+                            { value: ',', label: 'numeric_display_separator_comma' },
+                        ],
+                    },
+                    {
+                        name: 'numericDisplayThousandSeparator',
+                        label: 'numeric_display_thousand_separator',
+                        type: 'select',
+                        default: 'none',
+                        options: [
+                            { value: 'none', label: 'numeric_display_separator_none' },
+                            { value: '.', label: 'numeric_display_separator_dot' },
+                            { value: ',', label: 'numeric_display_separator_comma' },
+                            { value: "'", label: 'numeric_display_separator_apostrophe' },
+                            { value: ' ', label: 'numeric_display_separator_space' },
+                        ],
+                    },
+                    {
+                        name: 'numericDisplayUnit',
+                        label: 'numeric_display_unit',
+                        type: 'text',
+                        default: '',
+                        tooltip: 'numeric_display_unit_tooltip',
+                    },
+                    {
+                        name: 'numericDisplayPrefix',
+                        label: 'numeric_display_prefix',
+                        type: 'text',
+                        default: '',
+                    },
+                    {
+                        name: 'numericDisplaySuffix',
+                        label: 'numeric_display_suffix',
+                        type: 'text',
+                        default: '',
+                    },
+                    {
+                        name: 'numericDisplayValueMapping',
+                        label: 'numeric_display_value_mapping',
+                        type: 'text',
+                        default: '',
+                        tooltip: 'numeric_display_value_mapping_tooltip',
+                    },
+                ],
+            },
+
+            // --- NUMERIC DISPLAY COLOR THRESHOLDS ---
+            {
+                name: 'mode_numeric_display_thresholds',
+                label: 'deluxe_numeric_display_thresholds',
+                hidden: 'data.mode !== "numeric_display"',
+                fields: [
+                    {
+                        name: 'numericDisplayUseColorThresholds',
+                        label: 'numeric_display_use_color_thresholds',
+                        type: 'checkbox',
+                        default: false,
+                    },
+                    {
+                        name: 'numericDisplayThresholdLow',
+                        label: 'numeric_display_threshold_low',
+                        type: 'number',
+                        default: 0,
+                        hidden: (data: unknown) =>
+                            !(data as OneIconToRuleThemAllRxData).numericDisplayUseColorThresholds,
+                    },
+                    {
+                        name: 'numericDisplayThresholdHigh',
+                        label: 'numeric_display_threshold_high',
+                        type: 'number',
+                        default: 100,
+                        hidden: (data: unknown) =>
+                            !(data as OneIconToRuleThemAllRxData).numericDisplayUseColorThresholds,
+                    },
+                    {
+                        name: 'numericDisplayColorLow',
+                        label: 'numeric_display_color_low',
+                        type: 'color',
+                        default: '#2196f3',
+                        hidden: (data: unknown) =>
+                            !(data as OneIconToRuleThemAllRxData).numericDisplayUseColorThresholds,
+                    },
+                    {
+                        name: 'numericDisplayColorMedium',
+                        label: 'numeric_display_color_medium',
+                        type: 'color',
+                        default: '#4caf50',
+                        hidden: (data: unknown) =>
+                            !(data as OneIconToRuleThemAllRxData).numericDisplayUseColorThresholds,
+                    },
+                    {
+                        name: 'numericDisplayColorHigh',
+                        label: 'numeric_display_color_high',
+                        type: 'color',
+                        default: '#f44336',
+                        hidden: (data: unknown) =>
+                            !(data as OneIconToRuleThemAllRxData).numericDisplayUseColorThresholds,
+                    },
+                ],
+            },
+
+            // --- STRING DISPLAY MODE ---
+            {
+                name: 'mode_string_display',
+                label: 'deluxe_string_display_settings',
+                hidden: 'data.mode !== "string_display"',
+                fields: [
+                    {
+                        name: 'stringDisplayValueOid',
+                        label: 'string_display_value_oid',
+                        type: 'id',
+                        tooltip: 'string_display_value_oid_tooltip',
+                    },
+                    {
+                        name: 'stringDisplayMaxLength',
+                        label: 'string_display_max_length',
+                        type: 'number',
+                        default: 50,
+                        min: 1,
+                        max: 200,
+                    },
+                    {
+                        name: 'stringDisplayEllipsis',
+                        label: 'string_display_ellipsis',
+                        type: 'checkbox',
+                        default: true,
+                    },
+                    {
+                        name: 'stringDisplayTextTransform',
+                        label: 'string_display_text_transform',
+                        type: 'select',
+                        default: 'none',
+                        options: [
+                            { value: 'none', label: 'string_display_transform_none' },
+                            { value: 'uppercase', label: 'string_display_transform_uppercase' },
+                            { value: 'lowercase', label: 'string_display_transform_lowercase' },
+                            { value: 'capitalize', label: 'string_display_transform_capitalize' },
+                        ],
+                    },
+                    {
+                        name: 'stringDisplayPrefix',
+                        label: 'string_display_prefix',
+                        type: 'text',
+                        default: '',
+                    },
+                    {
+                        name: 'stringDisplaySuffix',
+                        label: 'string_display_suffix',
+                        type: 'text',
+                        default: '',
+                    },
+                    {
+                        name: 'stringDisplayValueMapping',
+                        label: 'string_display_value_mapping',
+                        type: 'text',
+                        default: '',
+                        tooltip: 'string_display_value_mapping_tooltip',
+                    },
+                ],
+            },
+
+            // --- DISPLAY MODE COMMON SETTINGS ---
+            {
+                name: 'display_common',
+                label: 'deluxe_display_common_settings',
+                hidden: 'data.mode !== "numeric_display" && data.mode !== "string_display"',
+                fields: [
+                    {
+                        name: 'displayIconPosition',
+                        label: 'display_icon_position',
+                        type: 'select',
+                        default: 'top',
+                        options: [
+                            { value: 'top', label: 'display_icon_position_top' },
+                            { value: 'bottom', label: 'display_icon_position_bottom' },
+                            { value: 'left', label: 'display_icon_position_left' },
+                            { value: 'right', label: 'display_icon_position_right' },
+                        ],
+                    },
+                    {
+                        name: 'displayClickAction',
+                        label: 'display_click_action',
+                        type: 'select',
+                        default: 'none',
+                        options: [
+                            { value: 'none', label: 'display_click_action_none' },
+                            { value: 'navigate', label: 'display_click_action_navigate' },
+                        ],
+                    },
+                    {
+                        name: 'displayTargetView',
+                        label: 'display_target_view',
+                        type: 'views',
+                        default: '',
+                        hidden: (data: unknown) =>
+                            (data as OneIconToRuleThemAllRxData).displayClickAction !== 'navigate',
+                    },
+                    {
+                        name: 'displayValueFontSize',
+                        label: 'display_value_font_size',
+                        type: 'number',
+                        default: 14,
+                        min: 8,
+                        max: 48,
+                    },
+                    {
+                        name: 'displayIconTextGap',
+                        label: 'display_icon_text_gap',
+                        type: 'number',
+                        default: 8,
+                        min: 0,
+                        max: 50,
+                        tooltip: 'display_icon_text_gap_tooltip',
                     },
                 ],
             },
