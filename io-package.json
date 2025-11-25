@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.3.6",
+    "version": "0.4.0",
     "news": {
+      "0.4.0": {
+        "en": "Neue Modi: Numeric Display, String Display\nFlexible Layouts und Farb-Schwellwerte\nView-Navigation per Klick\nDependencies aktualisiert",
+        "de": "Neue Modi: Numeric Display, String Display\nFlexible Layouts und Farb-Schwellwerte\nView-Navigation per Klick\nDependances aktualisiert",
+        "ru": "Neue Modi: численный дисплей, струнный дисплей\nГибкие планировки и Farb-Schwellwerte\nНавигация по клику\nЗависимости aktualisiert",
+        "pt": "Neue Modi: Exibição numérica, Exibição de texto\nDisposição flexível e Farb-Schwellwerte\nVisão- Navegação por Klick\nDependências aktualisiert",
+        "nl": "Neue Modi: Numeriek display, tekenreeksweergave\nFlexibele lay-outs und Farb-Schwellwerte\nBeeldnavigatie per Klick\nAfhankelijkheden aktualisiert",
+        "fr": "Neue Modi: Affichage numérique, Affichage chaîne\nLayouts flexibles und Farb-Schwellwerte\nVue-navigation par Klick\nDépendances aktualisiert",
+        "it": "Neue Modi: display numerico, display a corda\nTelaio flessibile und Farb-Schwellwerte\nVisualizza-Navigazione per Klick\nDipendenze aktualisiert",
+        "es": "Neue Modi: Pantalla numérica, Visualización de cuerda\nDiseños flexibles und Farb-Schwellwerte\nView-Navigation per Klick\nDependencias aktualisiert",
+        "pl": "Neue Modi: wyświetlacz numeryczny, wyświetlacz strun\nElastyczne układy i Farb- Schwellwerte\nView- Navigation per Klick\nZależności aktualisiert",
+        "uk": "Neue Modi: Numeric Display, String Display\nГнучкі макети унд Farb-Schwellwerte\nПерегляд навігацію на Klick\nЗалежність актуаліс'єта",
+        "zh-cn": "Neue Modi: 数字显示, 字符串显示\n弹性布局 und Farb-Schwellwerte\n每千米查看导航\n依附关系"
+      },
       "0.3.6": {
         "en": "Test-Release",
         "de": "Test-Release",
@@ -62,19 +75,6 @@
         "pl": "Ogrzewanie (KNX): Sollwertverschiebungs- Werte zakonnica konfigurierbar (true / false, 1 / 0, \"wzrost\" / \"spadek\", itp.) - Standard: true / false\nOgrzewanie (KNX): Modimen- Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
         "uk": "Опалення (KNX): Sollwertverschiebungs-Werte nun konfigurierbar (true/false, 1/0, \"increase\"/\"decrease\", тощо) - Стандарт: true/false\nОпалення (KNX): Modi-Konfiguration erweitert - статусValue (vom OID empfangen) und controlValue (an OID senden) können nun unterschiedlich sein (rückwärtskompatibel mit \"value\")",
         "zh-cn": "加热( KNX): Sollwertverschiebungs- Werte 修女 konfigurierbar (真/假, 1/0, \"增加\"/\"减少\", 等) - 标准:真实/虚假\n加热(KNX):Modi-Konfiguration erweitert - statusValue (vom OID empfangen) und controlValue (OID senten) können 修女 unterschiedlich sein (rückwärtskompatibel mit \"值\")"
-      },
-      "0.3.0": {
-        "en": "Heating (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nHeating (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nHeating (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "de": "Heizung (KNX): reduziert - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nHeizung (KNX): Dropdown zeigt jetzt den aktuellen Modus an\nHeizung (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "ru": "Нагрев (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nНагрев (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nНагрев (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "pt": "Aquecimento (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nAquecimento (KNX):\nAquecimento (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "nl": "Verwarming (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nVerwarming (KNX): Dropdown zet jetzt korrekten aktuellen Modus en\nVerwarming (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "fr": "Chauffage (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nChauffage (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nChauffage (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visualer Hervorhebung des aktiven Modus",
-        "it": "Riscaldamento (KNX): Sollwertverschiebung verainfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nRiscaldamento (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus an\nRiscaldamento (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "es": "Calefacción (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nCalefacción (KNX): Bajar zeigt jetzt korrekten aktuellen Modus an\nCalefacción (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "pl": "Ogrzewanie (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true = erhöhen, false = verringern)\nOgrzewanie (KNX): Dropdown zeigt jetzt korrekten aktuellen Modus\nOgrzewanie (KNX): Neue Steuerungsart \"Buttons (Indywidualne)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "uk": "Опалення (KNX): Sollwertverschiebung vereinfacht - nur noch ein Datenpunkt (true=erhöhen, false=verringern)\nОпалення (KNX): Попадання zeigt jetzt korrekten aktuellen Modus\nОпалення (KNX): Neue Steuerungsart \"Buttons (Individual)\" - einzelne Buttons für jeden Betriebsmodus mit visueller Hervorhebung des aktiven Modus",
-        "zh-cn": "加热( KNX): Sollwertverschiebung verreinfacht - nur noch ein Datenpunkt (real=erhöhen, 假=verringern) (中文(简体) )\n加热( KNX): 下沉的 zeigt 喷气式喷气式喷气式发动机\n暖气(KNX):Neue Steurungsart \"按钮(英语:Buttons (Individual))\" - einzelne Buttons für Jeden Betriebsmodors mit visueller Hervorhebung des akiten Modus(英语:Hervorhebung des aktiven Modus) 热气(英语:Neue Steurhebung) 热气(英语:Neue Steurungsart) 热气(英语:Neue Steurhungs) 热气流(英语:Neuel Ste) 热气流(英语:Neuel Ste) 热气流(英语:"
       }
     },
     "titleLang": {
