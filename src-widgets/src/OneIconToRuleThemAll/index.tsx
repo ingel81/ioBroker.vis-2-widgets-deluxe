@@ -62,6 +62,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 hasTiltedPanes: false,
             },
             numericDisplay: {
+                rawValue: null,
                 value: null,
                 formattedValue: '--',
                 currentColor: '',
@@ -192,6 +193,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 colorMedium: this.state.rxData.numericDisplayColorMedium,
                 colorHigh: this.state.rxData.numericDisplayColorHigh,
                 valueMapping: this.state.rxData.numericDisplayValueMapping,
+                formula: this.state.rxData.numericDisplayFormula,
             },
             this.props.context.socket,
             updates => this.setState({ numericDisplay: { ...this.state.numericDisplay, ...updates } }),
@@ -677,18 +679,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             }
 
             case FlexMode.NUMERIC_DISPLAY: {
-                // OID Value Change
-                if (this.state.rxData.numericDisplayValueOid) {
-                    const value = this.getPropertyValue('numericDisplayValueOid');
-                    if (value !== null && value !== undefined) {
-                        const numValue = Number(value);
-                        if (numValue !== this.state.numericDisplay.value) {
-                            this.numericDisplayMode.handleStateChange(this.state.rxData.numericDisplayValueOid, value);
-                        }
-                    }
-                }
-
-                // Config change -> Reinitialize
+                // Config change -> Reinitialize (check FIRST to avoid double updates)
                 const prevRxDataNumeric = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
                 const numericConfigChanged =
                     this.state.rxData.numericDisplayValueOid !== prevRxDataNumeric.numericDisplayValueOid ||
@@ -708,11 +699,24 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     this.state.rxData.numericDisplayColorLow !== prevRxDataNumeric.numericDisplayColorLow ||
                     this.state.rxData.numericDisplayColorMedium !== prevRxDataNumeric.numericDisplayColorMedium ||
                     this.state.rxData.numericDisplayColorHigh !== prevRxDataNumeric.numericDisplayColorHigh ||
-                    this.state.rxData.numericDisplayValueMapping !== prevRxDataNumeric.numericDisplayValueMapping;
+                    this.state.rxData.numericDisplayValueMapping !== prevRxDataNumeric.numericDisplayValueMapping ||
+                    this.state.rxData.numericDisplayFormula !== prevRxDataNumeric.numericDisplayFormula;
 
                 if (numericConfigChanged) {
+                    // Config changed: reinitialize (this will load and format the value)
                     this.initializeModes();
                     void this.numericDisplayMode.initialize();
+                } else if (this.state.rxData.numericDisplayValueOid) {
+                    // Only check OID value change if config did NOT change
+                    // (to avoid double setState which causes React error #185)
+                    const value = this.getPropertyValue('numericDisplayValueOid');
+                    if (value !== null && value !== undefined) {
+                        const numValue = Number(value);
+                        // Compare with rawValue (before formula), not value (after formula)!
+                        if (numValue !== this.state.numericDisplay.rawValue) {
+                            this.numericDisplayMode.handleStateChange(this.state.rxData.numericDisplayValueOid, value);
+                        }
+                    }
                 }
                 break;
             }
@@ -1137,6 +1141,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         }
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
+                        textAlign={this.state.rxData.displayTextAlign}
                     />
                 ) : this.isVerticalDisplayLayout() ? (
                     <VerticalDisplay
@@ -1154,6 +1159,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         }
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
+                        textAlign={this.state.rxData.displayTextAlign}
                     />
                 ) : (
                     <IconWithStatus

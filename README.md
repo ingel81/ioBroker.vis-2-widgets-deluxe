@@ -71,6 +71,8 @@ Ein universelles Widget mit verschiedenen Modi zur Steuerung unterschiedlicher G
 
 - Zahlen- und Textanzeige mit flexiblem Layout
 - Formatierung: Dezimalstellen, Tausender-Trennzeichen, Prefix/Suffix, Unit
+- **Formel-Feld** (nur Numeric): Mathematische Berechnung vor Anzeige (z.B. `x / 1000` für W→kW)
+- **Text-Ausrichtung**: Links, Mitte, Rechts für beide Display-Modi
 - Text-Transformation: uppercase, lowercase, capitalize
 - Value-Mapping für benutzerdefinierte Anzeigewerte
 - Farb-Schwellwerte: 3-Zonen Farbcodierung
@@ -93,6 +95,11 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- Numeric Display: Formel-Feld für mathematische Berechnungen (z.B. `x / 1000` für W→kW)
+- Display Modi: Text-Ausrichtung (Links/Mitte/Rechts) für Numeric und String Display
+
 ### 0.4.1 (2025-11-25)
 
 - Minor fixes (ESLint/Prettier)

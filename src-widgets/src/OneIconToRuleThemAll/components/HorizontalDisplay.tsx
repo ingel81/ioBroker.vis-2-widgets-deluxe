@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { Icon } from '../../components';
-import { IconPosition } from '../types';
+import { IconPosition, type TextAlign } from '../types';
 
 export interface HorizontalDisplayProps {
     icon: string;
@@ -15,6 +15,7 @@ export interface HorizontalDisplayProps {
     iconPosition: IconPosition.LEFT | IconPosition.RIGHT;
     onClick: () => void;
     editMode: boolean;
+    textAlign?: TextAlign;
 }
 
 export const HorizontalDisplay: React.FC<HorizontalDisplayProps> = React.memo(
@@ -30,6 +31,7 @@ export const HorizontalDisplay: React.FC<HorizontalDisplayProps> = React.memo(
         iconPosition,
         onClick,
         editMode,
+        textAlign,
     }) => {
         const hasIcon = icon && icon.trim() !== '';
         const isDataUrl = hasIcon && (icon.startsWith('data:') || icon.startsWith('http'));
@@ -57,7 +59,8 @@ export const HorizontalDisplay: React.FC<HorizontalDisplayProps> = React.memo(
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
                     flex: 1,
-                    textAlign: iconPosition === IconPosition.LEFT ? 'left' : 'right',
+                    width: '100%',
+                    textAlign: textAlign || (iconPosition === IconPosition.LEFT ? 'left' : 'right'),
                 }}
             >
                 {value}

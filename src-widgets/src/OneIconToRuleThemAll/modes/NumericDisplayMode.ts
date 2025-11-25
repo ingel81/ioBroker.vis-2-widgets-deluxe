@@ -3,6 +3,7 @@ import type { NumericDisplayModeConfig, NumericDisplayModeState } from '../types
 import { formatNumber, toNumber } from '../utils/numberFormatter';
 import { getColorByThreshold } from '../utils/colorThresholds';
 import { mapValue, parseValueMapping } from '../utils/valueMapper';
+import { evaluateFormula } from '../utils/formulaEvaluator';
 
 /**
  * NumericDisplayMode - Read-only numeric value display
@@ -37,6 +38,7 @@ export class NumericDisplayModeLogic {
     async initialize(): Promise<void> {
         if (!this.config.valueOid) {
             this.setState({
+                rawValue: null,
                 value: null,
                 formattedValue: '--',
                 currentColor: this.getDefaultColor(),
@@ -50,6 +52,7 @@ export class NumericDisplayModeLogic {
                 this.updateValue(state.val);
             } else {
                 this.setState({
+                    rawValue: null,
                     value: null,
                     formattedValue: '--',
                     currentColor: this.getDefaultColor(),
@@ -58,6 +61,7 @@ export class NumericDisplayModeLogic {
         } catch (error) {
             console.error('Failed to initialize NumericDisplayMode:', error);
             this.setState({
+                rawValue: null,
                 value: null,
                 formattedValue: '--',
                 currentColor: this.getDefaultColor(),
@@ -82,16 +86,27 @@ export class NumericDisplayModeLogic {
     /**
      * Updates value + formatted string + color
      */
-    private updateValue(rawValue: unknown): void {
-        const numValue = toNumber(rawValue);
+    private updateValue(rawValueInput: unknown): void {
+        const rawNumValue = toNumber(rawValueInput);
 
-        if (numValue === null) {
+        if (rawNumValue === null) {
             this.setState({
+                rawValue: null,
                 value: null,
                 formattedValue: '--',
                 currentColor: this.getDefaultColor(),
             });
             return;
+        }
+
+        // Apply formula BEFORE any formatting
+        let numValue = rawNumValue;
+        if (this.config.formula) {
+            const calculated = evaluateFormula(this.config.formula, rawNumValue);
+            if (calculated !== null) {
+                numValue = calculated;
+            }
+            // On error: keep original value
         }
 
         // Value mapping has priority!
@@ -103,6 +118,7 @@ export class NumericDisplayModeLogic {
             const color = this.getColorForValue(numValue);
 
             this.setState({
+                rawValue: rawNumValue,
                 value: numValue,
                 formattedValue: this.applyPrefixSuffix(mapped),
                 currentColor: color,
@@ -115,6 +131,7 @@ export class NumericDisplayModeLogic {
         const color = this.getColorForValue(numValue);
 
         this.setState({
+            rawValue: rawNumValue,
             value: numValue,
             formattedValue: this.applyPrefixSuffix(formatted),
             currentColor: color,

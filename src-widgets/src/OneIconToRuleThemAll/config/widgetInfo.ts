@@ -483,6 +483,13 @@ export function getWidgetInfo(): RxWidgetInfo {
                         default: '',
                         tooltip: 'numeric_display_value_mapping_tooltip',
                     },
+                    {
+                        name: 'numericDisplayFormula',
+                        label: 'numeric_display_formula',
+                        type: 'text',
+                        default: 'x',
+                        tooltip: 'numeric_display_formula_tooltip',
+                    },
                 ],
             },
 
@@ -659,6 +666,17 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'display_text_color',
                         type: 'color',
                         default: '#555555',
+                    },
+                    {
+                        name: 'displayTextAlign',
+                        label: 'display_text_align',
+                        type: 'select',
+                        options: [
+                            { value: 'left', label: 'align_left' },
+                            { value: 'center', label: 'align_center' },
+                            { value: 'right', label: 'align_right' },
+                        ],
+                        default: 'left',
                     },
                 ],
             },

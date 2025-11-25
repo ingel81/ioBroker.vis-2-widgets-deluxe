@@ -71,6 +71,11 @@ export enum ClickAction {
 }
 
 /**
+ * Text alignment for display modes
+ */
+export type TextAlign = 'left' | 'center' | 'right';
+
+/**
  * Mode metadata and capabilities
  */
 export interface ModeDefinition {
@@ -181,6 +186,7 @@ export interface OneIconToRuleThemAllRxData {
     displayValueFontSize?: number;
     displayIconTextGap?: number;
     displayTextColor?: string;
+    displayTextAlign?: TextAlign;
 
     // === MODE: NUMERIC_DISPLAY ===
     numericDisplayValueOid?: string;
@@ -198,6 +204,7 @@ export interface OneIconToRuleThemAllRxData {
     numericDisplayColorMedium?: string;
     numericDisplayColorHigh?: string;
     numericDisplayValueMapping?: string;
+    numericDisplayFormula?: string;
 
     // === MODE: STRING_DISPLAY ===
     stringDisplayValueOid?: string;
@@ -230,13 +237,15 @@ export interface NumericDisplayModeConfig {
     colorLow?: string;
     colorMedium?: string;
     colorHigh?: string;
+    formula?: string; // e.g., "x / 1000" for W to kW conversion
 }
 
 /**
  * NumericDisplayMode state
  */
 export interface NumericDisplayModeState {
-    value: number | null;
+    rawValue: number | null; // Original value before formula
+    value: number | null; // Value after formula (for thresholds)
     formattedValue: string;
     currentColor: string;
 }

@@ -15,6 +15,7 @@
         "@types/react": "^18.3.24",
         "@types/react-dom": "^18.3.7",
         "@vitejs/plugin-react": "^5.0.4",
+        "math-expression-evaluator": "^2.0.7",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "vite": "7.1.7",

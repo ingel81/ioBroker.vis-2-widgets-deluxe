@@ -264,6 +264,12 @@ const translations = {
         display_icon_text_gap: 'Icon-Text Gap',
         display_icon_text_gap_tooltip: 'Space between icon and text in pixels',
         display_text_color: 'Text Color',
+        display_text_align: 'Text Alignment',
+        align_left: 'Left',
+        align_center: 'Center',
+        align_right: 'Right',
+        numeric_display_formula: 'Formula',
+        numeric_display_formula_tooltip: 'Formula with x as value (e.g. x / 1000 for W→kW)',
     },
     de: {
         set_label: 'Deluxe Widgets',
@@ -531,6 +537,12 @@ const translations = {
         display_icon_text_gap: 'Icon-Text Abstand',
         display_icon_text_gap_tooltip: 'Abstand zwischen Icon und Text in Pixeln',
         display_text_color: 'Textfarbe',
+        display_text_align: 'Textausrichtung',
+        align_left: 'Links',
+        align_center: 'Mitte',
+        align_right: 'Rechts',
+        numeric_display_formula: 'Formel',
+        numeric_display_formula_tooltip: 'Formel mit x als Wert (z.B. x / 1000 für W→kW)',
     },
     ru: {
         // Russian translations (fallback to English until properly translated)

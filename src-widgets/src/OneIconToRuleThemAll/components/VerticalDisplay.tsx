@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, IconButton, Typography } from '@mui/material';
 import { Icon } from '../../components';
-import { IconPosition } from '../types';
+import { IconPosition, type TextAlign } from '../types';
 
 export interface VerticalDisplayProps {
     icon: string;
@@ -15,6 +15,7 @@ export interface VerticalDisplayProps {
     iconPosition: IconPosition.TOP | IconPosition.BOTTOM;
     onClick: () => void;
     editMode: boolean;
+    textAlign?: TextAlign;
 }
 
 export const VerticalDisplay: React.FC<VerticalDisplayProps> = React.memo(
@@ -30,6 +31,7 @@ export const VerticalDisplay: React.FC<VerticalDisplayProps> = React.memo(
         iconPosition,
         onClick,
         editMode,
+        textAlign,
     }) => {
         const hasIcon = icon && icon.trim() !== '';
         const isDataUrl = hasIcon && (icon.startsWith('data:') || icon.startsWith('http'));
@@ -57,7 +59,7 @@ export const VerticalDisplay: React.FC<VerticalDisplayProps> = React.memo(
                     whiteSpace: 'nowrap',
                     overflow: 'hidden',
                     textOverflow: 'ellipsis',
-                    textAlign: 'center',
+                    textAlign: textAlign || 'center',
                     width: '100%',
                 }}
             >
