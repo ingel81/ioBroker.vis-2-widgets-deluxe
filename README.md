@@ -95,7 +95,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.2 (2025-11-25)
 
 - Numeric Display: Formel-Feld für mathematische Berechnungen (z.B. `x / 1000` für W→kW)
 - Display Modi: Text-Ausrichtung (Links/Mitte/Rechts) für Numeric und String Display
