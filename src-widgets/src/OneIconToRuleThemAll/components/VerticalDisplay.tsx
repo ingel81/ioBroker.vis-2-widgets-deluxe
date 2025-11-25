@@ -51,7 +51,7 @@ export const VerticalDisplay: React.FC<VerticalDisplayProps> = React.memo(
         const textElement = (
             <Typography
                 sx={{
-                    color: valueColor || iconColor,
+                    color: valueColor,
                     fontSize: `${valueFontSize}px`,
                     fontWeight: 'bold',
                     whiteSpace: 'nowrap',

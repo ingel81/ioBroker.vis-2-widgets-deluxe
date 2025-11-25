@@ -262,6 +262,7 @@ const translations = {
         display_value_font_size: 'Value Font Size',
         display_icon_text_gap: 'Icon-Text Gap',
         display_icon_text_gap_tooltip: 'Space between icon and text in pixels',
+        display_text_color: 'Text Color',
     },
     de: {
         set_label: 'Deluxe Widgets',
@@ -527,6 +528,7 @@ const translations = {
         display_value_font_size: 'Wert-Schriftgröße',
         display_icon_text_gap: 'Icon-Text Abstand',
         display_icon_text_gap_tooltip: 'Abstand zwischen Icon und Text in Pixeln',
+        display_text_color: 'Textfarbe',
     },
     ru: {
         // Russian translations (fallback to English until properly translated)

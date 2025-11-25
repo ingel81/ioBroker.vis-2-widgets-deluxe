@@ -180,6 +180,7 @@ export interface OneIconToRuleThemAllRxData {
     displayTargetView?: string;
     displayValueFontSize?: number;
     displayIconTextGap?: number;
+    displayTextColor?: string;
 
     // === MODE: NUMERIC_DISPLAY ===
     numericDisplayValueOid?: string;

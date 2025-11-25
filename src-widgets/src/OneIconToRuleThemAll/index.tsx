@@ -307,7 +307,10 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             for (const el of allElements) {
                 const computedStyle = window.getComputedStyle(el);
                 const isScrollable =
-                    (computedStyle.overflowY === 'auto' || computedStyle.overflowY === 'scroll' || computedStyle.overflow === 'auto' || computedStyle.overflow === 'scroll') &&
+                    (computedStyle.overflowY === 'auto' ||
+                        computedStyle.overflowY === 'scroll' ||
+                        computedStyle.overflow === 'auto' ||
+                        computedStyle.overflow === 'scroll') &&
                     el.scrollHeight > el.clientHeight;
 
                 if (isScrollable) {
@@ -332,7 +335,10 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             if (!scrollContainer) {
                 scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
                 scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-                console.log('[moveDialogIntoView] Using window scroll (no container found): ' + JSON.stringify({ scrollX, scrollY }));
+                console.log(
+                    '[moveDialogIntoView] Using window scroll (no container found): ' +
+                        JSON.stringify({ scrollX, scrollY }),
+                );
             }
 
             // Get dialog dimensions
@@ -356,15 +362,15 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             if (isMobile) {
                 // MOBILE: Full width with small padding, aligned left
                 const mobilePadding = 10;
-                finalWidth = Math.min(dialogWidth, effectiveWidth - (mobilePadding * 2));
+                finalWidth = Math.min(dialogWidth, effectiveWidth - mobilePadding * 2);
                 finalHeight = Math.min(dialogHeight, effectiveHeight - 40);
                 finalLeft = scrollX + mobilePadding;
                 finalTop = Math.max(scrollY + 20, scrollY + (effectiveHeight - finalHeight) / 2);
             } else {
                 // DESKTOP: Centered with more padding
                 const desktopPadding = 40;
-                finalWidth = Math.min(dialogWidth, effectiveWidth - (desktopPadding * 2));
-                finalHeight = Math.min(dialogHeight, effectiveHeight - (desktopPadding * 2));
+                finalWidth = Math.min(dialogWidth, effectiveWidth - desktopPadding * 2);
+                finalHeight = Math.min(dialogHeight, effectiveHeight - desktopPadding * 2);
 
                 const centerX = scrollX + (effectiveWidth - finalWidth) / 2;
                 const centerY = scrollY + (effectiveHeight - finalHeight) / 2;
@@ -392,7 +398,12 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         scroll: { x: scrollX, y: scrollY },
                         dialogOriginal: { w: dialogWidth, h: dialogHeight },
                         dialogFinal: { w: finalWidth, h: finalHeight },
-                        position: { left: finalLeft, top: finalTop, rightEdge: finalLeft + finalWidth, maxRight: scrollX + effectiveWidth },
+                        position: {
+                            left: finalLeft,
+                            top: finalTop,
+                            rightEdge: finalLeft + finalWidth,
+                            maxRight: scrollX + effectiveWidth,
+                        },
                     }),
             );
 
@@ -459,6 +470,29 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         }
                     }
                 }
+
+                // Config change -> Reinitialize
+                {
+                    const prevRxDataHeating = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                    const heatingConfigChanged =
+                        this.state.rxData.heatingSetpointShiftOid !== prevRxDataHeating.heatingSetpointShiftOid ||
+                        this.state.rxData.heatingSetpointIncreaseValue !==
+                            prevRxDataHeating.heatingSetpointIncreaseValue ||
+                        this.state.rxData.heatingSetpointDecreaseValue !==
+                            prevRxDataHeating.heatingSetpointDecreaseValue ||
+                        this.state.rxData.heatingValvePositionOid !== prevRxDataHeating.heatingValvePositionOid ||
+                        this.state.rxData.heatingSetpointOid !== prevRxDataHeating.heatingSetpointOid ||
+                        this.state.rxData.heatingModeStatusOid !== prevRxDataHeating.heatingModeStatusOid ||
+                        this.state.rxData.heatingModeControlOid !== prevRxDataHeating.heatingModeControlOid ||
+                        this.state.rxData.heatingShowUnits !== prevRxDataHeating.heatingShowUnits ||
+                        this.state.rxData.heatingModeControlType !== prevRxDataHeating.heatingModeControlType ||
+                        this.state.rxData.heatingModesConfig !== prevRxDataHeating.heatingModesConfig;
+
+                    if (heatingConfigChanged) {
+                        this.initializeModes();
+                        void this.heatingMode.initialize();
+                    }
+                }
                 break;
 
             case FlexMode.DIMMER_DIALOG:
@@ -471,6 +505,23 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         }
                     }
                 }
+
+                // Config change -> Reinitialize
+                {
+                    const prevRxDataDimmer = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                    const dimmerConfigChanged =
+                        this.state.rxData.controlOid !== prevRxDataDimmer.controlOid ||
+                        this.state.rxData.dimmerMinValue !== prevRxDataDimmer.dimmerMinValue ||
+                        this.state.rxData.dimmerMaxValue !== prevRxDataDimmer.dimmerMaxValue ||
+                        this.state.rxData.dimmerStep !== prevRxDataDimmer.dimmerStep ||
+                        this.state.rxData.dimmerShowQuickButtons !== prevRxDataDimmer.dimmerShowQuickButtons ||
+                        this.state.rxData.showPercentage !== prevRxDataDimmer.showPercentage;
+
+                    if (dimmerConfigChanged) {
+                        this.initializeModes();
+                        void this.dimmerMode.initialize();
+                    }
+                }
                 break;
 
             case FlexMode.SWITCH:
@@ -481,6 +532,24 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         this.setState({ switch: { ...this.state.switch, isOn } });
                     }
                 }
+
+                // Config change -> Reinitialize
+                {
+                    const prevRxDataSwitch = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                    const switchConfigChanged =
+                        this.state.rxData.controlOid !== prevRxDataSwitch.controlOid ||
+                        this.state.rxData.switchOnValue !== prevRxDataSwitch.switchOnValue ||
+                        this.state.rxData.switchOffValue !== prevRxDataSwitch.switchOffValue ||
+                        this.state.rxData.showStatusText !== prevRxDataSwitch.showStatusText ||
+                        this.state.rxData.statusOnText !== prevRxDataSwitch.statusOnText ||
+                        this.state.rxData.statusOffText !== prevRxDataSwitch.statusOffText ||
+                        this.state.rxData.statusFontSize !== prevRxDataSwitch.statusFontSize;
+
+                    if (switchConfigChanged) {
+                        this.initializeModes();
+                        void this.switchMode.initialize();
+                    }
+                }
                 break;
 
             case FlexMode.WINDOW_SHUTTER: {
@@ -489,9 +558,26 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 const configChanged =
                     this.state.rxData.windowPaneCount !== prevRxData.windowPaneCount ||
                     this.state.rxData.shutterPositionOid !== prevRxData.shutterPositionOid ||
+                    this.state.rxData.shutterUpOid !== prevRxData.shutterUpOid ||
+                    this.state.rxData.shutterDownOid !== prevRxData.shutterDownOid ||
+                    this.state.rxData.shutterStopOid !== prevRxData.shutterStopOid ||
                     this.state.rxData.shutterInvert !== prevRxData.shutterInvert ||
                     this.state.rxData.shutterMin !== prevRxData.shutterMin ||
-                    this.state.rxData.shutterMax !== prevRxData.shutterMax;
+                    this.state.rxData.shutterMax !== prevRxData.shutterMax ||
+                    this.state.rxData.shutterUpValue !== prevRxData.shutterUpValue ||
+                    this.state.rxData.shutterDownValue !== prevRxData.shutterDownValue ||
+                    this.state.rxData.shutterStopValue !== prevRxData.shutterStopValue ||
+                    // Colors
+                    this.state.rxData.windowFrameColor !== prevRxData.windowFrameColor ||
+                    this.state.rxData.windowPaneFrameColor !== prevRxData.windowPaneFrameColor ||
+                    this.state.rxData.windowGlassColor !== prevRxData.windowGlassColor ||
+                    this.state.rxData.windowHandleColor !== prevRxData.windowHandleColor ||
+                    this.state.rxData.windowPaneClosedColor !== prevRxData.windowPaneClosedColor ||
+                    this.state.rxData.windowPaneOpenColor !== prevRxData.windowPaneOpenColor ||
+                    this.state.rxData.windowPaneTiltColor !== prevRxData.windowPaneTiltColor ||
+                    this.state.rxData.windowShutterColor !== prevRxData.windowShutterColor ||
+                    this.state.rxData.windowBackgroundColorClosed !== prevRxData.windowBackgroundColorClosed ||
+                    this.state.rxData.windowBackgroundColorActive !== prevRxData.windowBackgroundColorActive;
 
                 console.log('[componentDidUpdate] WINDOW_SHUTTER configChanged:', configChanged);
 
@@ -679,10 +765,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     if (value !== null && value !== undefined) {
                         const numValue = Number(value);
                         if (numValue !== this.state.numericDisplay.value) {
-                            this.numericDisplayMode.handleStateChange(
-                                this.state.rxData.numericDisplayValueOid,
-                                value,
-                            );
+                            this.numericDisplayMode.handleStateChange(this.state.rxData.numericDisplayValueOid, value);
                         }
                     }
                 }
@@ -692,9 +775,21 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 const numericConfigChanged =
                     this.state.rxData.numericDisplayValueOid !== prevRxDataNumeric.numericDisplayValueOid ||
                     this.state.rxData.numericDisplayDecimals !== prevRxDataNumeric.numericDisplayDecimals ||
+                    this.state.rxData.numericDisplayDecimalMode !== prevRxDataNumeric.numericDisplayDecimalMode ||
+                    this.state.rxData.numericDisplayDecimalSeparator !==
+                        prevRxDataNumeric.numericDisplayDecimalSeparator ||
+                    this.state.rxData.numericDisplayThousandSeparator !==
+                        prevRxDataNumeric.numericDisplayThousandSeparator ||
                     this.state.rxData.numericDisplayUnit !== prevRxDataNumeric.numericDisplayUnit ||
+                    this.state.rxData.numericDisplayPrefix !== prevRxDataNumeric.numericDisplayPrefix ||
+                    this.state.rxData.numericDisplaySuffix !== prevRxDataNumeric.numericDisplaySuffix ||
                     this.state.rxData.numericDisplayUseColorThresholds !==
                         prevRxDataNumeric.numericDisplayUseColorThresholds ||
+                    this.state.rxData.numericDisplayThresholdLow !== prevRxDataNumeric.numericDisplayThresholdLow ||
+                    this.state.rxData.numericDisplayThresholdHigh !== prevRxDataNumeric.numericDisplayThresholdHigh ||
+                    this.state.rxData.numericDisplayColorLow !== prevRxDataNumeric.numericDisplayColorLow ||
+                    this.state.rxData.numericDisplayColorMedium !== prevRxDataNumeric.numericDisplayColorMedium ||
+                    this.state.rxData.numericDisplayColorHigh !== prevRxDataNumeric.numericDisplayColorHigh ||
                     this.state.rxData.numericDisplayValueMapping !== prevRxDataNumeric.numericDisplayValueMapping;
 
                 if (numericConfigChanged) {
@@ -710,10 +805,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     const value = this.getPropertyValue('stringDisplayValueOid');
                     if (value !== null && value !== undefined) {
                         if (value !== this.state.stringDisplay.value) {
-                            this.stringDisplayMode.handleStateChange(
-                                this.state.rxData.stringDisplayValueOid,
-                                value,
-                            );
+                            this.stringDisplayMode.handleStateChange(this.state.rxData.stringDisplayValueOid, value);
                         }
                     }
                 }
@@ -723,7 +815,10 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 const stringConfigChanged =
                     this.state.rxData.stringDisplayValueOid !== prevRxDataString.stringDisplayValueOid ||
                     this.state.rxData.stringDisplayMaxLength !== prevRxDataString.stringDisplayMaxLength ||
+                    this.state.rxData.stringDisplayEllipsis !== prevRxDataString.stringDisplayEllipsis ||
                     this.state.rxData.stringDisplayTextTransform !== prevRxDataString.stringDisplayTextTransform ||
+                    this.state.rxData.stringDisplayPrefix !== prevRxDataString.stringDisplayPrefix ||
+                    this.state.rxData.stringDisplaySuffix !== prevRxDataString.stringDisplaySuffix ||
                     this.state.rxData.stringDisplayValueMapping !== prevRxDataString.stringDisplayValueMapping;
 
                 if (stringConfigChanged) {
@@ -971,12 +1066,14 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
      * Get text color for display modes (based on thresholds)
      */
     private getDisplayTextColor(): string | undefined {
+        // Priority: 1. Threshold color (if active), 2. Configured text color, 3. undefined (fallback to inherit)
         if (this.state.rxData.mode === FlexMode.NUMERIC_DISPLAY) {
             if (this.state.numericDisplay.currentColor) {
                 return this.state.numericDisplay.currentColor;
             }
         }
-        return undefined;
+        // Use configured text color (default: #555555)
+        return this.state.rxData.displayTextColor || '#555555';
     }
 
     private renderDialogContent(): React.JSX.Element {

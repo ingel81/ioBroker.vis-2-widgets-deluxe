@@ -654,6 +654,12 @@ export function getWidgetInfo(): RxWidgetInfo {
                         max: 50,
                         tooltip: 'display_icon_text_gap_tooltip',
                     },
+                    {
+                        name: 'displayTextColor',
+                        label: 'display_text_color',
+                        type: 'color',
+                        default: '#555555',
+                    },
                 ],
             },
 
