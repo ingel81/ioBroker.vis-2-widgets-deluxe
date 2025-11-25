@@ -31,6 +31,8 @@ Ein universelles Widget mit verschiedenen Modi zur Steuerung unterschiedlicher G
 
 **Dimmer (Dialog)**
 
+![Dimmer](docs/screen_dimmer.png)
+
 - Dimmer-Steuerung mit Dialog-Fenster
 - Slider von 0-100%
 - Schnellwahl-Buttons für häufige Helligkeitsstufen
@@ -45,11 +47,23 @@ Ein universelles Widget mit verschiedenen Modi zur Steuerung unterschiedlicher G
 
 **Heating (KNX)**
 
+![Heating](docs/screen_radiator.png)
+
 - Heizungssteuerung für KNX-Systeme
 - Sollwert-Einstellung
 - Betriebsmodus-Auswahl (Komfort, Standby, Nacht, Frost)
 - Anzeige von Ist- und Solltemperatur
 - Dialog mit vollständiger Steuerung
+
+**Window/Shutter**
+
+![Window/Shutter](docs/screen_shutter.png)
+
+- Fenster- und Rolladensteuerung
+- Mehrfach-Flügel-Unterstützung (1-4 Fensterflügel)
+- Perspektivische Darstellung geöffneter Fenster
+- Rolladen-Animation mit Lamellenvisualisierung
+- KNX-kompatible Steuerung (Hoch/Runter/Stop)
 
 #### Allgemeine Features
 
