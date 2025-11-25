@@ -78,6 +78,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 - **View-Picker**: Ziel-View per Dialog auswählbar (statt Textfeld)
 - **Click-Action**: Navigation zu anderer View bei Klick
 - Bessere Dialogpositionierung
+- deps aktualisiert
 
 ### 0.3.6 (2025-11-03)
 
