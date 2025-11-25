@@ -1,6 +1,7 @@
 import Mexp from 'math-expression-evaluator';
 
-const X_TOKEN = { type: 3, show: 'x', token: 'x', value: 'x' };
+// Token type 3 = CONSTANT, precedence 0 for constants
+const X_TOKEN = { type: 3, show: 'x', token: 'x', value: 'x', precedence: 0 };
 
 // Simple check for obviously incomplete formulas
 const INCOMPLETE_FORMULA_PATTERN = /[+\-*/^(,]\s*$|^\s*[+*/^)]/;
