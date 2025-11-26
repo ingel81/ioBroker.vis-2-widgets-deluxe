@@ -95,6 +95,11 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)
+- Dimmer-Dialog: Quick-Buttons kompakter gestaltet
+
 ### 0.4.5 (2025-11-26)
 
 - Heating: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar

@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps } from '@iobroker/types-vis-2';
 import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
 import { Close } from '@mui/icons-material';
@@ -267,128 +268,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         await this.fetchOidName();
     }
 
-    /**
-     * Move dialog paper into visible viewport
-     * Mobile: left-aligned with 10px padding
-     * Desktop: centered with 40px padding
-     */
-    private moveDialogIntoView(): void {
-        // Try multiple times with increasing delays
-        const tryPositioning = (attempt: number): void => {
-            const dialogPaper = document.querySelector('.MuiDialog-paper') as HTMLElement;
-            if (!dialogPaper) {
-                if (attempt < 5) {
-                    setTimeout(() => tryPositioning(attempt + 1), 100 * attempt);
-                } else {
-                    console.warn('[moveDialogIntoView] ERROR: Dialog paper not found after 5 attempts');
-                }
-                return;
-            }
-
-            // Get viewport dimensions (visible area)
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-
-            // Get body/document dimensions (total scrollable area)
-            const bodyHeight = document.body.scrollHeight;
-
-            // Find the actual scroll container (vis-2 uses an inner container!)
-            let scrollX = 0;
-            let scrollY = 0;
-            let scrollContainer: Element | null = null;
-
-            // Find ALL scrollable elements, even if scrollTop is 0
-            const allElements = Array.from(document.querySelectorAll('*'));
-            for (const el of allElements) {
-                const computedStyle = window.getComputedStyle(el);
-                const isScrollable =
-                    (computedStyle.overflowY === 'auto' ||
-                        computedStyle.overflowY === 'scroll' ||
-                        computedStyle.overflow === 'auto' ||
-                        computedStyle.overflow === 'scroll') &&
-                    el.scrollHeight > el.clientHeight;
-
-                if (isScrollable) {
-                    scrollContainer = el;
-                    scrollX = el.scrollLeft;
-                    scrollY = el.scrollTop;
-                    break;
-                }
-            }
-
-            // Fallback to window scroll
-            if (!scrollContainer) {
-                scrollX = window.scrollX || window.pageXOffset || document.documentElement.scrollLeft;
-                scrollY = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-            }
-
-            // Get dialog dimensions
-            const dialogWidth = dialogPaper.offsetWidth;
-            const dialogHeight = dialogPaper.offsetHeight;
-
-            // Calculate effective dimensions
-            // HEIGHT: Use body height (viewport can be artificially tall in vis-2)
-            // WIDTH: Use viewport width (the actual visible area, body can be wider due to scrollbars)
-            const effectiveHeight = Math.min(bodyHeight, viewportHeight);
-            const effectiveWidth = viewportWidth; // Always use viewport width for horizontal!
-
-            // Calculate dialog dimensions with constraints
-            const isMobile = effectiveWidth < 700;
-
-            let finalWidth: number;
-            let finalHeight: number;
-            let finalLeft: number;
-            let finalTop: number;
-
-            if (isMobile) {
-                // MOBILE: Full width with small padding, aligned left
-                const mobilePadding = 10;
-                finalWidth = Math.min(dialogWidth, effectiveWidth - mobilePadding * 2);
-                finalHeight = Math.min(dialogHeight, effectiveHeight - 40);
-                finalLeft = scrollX + mobilePadding;
-                finalTop = Math.max(scrollY + 20, scrollY + (effectiveHeight - finalHeight) / 2);
-            } else {
-                // DESKTOP: Centered with more padding
-                const desktopPadding = 40;
-                finalWidth = Math.min(dialogWidth, effectiveWidth - desktopPadding * 2);
-                finalHeight = Math.min(dialogHeight, effectiveHeight - desktopPadding * 2);
-
-                const centerX = scrollX + (effectiveWidth - finalWidth) / 2;
-                const centerY = scrollY + (effectiveHeight - finalHeight) / 2;
-
-                finalLeft = Math.max(scrollX + desktopPadding, centerX);
-                finalTop = Math.max(scrollY + desktopPadding, centerY);
-
-                // Ensure right edge is within bounds
-                const rightEdge = finalLeft + finalWidth;
-                const maxRight = scrollX + effectiveWidth - desktopPadding;
-                if (rightEdge > maxRight) {
-                    finalLeft = maxRight - finalWidth;
-                }
-            }
-
-            // Apply positioning with fixed width/height to prevent overflow
-            dialogPaper.style.setProperty('position', 'absolute', 'important');
-            dialogPaper.style.setProperty('top', `${finalTop}px`, 'important');
-            dialogPaper.style.setProperty('left', `${finalLeft}px`, 'important');
-            dialogPaper.style.setProperty('width', `${finalWidth}px`, 'important');
-            dialogPaper.style.setProperty('max-width', `${finalWidth}px`, 'important');
-            dialogPaper.style.setProperty('height', 'auto', 'important');
-            dialogPaper.style.setProperty('max-height', `${finalHeight}px`, 'important');
-            dialogPaper.style.setProperty('transform', 'none', 'important');
-            dialogPaper.style.setProperty('margin', '0', 'important');
-            dialogPaper.style.setProperty('overflow', 'auto', 'important');
-        };
-
-        tryPositioning(1);
-    }
-
-    componentDidUpdate(prevProps: VisRxWidgetProps, prevState: OneIconToRuleThemAllState): void {
-        // Move dialog into view when it opens
-        if (!prevState.dialog && this.state.dialog) {
-            this.moveDialogIntoView();
-        }
-
+    componentDidUpdate(_prevProps: VisRxWidgetProps, prevState: OneIconToRuleThemAllState): void {
         // Handle mode-specific state updates
         switch (this.state.rxData.mode) {
             case FlexMode.HEATING_KNX:
@@ -1108,9 +988,9 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         const dialogWidth = this.state.rxData.dialogWidth || 'xs';
 
         const widthConstraints = {
-            xs: { minWidth: 320, maxWidth: 400 },
-            sm: { minWidth: 400, maxWidth: 500 },
-            md: { minWidth: 500, maxWidth: 650 },
+            xs: { minWidth: 'calc(100vw - 24px) !important', maxWidth: 'min(300px, calc(100vw - 48px)) !important' },
+            sm: { minWidth: 'calc(100vw - 24px) !important', maxWidth: 'min(340px, calc(100vw - 48px)) !important' },
+            md: { minWidth: 'calc(100vw - 24px) !important', maxWidth: 'min(420px, calc(100vw - 48px)) !important' },
         };
 
         return (
@@ -1198,40 +1078,60 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     />
                 )}
 
-                {this.state.dialog && (
-                    <Dialog
-                        fullWidth
-                        maxWidth={dialogWidth}
-                        open={true}
-                        onClose={this.handleDialogClose}
-                        sx={{
-                            '& .MuiDialog-paper': {
-                                ...widthConstraints[dialogWidth],
-                                ...(backgroundColor ? { backgroundColor } : {}),
-                            },
-                        }}
-                    >
-                        <DialogTitle
+                {/* Portal: Render dialog directly into document.body to escape vis-2's CSS context */}
+                {this.state.dialog &&
+                    ReactDOM.createPortal(
+                        <Dialog
+                            maxWidth={dialogWidth}
+                            open={true}
+                            onClose={this.handleDialogClose}
                             sx={{
-                                ...(titleColor ? { color: titleColor } : {}),
+                                // Force fixed positioning relative to viewport
+                                position: 'fixed !important',
+                                top: '0 !important',
+                                left: '0 !important',
+                                right: '0 !important',
+                                bottom: '0 !important',
+                                zIndex: '9999 !important',
+                                // Center the container
+                                '& .MuiDialog-container': {
+                                    display: 'flex !important',
+                                    alignItems: 'center !important',
+                                    justifyContent: 'center !important',
+                                    height: '100vh !important',
+                                    width: '100vw !important',
+                                },
+                                '& .MuiDialog-paper': {
+                                    ...widthConstraints[dialogWidth],
+                                    margin: '0 !important',
+                                    maxHeight: 'calc(100vh - 32px) !important',
+                                    position: 'relative !important',
+                                    ...(backgroundColor ? { backgroundColor } : {}),
+                                },
                             }}
                         >
-                            {this.state.rxData.dialogTitle || this.state.oidName || 'Control'}
-                            <IconButton
+                            <DialogTitle
                                 sx={{
-                                    position: 'absolute',
-                                    right: 8,
-                                    top: 8,
                                     ...(titleColor ? { color: titleColor } : {}),
                                 }}
-                                onClick={this.handleDialogClose}
                             >
-                                <Close />
-                            </IconButton>
-                        </DialogTitle>
-                        <DialogContent>{this.renderDialogContent()}</DialogContent>
-                    </Dialog>
-                )}
+                                {this.state.rxData.dialogTitle || this.state.oidName || 'Control'}
+                                <IconButton
+                                    sx={{
+                                        position: 'absolute',
+                                        right: 8,
+                                        top: 8,
+                                        ...(titleColor ? { color: titleColor } : {}),
+                                    }}
+                                    onClick={this.handleDialogClose}
+                                >
+                                    <Close />
+                                </IconButton>
+                            </DialogTitle>
+                            <DialogContent>{this.renderDialogContent()}</DialogContent>
+                        </Dialog>,
+                        document.body,
+                    )}
             </CardWrapper>
         );
     }

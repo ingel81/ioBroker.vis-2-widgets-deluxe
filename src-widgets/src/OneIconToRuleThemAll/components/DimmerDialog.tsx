@@ -39,7 +39,7 @@ export const DimmerDialog: React.FC<DimmerDialogProps> = React.memo(
         ];
 
         return (
-            <Box sx={{ pt: 2, pb: 2 }}>
+            <Box sx={{ pt: 2, pb: 2, width: '100%', boxSizing: 'border-box' }}>
                 <Typography
                     variant="h4"
                     align="center"
@@ -48,7 +48,7 @@ export const DimmerDialog: React.FC<DimmerDialogProps> = React.memo(
                     {Math.round(localValue)}%
                 </Typography>
 
-                <Box sx={{ px: 2, mb: 3 }}>
+                <Box sx={{ px: 1, mb: 3 }}>
                     <Slider
                         value={localValue}
                         onChange={onChange}
@@ -68,38 +68,24 @@ export const DimmerDialog: React.FC<DimmerDialogProps> = React.memo(
                 </Box>
 
                 {showQuickButtons && (
-                    <>
-                        <ButtonGroup
-                            fullWidth
-                            variant="outlined"
-                            sx={{ mb: 2 }}
-                        >
-                            {quickButtons.slice(0, 3).map(btn => (
-                                <Button
-                                    key={btn.value}
-                                    onClick={() => onQuickSet(btn.value)}
-                                    sx={getOutlinedButtonStyle(primaryColor)}
-                                >
-                                    {btn.icon || btn.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-
-                        <ButtonGroup
-                            fullWidth
-                            variant="outlined"
-                        >
-                            {quickButtons.slice(3).map(btn => (
-                                <Button
-                                    key={btn.value}
-                                    onClick={() => onQuickSet(btn.value)}
-                                    sx={getOutlinedButtonStyle(primaryColor)}
-                                >
-                                    {btn.label}
-                                </Button>
-                            ))}
-                        </ButtonGroup>
-                    </>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, width: '100%', boxSizing: 'border-box' }}>
+                        {quickButtons.map(btn => (
+                            <Button
+                                key={btn.value}
+                                variant="outlined"
+                                onClick={() => onQuickSet(btn.value)}
+                                size="small"
+                                sx={{
+                                    ...getOutlinedButtonStyle(primaryColor),
+                                    flex: '1 1 calc(33.333% - 4px)',
+                                    minWidth: '50px',
+                                    px: 1,
+                                }}
+                            >
+                                {btn.icon || btn.label}
+                            </Button>
+                        ))}
+                    </Box>
                 )}
             </Box>
         );
