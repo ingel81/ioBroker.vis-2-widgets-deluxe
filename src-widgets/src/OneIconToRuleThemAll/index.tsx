@@ -996,13 +996,19 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
      * Get text color for display modes (based on thresholds)
      */
     private getDisplayTextColor(): string | undefined {
-        // Priority: 1. Threshold color (if active), 2. Configured text color, 3. undefined (fallback to inherit)
+        // Heating mode: eigene Textfarbe
+        if (this.state.rxData.mode === FlexMode.HEATING_KNX) {
+            return this.state.rxData.heatingStatusTextColor || '#555555';
+        }
+
+        // Numeric Display: Threshold color has priority
         if (this.state.rxData.mode === FlexMode.NUMERIC_DISPLAY) {
             if (this.state.numericDisplay.currentColor) {
                 return this.state.numericDisplay.currentColor;
             }
         }
-        // Use configured text color (default: #555555)
+
+        // Display modes: configured text color (default: #555555)
         return this.state.rxData.displayTextColor || '#555555';
     }
 

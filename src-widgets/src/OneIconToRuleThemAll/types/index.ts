@@ -146,6 +146,7 @@ export interface OneIconToRuleThemAllRxData {
     heatingShowUnits?: boolean;
     heatingModeControlType?: 'button' | 'dropdown' | 'buttons';
     heatingModesConfig?: string;
+    heatingStatusTextColor?: string;
 
     // === MODE: WINDOW_SHUTTER ===
     // Kein Rollladen (nur Fenster-/Türkontakt-Anzeige)

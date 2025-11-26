@@ -99,6 +99,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 
 - Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung
 - Window/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)
+- Heating: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar
 
 ### 0.4.3 (2025-11-25)
 

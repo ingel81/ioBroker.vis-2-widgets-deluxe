@@ -123,6 +123,7 @@ const translations = {
         heating_setpoint_label: 'Setpoint',
         heating_valve_label: 'Valve',
         heating_mode_label: 'Mode',
+        heating_status_text_color: 'Status Text Color',
 
         // Window Shutter Mode
         one_icon_mode_window_shutter: 'Window & Shutter',
@@ -413,6 +414,7 @@ const translations = {
         heating_setpoint_label: 'Sollwert',
         heating_valve_label: 'Ventil',
         heating_mode_label: 'Modus',
+        heating_status_text_color: 'Status-Textfarbe',
 
         // Window Shutter Mode
         one_icon_mode_window_shutter: 'Fenster & Rolladen',

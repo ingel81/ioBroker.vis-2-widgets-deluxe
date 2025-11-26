@@ -189,6 +189,12 @@ export function getWidgetInfo(): RxWidgetInfo {
                             '[{"label":"Komfort","statusValue":33,"controlValue":1},{"label":"Standby","statusValue":34,"controlValue":2},{"label":"Nacht","statusValue":36,"controlValue":3},{"label":"Frost","statusValue":40,"controlValue":4}]',
                         tooltip: 'heating_modes_config_tooltip',
                     },
+                    {
+                        name: 'heatingStatusTextColor',
+                        label: 'heating_status_text_color',
+                        type: 'color',
+                        default: '#555555',
+                    },
                 ],
             },
 
