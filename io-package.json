@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.4.4",
+    "version": "0.4.5",
     "news": {
+      "0.4.5": {
+        "en": "Heating: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "de": "Heizung: Status-Text (Sollwert/Ventil) jetzt konfigurierbar",
+        "ru": "Отопление: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "pt": "Aquecimento: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "nl": "Verwarming: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "fr": "Chauffage: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "it": "Riscaldamento: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "es": "Calefacción: Estatus-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
+        "pl": "Ogrzewanie: Status- Textfarbe (Sollwert / Ventil) jetzt konfigurierbar",
+        "uk": "Опалення: Статус-Textfarbe (Sollwert/Ventil) jetzt configurierbar",
+        "zh-cn": "暖气: 状态- Textfarbe( Sollwert/Ventil) 喷气式喷气机 konfigurierbar"
+      },
       "0.4.4": {
         "en": "Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nWindow/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
         "de": "Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nFenster/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
@@ -80,10 +93,6 @@
         "pl": "Test- Release",
         "uk": "Тест-реліз",
         "zh-cn": "试放"
-      },
-      "0.3.5": {
-        "en": "Fix: Corrected npm package build (customWidgets.js was broken in v0.3.4)",
-        "de": "Fix: npm Package Build korrigiert (customWidgets.js war in v0.3.4 defekt)"
       }
     },
     "titleLang": {
