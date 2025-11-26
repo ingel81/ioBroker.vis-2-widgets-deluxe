@@ -95,7 +95,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.4 (2025-11-26)
 
 - Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung
 - Window/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)

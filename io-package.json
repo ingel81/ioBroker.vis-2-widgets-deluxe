@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.4.3",
+    "version": "0.4.4",
     "news": {
+      "0.4.4": {
+        "en": "Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nWindow/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "de": "Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nFenster/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "ru": "Окно/Затвор: Neues Flag 'noShutter' für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nОкно/Затвор: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "pt": "Janela/selador: Neues Bandeira `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nJanela/secador: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "nl": "Venster/Shutter: Neues Flag \nWindow/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "fr": "Fenêtre/Shutter: Drapeau de Neues `noShutter` für Reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nFenêtre/Fenêtre: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "it": "Finestra/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nFinestra/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "es": "Window/Shutter: Neues Flag `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nWindow/Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "pl": "Okno / Shutter: Neues Flag 'noShutter' für reine Fenster- / Türkontakt- Anzeige ohne Rollladensteuerung\nOkno / Shutter: Alle Farben jetzt konfigurierbar (Glas, Griff, Flügel- Rahmen, Lamellen- Schatten, Hover)",
+        "uk": "Вікно/Shutter: Ней Прапор `noShutter` für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung\nВікно/Shutter: Alle Farben jetzt configurierbar (Glas, Griff, Flügel-Rahmen, Lamellen-Schatten, Hover)",
+        "zh-cn": "窗口/ 关闭: 新旗 \" 不关闭 \" / Türkontakt- Anzeige ohne Rollladensteuerung\n窗口/关闭器: Alle Farben jirtzt konfigurierbar(格拉斯、格里夫、弗吕格尔-拉赫门、拉梅伦-沙滕、霍弗)"
+      },
       "0.4.3": {
         "en": "Minor fixes (ESLint/Prettier)",
         "de": "Kleinere Korrekturen (ESLint/Prettier)",
@@ -71,10 +84,6 @@
       "0.3.5": {
         "en": "Fix: Corrected npm package build (customWidgets.js was broken in v0.3.4)",
         "de": "Fix: npm Package Build korrigiert (customWidgets.js war in v0.3.4 defekt)"
-      },
-      "0.3.4": {
-        "en": "Window/Shutter Mode: KNX shutter control improved (Up/Down button logic, configurable command values, single-OID support)\nDialog UI: Centralized button styles, consistent colors\nWindow/Shutter Mode: Perspective glass distortion for open windows",
-        "de": "Window/Shutter Modus: KNX Rolladen-Steuerung verbessert (Hoch/Runter-Logik, konfigurierbare Befehle, Single-OID Unterstützung)\nDialog UI: Zentrale Button-Styles, einheitliche Farben\nWindow/Shutter Modus: Perspektivische Glas-Verzerrung bei geöffneten Fenstern"
       }
     },
     "titleLang": {
