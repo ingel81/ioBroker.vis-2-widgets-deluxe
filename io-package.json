@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.4.5",
+    "version": "0.4.6",
     "news": {
+      "0.4.6": {
+        "en": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
+        "de": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für ausgewählte Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
+        "ru": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS Viewport-relative Positionierung für zuverlässige Darstellung in vis-2\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
+        "pt": "Diálogo- Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer- Dialog: Buttons rápidos kompakter gestaltet",
+        "nl": "Dialoog-Positionierung komplett überraberitet: React Portal + CSS viewport-relatief Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
+        "fr": "Dialog-Positionierung komplett überarbeitet: Portail de réaction + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Gestaltet à boutons rapides kompakter",
+        "it": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
+        "es": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Botones rápidos kompakter gestaltet",
+        "pl": "Dialog- Pozytionierung Komplett überarbeitet: Reacte Portal + CSS viewport- relative Pozytionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer- Dialog: Quick- Buttons kompakter gestaltet",
+        "uk": "Dialog-Positionierung komplett überarbeitet: JavaScript licenses API Веб-сайт Go1.13.8\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
+        "zh-cn": "博客: React Portal + CSS 查看器 - 相对定位器 für zuverlässige Darstellung in vis 2 (移动和桌面)\nDimmer-Dialog:快速按钮 kompakter gestaltet"
+      },
       "0.4.5": {
         "en": "Heating: Status-Textfarbe (Sollwert/Ventil) jetzt konfigurierbar",
         "de": "Heizung: Status-Text (Sollwert/Ventil) jetzt konfigurierbar",
@@ -80,19 +93,6 @@
         "pl": "Neue Modi: wyświetlacz numeryczny, wyświetlacz strun\nElastyczne układy i Farb- Schwellwerte\nView- Navigation per Klick\nZależności aktualisiert",
         "uk": "Neue Modi: Numeric Display, String Display\nГнучкі макети унд Farb-Schwellwerte\nПерегляд навігацію на Klick\nЗалежність актуаліс'єта",
         "zh-cn": "Neue Modi: 数字显示, 字符串显示\n弹性布局 und Farb-Schwellwerte\n每千米查看导航\n依附关系"
-      },
-      "0.3.6": {
-        "en": "Test-Release",
-        "de": "Test-Release",
-        "ru": "Освобождение от испытаний",
-        "pt": "Liberação do ensaio",
-        "nl": "Test-release",
-        "fr": "Essai de libération",
-        "it": "Test-Release",
-        "es": "Test-Release",
-        "pl": "Test- Release",
-        "uk": "Тест-реліз",
-        "zh-cn": "试放"
       }
     },
     "titleLang": {
