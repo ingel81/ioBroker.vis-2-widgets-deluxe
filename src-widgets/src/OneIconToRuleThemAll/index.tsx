@@ -525,8 +525,10 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                     this.state.rxData.windowPaneOpenColor !== prevRxData.windowPaneOpenColor ||
                     this.state.rxData.windowPaneTiltColor !== prevRxData.windowPaneTiltColor ||
                     this.state.rxData.windowShutterColor !== prevRxData.windowShutterColor ||
+                    this.state.rxData.windowShutterShadowColor !== prevRxData.windowShutterShadowColor ||
                     this.state.rxData.windowBackgroundColorClosed !== prevRxData.windowBackgroundColorClosed ||
-                    this.state.rxData.windowBackgroundColorActive !== prevRxData.windowBackgroundColorActive;
+                    this.state.rxData.windowBackgroundColorActive !== prevRxData.windowBackgroundColorActive ||
+                    this.state.rxData.windowHoverColor !== prevRxData.windowHoverColor;
 
                 // Check if any pane config changed
                 let paneConfigChanged = false;
@@ -835,8 +837,14 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         switch (this.state.rxData.mode) {
             case FlexMode.DIMMER_DIALOG:
             case FlexMode.HEATING_KNX:
-            case FlexMode.WINDOW_SHUTTER:
                 this.setState({ dialog: true });
+                break;
+
+            case FlexMode.WINDOW_SHUTTER:
+                // Kein Dialog wenn noShutter aktiviert ist
+                if (!this.state.rxData.noShutter) {
+                    this.setState({ dialog: true });
+                }
                 break;
 
             case FlexMode.SWITCH:
@@ -1114,6 +1122,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         panes={this.state.windowShutter.paneStates}
                         shutterPosition={this.state.windowShutter.shutterPosition ?? 0}
                         iconRotation={this.state.rxData.iconRotation ?? 0}
+                        noShutter={this.state.rxData.noShutter}
                         frameColor={this.state.rxData.windowFrameColor || '#8B6F47'}
                         paneFrameColor={this.state.rxData.windowPaneFrameColor || '#999999'}
                         glassColor={this.state.rxData.windowGlassColor || '#87CEEB'}
@@ -1121,7 +1130,9 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         paneOpenColor={this.state.rxData.windowPaneOpenColor || '#FFC107'}
                         paneTiltColor={this.state.rxData.windowPaneTiltColor || '#FF9800'}
                         shutterColor={this.state.rxData.windowShutterColor || '#666666'}
+                        shutterShadowColor={this.state.rxData.windowShutterShadowColor || 'rgba(0, 0, 0, 0.4)'}
                         backgroundColor={this.state.rxData.windowBackgroundColorClosed || '#E0E0E0'}
+                        hoverColor={this.state.rxData.windowHoverColor || 'rgba(0, 0, 0, 0.04)'}
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
                     />

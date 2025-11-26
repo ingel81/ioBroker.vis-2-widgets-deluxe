@@ -148,6 +148,9 @@ export interface OneIconToRuleThemAllRxData {
     heatingModesConfig?: string;
 
     // === MODE: WINDOW_SHUTTER ===
+    // Kein Rollladen (nur Fenster-/Türkontakt-Anzeige)
+    noShutter?: boolean;
+
     // Rolladen-OIDs
     shutterPositionOid?: string;
     shutterUpOid?: string;
@@ -176,8 +179,10 @@ export interface OneIconToRuleThemAllRxData {
     windowPaneOpenColor?: string; // Status: offen
     windowPaneTiltColor?: string; // Status: gekippt
     windowShutterColor?: string; // Rolladen
+    windowShutterShadowColor?: string; // Lamellen-Schatten
     windowBackgroundColorClosed?: string; // Hintergrund inaktiv
     windowBackgroundColorActive?: string; // Hintergrund aktiv
+    windowHoverColor?: string; // Hover-Effekt
 
     // === MODE: DISPLAY (Common) ===
     displayIconPosition?: IconPosition;

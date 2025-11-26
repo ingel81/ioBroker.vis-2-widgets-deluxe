@@ -10,6 +10,9 @@ export interface WindowShutterIconProps {
     shutterPosition: number; // 0-100
     iconRotation: number;
 
+    // Kein Rollladen (nur Fenster-/Türkontakt)
+    noShutter?: boolean;
+
     // Farben
     frameColor: string; // Gesamtrahmen (rosa im Mockup)
     paneFrameColor: string; // Flügel-Rahmen (grau im Mockup)
@@ -18,7 +21,9 @@ export interface WindowShutterIconProps {
     paneOpenColor: string; // Status: offen
     paneTiltColor: string; // Status: gekippt
     shutterColor: string; // Rolladen-Lamellen
+    shutterShadowColor: string; // Lamellen-Schatten für 3D-Effekt
     backgroundColor: string; // Hintergrund
+    hoverColor: string; // Hover-Effekt
 
     onClick?: () => void;
     editMode?: boolean;
@@ -29,6 +34,7 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
         panes,
         shutterPosition,
         iconRotation = 0,
+        noShutter = false,
         frameColor,
         paneFrameColor,
         glassColor,
@@ -36,7 +42,9 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
         paneOpenColor,
         paneTiltColor,
         shutterColor,
+        shutterShadowColor,
         backgroundColor,
+        hoverColor,
         onClick,
         editMode,
     }) => {
@@ -170,8 +178,7 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
                                 y={y + slatHeight - slatGap}
                                 width={glassWidth}
                                 height={slatGap}
-                                fill="#000000"
-                                opacity={0.4}
+                                fill={shutterShadowColor}
                             />
                         </g>,
                     );
@@ -196,8 +203,7 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
                                 y={y + slatHeight - slatGap}
                                 width={glassWidth}
                                 height={slatGap}
-                                fill="#000000"
-                                opacity={0.4}
+                                fill={shutterShadowColor}
                             />
                         </g>,
                     );
@@ -508,7 +514,7 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
                         borderRadius: 0,
                         overflow: 'hidden',
                         '&:hover': {
-                            backgroundColor: 'rgba(0, 0, 0, 0.04)',
+                            backgroundColor: hoverColor,
                         },
                     }}
                 >
@@ -560,7 +566,7 @@ export const WindowShutterIcon: React.FC<WindowShutterIconProps> = React.memo(
                         {panePositions.map((pos, idx) => renderPaneFrame(pos.x, pos.width, idx))}
 
                         {/* 4. Rolladen - NUR im Glasbereich sichtbar (mit clipPath) */}
-                        <g clipPath={`url(#${clipPathId})`}>{renderShutter()}</g>
+                        {!noShutter && <g clipPath={`url(#${clipPathId})`}>{renderShutter()}</g>}
 
                         {/* 5. Glasscheiben (Cyan im Mockup) - transparent über dem Rolladen */}
                         {panePositions.map((pos, idx) => renderGlassPane(pos.x, pos.width, idx))}

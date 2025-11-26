@@ -129,6 +129,10 @@ const translations = {
         deluxe_window_shutter_settings: 'Window & Shutter Settings',
         deluxe_window_shutter_colors: 'Window & Shutter Colors',
 
+        // No Shutter (Window/Door only)
+        no_shutter: 'No Shutter',
+        no_shutter_tooltip: 'Enable for window/door contact display only, without shutter control',
+
         // Shutter
         shutter_position_oid: 'Shutter Position',
         shutter_position_oid_tooltip: 'State for shutter position (0-100%)',
@@ -181,12 +185,25 @@ const translations = {
 
         // Colors
         window_frame_color: 'Frame Color',
+        window_pane_frame_color: 'Pane Frame Color',
         window_pane_closed_color: 'Closed Color',
         window_pane_open_color: 'Open Color (Highlight)',
+        window_pane_open_color_tooltip:
+            'Use transparent color (rgba) to see shutter behind. Auto-transparency 40% if no alpha specified.',
         window_pane_tilt_color: 'Tilted Color (Highlight)',
+        window_pane_tilt_color_tooltip:
+            'Use transparent color (rgba) to see shutter behind. Auto-transparency 40% if no alpha specified.',
+        window_glass_color: 'Glass Color',
+        window_glass_color_tooltip:
+            'Use transparent color (rgba) to see shutter behind glass. Auto-transparency 30% if no alpha specified.',
+        window_handle_color: 'Handle Color',
         window_shutter_color: 'Shutter Color',
+        window_shutter_shadow_color: 'Shutter Shadow Color',
+        window_shutter_shadow_color_tooltip: 'Shadow color for 3D effect on shutter slats',
         window_background_closed: 'Background (All Closed)',
         window_background_active: 'Background (Something Open)',
+        window_hover_color: 'Hover Color',
+        window_hover_color_tooltip: 'Background color when hovering over the widget',
 
         // Dialog
         window_shutter_status: 'Window Status',
@@ -402,6 +419,10 @@ const translations = {
         deluxe_window_shutter_settings: 'Fenster & Rolladen Einstellungen',
         deluxe_window_shutter_colors: 'Fenster & Rolladen Farben',
 
+        // Kein Rollladen (nur Fenster/Tür)
+        no_shutter: 'Kein Rollladen',
+        no_shutter_tooltip: 'Aktivieren für reine Fenster-/Türkontakt-Anzeige ohne Rollladensteuerung',
+
         // Shutter
         shutter_position_oid: 'Rolladen Position',
         shutter_position_oid_tooltip: 'Status für Rolladen Position (0-100%)',
@@ -454,12 +475,25 @@ const translations = {
 
         // Colors
         window_frame_color: 'Rahmenfarbe',
+        window_pane_frame_color: 'Flügel-Rahmenfarbe',
         window_pane_closed_color: 'Farbe geschlossen',
         window_pane_open_color: 'Farbe offen (Highlight)',
+        window_pane_open_color_tooltip:
+            'Transparente Farbe (rgba) verwenden, um Rollladen dahinter zu sehen. Auto-Transparenz 40% ohne Alpha.',
         window_pane_tilt_color: 'Farbe gekippt (Highlight)',
+        window_pane_tilt_color_tooltip:
+            'Transparente Farbe (rgba) verwenden, um Rollladen dahinter zu sehen. Auto-Transparenz 40% ohne Alpha.',
+        window_glass_color: 'Glasfarbe',
+        window_glass_color_tooltip:
+            'Transparente Farbe (rgba) verwenden, um Rollladen hinter Glas zu sehen. Auto-Transparenz 30% ohne Alpha.',
+        window_handle_color: 'Grifffarbe',
         window_shutter_color: 'Rolladenfarbe',
+        window_shutter_shadow_color: 'Lamellen-Schattenfarbe',
+        window_shutter_shadow_color_tooltip: 'Schattenfarbe für 3D-Effekt der Rollladen-Lamellen',
         window_background_closed: 'Hintergrund (alles zu)',
         window_background_active: 'Hintergrund (etwas offen)',
+        window_hover_color: 'Hover-Farbe',
+        window_hover_color_tooltip: 'Hintergrundfarbe beim Überfahren des Widgets mit der Maus',
 
         // Dialog
         window_shutter_status: 'Fensterstatus',

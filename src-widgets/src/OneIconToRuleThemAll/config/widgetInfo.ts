@@ -198,39 +198,53 @@ export function getWidgetInfo(): RxWidgetInfo {
                 label: 'deluxe_window_shutter_settings',
                 hidden: 'data.mode !== "window_shutter"',
                 fields: [
-                    // Rolladen-OIDs
+                    // Kein Rollladen (nur Fenster-/Türkontakt)
+                    {
+                        name: 'noShutter',
+                        label: 'no_shutter',
+                        type: 'checkbox',
+                        default: false,
+                        tooltip: 'no_shutter_tooltip',
+                    },
+
+                    // Rolladen-OIDs (nur wenn noShutter === false)
                     {
                         name: 'shutterPositionOid',
                         label: 'shutter_position_oid',
                         type: 'id',
                         tooltip: 'shutter_position_oid_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterUpOid',
                         label: 'shutter_up_oid',
                         type: 'id',
                         tooltip: 'shutter_up_oid_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterDownOid',
                         label: 'shutter_down_oid',
                         type: 'id',
                         tooltip: 'shutter_down_oid_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterStopOid',
                         label: 'shutter_stop_oid',
                         type: 'id',
                         tooltip: 'shutter_stop_oid_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
 
-                    // Rolladen-Config
+                    // Rolladen-Config (nur wenn noShutter === false)
                     {
                         name: 'shutterInvert',
                         label: 'shutter_invert',
                         type: 'checkbox',
                         default: false,
                         tooltip: 'shutter_invert_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterMin',
@@ -238,6 +252,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         type: 'number',
                         default: 0,
                         tooltip: 'shutter_min_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterMax',
@@ -245,6 +260,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         type: 'number',
                         default: 100,
                         tooltip: 'shutter_max_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterUpValue',
@@ -252,6 +268,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         type: 'number',
                         default: 0,
                         tooltip: 'shutter_up_value_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterDownValue',
@@ -259,6 +276,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         type: 'number',
                         default: 1,
                         tooltip: 'shutter_down_value_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'shutterStopValue',
@@ -266,6 +284,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         type: 'number',
                         default: 1,
                         tooltip: 'shutter_stop_value_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
 
                     // Fenster
@@ -364,6 +383,12 @@ export function getWidgetInfo(): RxWidgetInfo {
                         default: '#555555',
                     },
                     {
+                        name: 'windowPaneFrameColor',
+                        label: 'window_pane_frame_color',
+                        type: 'color',
+                        default: '#999999',
+                    },
+                    {
                         name: 'windowPaneClosedColor',
                         label: 'window_pane_closed_color',
                         type: 'color',
@@ -374,18 +399,42 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'window_pane_open_color',
                         type: 'color',
                         default: '#FFC107',
+                        tooltip: 'window_pane_open_color_tooltip',
                     },
                     {
                         name: 'windowPaneTiltColor',
                         label: 'window_pane_tilt_color',
                         type: 'color',
                         default: '#FF9800',
+                        tooltip: 'window_pane_tilt_color_tooltip',
+                    },
+                    {
+                        name: 'windowGlassColor',
+                        label: 'window_glass_color',
+                        type: 'color',
+                        default: '#87CEEB',
+                        tooltip: 'window_glass_color_tooltip',
+                    },
+                    {
+                        name: 'windowHandleColor',
+                        label: 'window_handle_color',
+                        type: 'color',
+                        default: '#333333',
                     },
                     {
                         name: 'windowShutterColor',
                         label: 'window_shutter_color',
                         type: 'color',
                         default: '#666666',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
+                    },
+                    {
+                        name: 'windowShutterShadowColor',
+                        label: 'window_shutter_shadow_color',
+                        type: 'color',
+                        default: 'rgba(0, 0, 0, 0.4)',
+                        tooltip: 'window_shutter_shadow_color_tooltip',
+                        hidden: (data: unknown) => (data as OneIconToRuleThemAllRxData).noShutter === true,
                     },
                     {
                         name: 'windowBackgroundColorClosed',
@@ -398,6 +447,13 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'window_background_active',
                         type: 'color',
                         default: '#FFEB3B',
+                    },
+                    {
+                        name: 'windowHoverColor',
+                        label: 'window_hover_color',
+                        type: 'color',
+                        default: 'rgba(0, 0, 0, 0.04)',
+                        tooltip: 'window_hover_color_tooltip',
                     },
                 ],
             },
@@ -783,7 +839,14 @@ export function getWidgetInfo(): RxWidgetInfo {
             {
                 name: 'dialog',
                 label: 'deluxe_dialog_settings',
-                hidden: (data: unknown) => !modeHasDialog((data as OneIconToRuleThemAllRxData).mode),
+                hidden: (data: unknown) => {
+                    const typedData = data as OneIconToRuleThemAllRxData;
+                    // Kein Dialog wenn noShutter aktiviert ist
+                    if (typedData.mode === FlexMode.WINDOW_SHUTTER && typedData.noShutter) {
+                        return true;
+                    }
+                    return !modeHasDialog(typedData.mode);
+                },
                 fields: [
                     {
                         name: 'dialogTitle',
