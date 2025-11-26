@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Slider, Button, ButtonGroup } from '@mui/material';
+import { Box, Typography, Slider, Button } from '@mui/material';
 import { PowerSettingsNew } from '@mui/icons-material';
 import { getOutlinedButtonStyle } from './shared/buttonStyles';
 
