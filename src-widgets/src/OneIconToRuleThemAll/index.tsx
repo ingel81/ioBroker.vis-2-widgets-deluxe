@@ -987,10 +987,21 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         const backgroundColor = this.state.rxData.dialogBackgroundColor;
         const dialogWidth = this.state.rxData.dialogWidth || 'xs';
 
-        const widthConstraints = {
-            xs: { minWidth: 'calc(100vw - 24px) !important', maxWidth: 'min(300px, calc(100vw - 48px)) !important' },
-            sm: { minWidth: 'calc(100vw - 24px) !important', maxWidth: 'min(340px, calc(100vw - 48px)) !important' },
-            md: { minWidth: 'calc(100vw - 24px) !important', maxWidth: 'min(420px, calc(100vw - 48px)) !important' },
+        // Drei-Stufen Breakpoint: Mobile = nahezu vollflächig, Tablet = 80vw gekappt, Desktop = feste Breite mittig
+        const widthMap: Record<'xs' | 'sm' | 'md', number> = { xs: 300, sm: 340, md: 420 };
+        const targetWidth = widthMap[dialogWidth];
+        const paperWidthSx = {
+            width: 'calc(100vw - 24px) !important',
+            maxWidth: 'calc(100vw - 24px) !important',
+            minWidth: 'unset !important',
+            '@media (min-width: 600px)': {
+                width: `min(80vw, ${targetWidth}px) !important`,
+                maxWidth: `${targetWidth}px !important`,
+            },
+            '@media (min-width: 960px)': {
+                width: `${targetWidth}px !important`,
+                maxWidth: `${targetWidth}px !important`,
+            },
         };
 
         return (
@@ -1102,7 +1113,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                                     width: '100vw !important',
                                 },
                                 '& .MuiDialog-paper': {
-                                    ...widthConstraints[dialogWidth],
+                                    ...paperWidthSx,
                                     margin: '0 !important',
                                     maxHeight: 'calc(100vh - 32px) !important',
                                     position: 'relative !important',
