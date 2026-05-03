@@ -95,6 +95,13 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend
+- Dependencies: chai, mocha, @iobroker/testing, @types/node aktualisiert
+- CI: actions/checkout auf v6 angehoben
+- Build-Tooling: release-script Plugins (iobroker, license, manual-review) auf v5 angehoben
+
 ### 0.4.6 (2025-11-26)
 
 - Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)
