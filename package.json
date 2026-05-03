@@ -29,7 +29,7 @@
     "@alcalzone/release-script-plugin-manual-review": "^4.0.0",
     "@iobroker/build-tools": "^2.0.15",
     "@iobroker/eslint-config": "^2.2.0",
-    "@iobroker/testing": "^5.1.1",
+    "@iobroker/testing": "^5.2.2",
     "@iobroker/vis-2-widgets-testing": "^1.0.6",
     "@types/mocha": "^10.0.10",
     "@types/node": "^24.10.1",
