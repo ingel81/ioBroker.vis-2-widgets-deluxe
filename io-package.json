@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.4.6",
+    "version": "0.4.7",
     "news": {
+      "0.4.7": {
+        "en": "Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nDependencies: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: actions/checkout auf v6 angehoben\nBuild-Tooling: release-script Plugins (iobroker, license, manual-review) auf v5 angehoben",
+        "de": "Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun mit kompakt statt bildschirmausschnitt\nAbhängigkeiten: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: Aktionen/Checkout auf v6 angehoben\nBuild-Tooling: Release-script Plugins (iobroker, lizenz, manual-review) auf v5 angehoben",
+        "ru": "Диалог: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nЗависимости: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: action/checkout auf v6 angehoben\nBuild-Tooling: плагины релиз-скрипта (iobroker, лицензия, ручной обзор) auf v5 angehoben",
+        "pt": "Diálogo: Ponto de Paragem Drei-Stufen - Janela auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nDependências: chai, mocha, @iobroker/testing, @types/node aktualisiert\nIC: acções/checkout auf v6 angehoben\nFerramentas de compilação: 'Plugins' de versão- script (iobroker, licença, revisão manual) auf v5 angehoben",
+        "nl": "Dialoog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nAfhankelijkheden: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: acties/checkout auf v6 angehoben\nBuild-Tooling: release-script Plugins (iobroker, licentie, manual-review) auf v5 angehoben",
+        "fr": "Dialogue: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nDépendances: chai, moka, @iobroker/test, @types/node aktualisiert\nCI: actions/vérification auf v6 angehoben\nBuild-Tooling: release-script Plugins (iobroker, licence, review manuelle) auf v5 angehoben",
+        "it": "Dialogo: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nDipendenze: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: azioni/checkout auf v6 angehoben\nBuild-Tooling: release-script Plugins (iobroker, licenza, manuale-review) auf v5 angehoben",
+        "es": "Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nDependencias: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: acciones/salida auf v6 angehoben\nConstruir-Tooling: Plugins descript de liberación (iobroker, licencia, revisión manual) auf v5 angehoben",
+        "pl": "Dialog: Drei- Stufen Breakpoint - Dialog auf Tablet / Desktop nun kompakt mittig statt bildschirmfüllend\nZależności: chai, mocha, @ iobroker / testing, @ types / node aktualisiert\nCI: działania / checkout auf v6 angehoben\nBuild- Tooling: release- script Plugins (iobroker, licencja, manual- review) auf v5 angehoben",
+        "uk": "Діалог: Drei-Stufen Breakpoint - Діалог Auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nЗалежність: шайба, моха, @iobroker/testing, @types/node aktualisiert\nCI: дії/checkout auf v6 angehoben\nСкладання: плагіни (iobroker, ліцензія, ручний перегляд) auf v5 angehoben",
+        "zh-cn": "Dialog: Drei-Stufen 断点 - Dialog auf Tablet/Desktop 修女 Kompakt mitig stat bildschirmfüllend 互联网档案馆的存檔,存档日期2013-12-20\n依附:chai,mocha,@iobroster/测试,@types/node aktualisiert\nCI: 动作/检查 auf v6 angehoben\n构建- 工具: 发布标记插件( iobroster, 许可证, 手动审查) auf v5 angehoben"
+      },
       "0.4.6": {
         "en": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für zuverlässige Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
         "de": "Dialog-Positionierung komplett überarbeitet: React Portal + CSS viewport-relative Positionierung für ausgewählte Darstellung in vis-2 (Mobile & Desktop)\nDimmer-Dialog: Quick-Buttons kompakter gestaltet",
@@ -80,19 +93,6 @@
         "pl": "Niewielkie poprawki (ESLint / Prettier)",
         "uk": "Фіксатори мінор (ESLint/Prettier)",
         "zh-cn": "小修( ESLint/ prettier)"
-      },
-      "0.4.0": {
-        "en": "Neue Modi: Numeric Display, String Display\nFlexible Layouts und Farb-Schwellwerte\nView-Navigation per Klick\nDependencies aktualisiert",
-        "de": "Neue Modi: Numeric Display, String Display\nFlexible Layouts und Farb-Schwellwerte\nView-Navigation per Klick\nDependances aktualisiert",
-        "ru": "Neue Modi: численный дисплей, струнный дисплей\nГибкие планировки и Farb-Schwellwerte\nНавигация по клику\nЗависимости aktualisiert",
-        "pt": "Neue Modi: Exibição numérica, Exibição de texto\nDisposição flexível e Farb-Schwellwerte\nVisão- Navegação por Klick\nDependências aktualisiert",
-        "nl": "Neue Modi: Numeriek display, tekenreeksweergave\nFlexibele lay-outs und Farb-Schwellwerte\nBeeldnavigatie per Klick\nAfhankelijkheden aktualisiert",
-        "fr": "Neue Modi: Affichage numérique, Affichage chaîne\nLayouts flexibles und Farb-Schwellwerte\nVue-navigation par Klick\nDépendances aktualisiert",
-        "it": "Neue Modi: display numerico, display a corda\nTelaio flessibile und Farb-Schwellwerte\nVisualizza-Navigazione per Klick\nDipendenze aktualisiert",
-        "es": "Neue Modi: Pantalla numérica, Visualización de cuerda\nDiseños flexibles und Farb-Schwellwerte\nView-Navigation per Klick\nDependencias aktualisiert",
-        "pl": "Neue Modi: wyświetlacz numeryczny, wyświetlacz strun\nElastyczne układy i Farb- Schwellwerte\nView- Navigation per Klick\nZależności aktualisiert",
-        "uk": "Neue Modi: Numeric Display, String Display\nГнучкі макети унд Farb-Schwellwerte\nПерегляд навігацію на Klick\nЗалежність актуаліс'єта",
-        "zh-cn": "Neue Modi: 数字显示, 字符串显示\n弹性布局 und Farb-Schwellwerte\n每千米查看导航\n依附关系"
       }
     },
     "titleLang": {

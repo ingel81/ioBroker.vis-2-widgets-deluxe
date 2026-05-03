@@ -95,7 +95,7 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.4.7 (2026-05-03)
 
 - Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend
 - Dependencies: chai, mocha, @iobroker/testing, @types/node aktualisiert
