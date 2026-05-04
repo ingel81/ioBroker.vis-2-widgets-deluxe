@@ -11,6 +11,8 @@ export enum FlexMode {
     // Display-Modi (read-only)
     NUMERIC_DISPLAY = 'numeric_display',
     STRING_DISPLAY = 'string_display',
+    // Navigation
+    NAVIGATION = 'navigation',
 }
 
 /**
@@ -134,6 +136,18 @@ export interface OneIconToRuleThemAllRxData {
     // === MODE: SWITCH ===
     switchOnValue?: string;
     switchOffValue?: string;
+    switchDisplayStyle?: 'icon' | 'toggle';
+    switchToggleSize?: 'small' | 'medium';
+    switchToggleTrackOnColor?: string;
+    switchToggleTrackOffColor?: string;
+    switchToggleKnobOnColor?: string;
+    switchToggleKnobOffColor?: string;
+    switchToggleLabelOn?: string;
+    switchToggleLabelOff?: string;
+    switchToggleLabelPosition?: IconPosition;
+    switchToggleLabelOnColor?: string;
+    switchToggleLabelOffColor?: string;
+    switchToggleLabelFontSize?: number;
 
     // === MODE: HEATING_KNX ===
     heatingSetpointShiftOid?: string;
@@ -221,6 +235,15 @@ export interface OneIconToRuleThemAllRxData {
     stringDisplaySuffix?: string;
     stringDisplayValueMapping?: string;
 
+    // === MODE: NAVIGATION ===
+    navigationTargetView?: string;
+    navigationLabel?: string;
+    navigationLabelPosition?: IconPosition;
+    navigationLabelFontSize?: number;
+    navigationLabelColor?: string;
+    navigationLabelActiveColor?: string;
+    navigationLabelTextAlign?: TextAlign;
+
     [key: string]: unknown;
 }
 
@@ -278,6 +301,13 @@ export interface StringDisplayModeState {
 }
 
 /**
+ * NavigationMode state
+ */
+export interface NavigationModeState {
+    isOnTargetView: boolean;
+}
+
+/**
  * Component state
  */
 export interface OneIconToRuleThemAllState extends VisRxWidgetState {
@@ -291,6 +321,7 @@ export interface OneIconToRuleThemAllState extends VisRxWidgetState {
     windowShutter: WindowShutterModeState;
     numericDisplay: NumericDisplayModeState;
     stringDisplay: StringDisplayModeState;
+    navigation: NavigationModeState;
 }
 
 /**

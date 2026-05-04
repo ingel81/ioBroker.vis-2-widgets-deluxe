@@ -29,6 +29,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                             { value: 'window_shutter', label: 'one_icon_mode_window_shutter' },
                             { value: 'numeric_display', label: 'one_icon_mode_numeric_display' },
                             { value: 'string_display', label: 'one_icon_mode_string_display' },
+                            { value: 'navigation', label: 'one_icon_mode_navigation' },
                         ],
                         default: 'switch',
                         tooltip: 'one_icon_mode_tooltip',
@@ -38,7 +39,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'control_state',
                         type: 'id',
                         tooltip: 'control_state_tooltip',
-                        hidden: 'data.mode === "heating_knx" || data.mode === "window_shutter" || data.mode === "numeric_display" || data.mode === "string_display"',
+                        hidden: 'data.mode === "heating_knx" || data.mode === "window_shutter" || data.mode === "numeric_display" || data.mode === "string_display" || data.mode === "navigation"',
                     },
                     {
                         name: 'showCard',
@@ -89,7 +90,7 @@ export function getWidgetInfo(): RxWidgetInfo {
                 ],
             },
 
-            // --- SWITCH MODE ---
+            // --- SWITCH MODE: VALUES + STYLE PICKER ---
             {
                 name: 'mode_switch',
                 label: 'deluxe_switch_settings',
@@ -108,6 +109,121 @@ export function getWidgetInfo(): RxWidgetInfo {
                         type: 'text',
                         default: 'false',
                         tooltip: 'switch_off_value_tooltip',
+                    },
+                    {
+                        name: 'switchDisplayStyle',
+                        label: 'switch_display_style',
+                        type: 'select',
+                        default: 'icon',
+                        options: [
+                            { value: 'icon', label: 'switch_display_style_icon' },
+                            { value: 'toggle', label: 'switch_display_style_toggle' },
+                        ],
+                        tooltip: 'switch_display_style_tooltip',
+                    },
+                ],
+            },
+
+            // --- SWITCH MODE: TOGGLE OPTICS (size + track + knob) ---
+            {
+                name: 'mode_switch_toggle',
+                label: 'deluxe_switch_toggle_settings',
+                hidden: (data: unknown) => {
+                    const d = data as OneIconToRuleThemAllRxData;
+                    return d.mode !== FlexMode.SWITCH || d.switchDisplayStyle !== 'toggle';
+                },
+                fields: [
+                    {
+                        name: 'switchToggleSize',
+                        label: 'switch_toggle_size',
+                        type: 'select',
+                        default: 'medium',
+                        options: [
+                            { value: 'small', label: 'switch_toggle_size_small' },
+                            { value: 'medium', label: 'switch_toggle_size_medium' },
+                        ],
+                    },
+                    {
+                        name: 'switchToggleTrackOnColor',
+                        label: 'switch_toggle_track_on_color',
+                        type: 'color',
+                        default: '#1976d2',
+                    },
+                    {
+                        name: 'switchToggleTrackOffColor',
+                        label: 'switch_toggle_track_off_color',
+                        type: 'color',
+                        default: '#aaaaaa',
+                    },
+                    {
+                        name: 'switchToggleKnobOnColor',
+                        label: 'switch_toggle_knob_on_color',
+                        type: 'color',
+                        default: '#ffffff',
+                    },
+                    {
+                        name: 'switchToggleKnobOffColor',
+                        label: 'switch_toggle_knob_off_color',
+                        type: 'color',
+                        default: '#fafafa',
+                    },
+                ],
+            },
+
+            // --- SWITCH MODE: TOGGLE LABEL ---
+            {
+                name: 'mode_switch_toggle_label',
+                label: 'deluxe_switch_toggle_label_settings',
+                hidden: (data: unknown) => {
+                    const d = data as OneIconToRuleThemAllRxData;
+                    return d.mode !== FlexMode.SWITCH || d.switchDisplayStyle !== 'toggle';
+                },
+                fields: [
+                    {
+                        name: 'switchToggleLabelOn',
+                        label: 'switch_toggle_label_on',
+                        type: 'text',
+                        default: '',
+                        tooltip: 'switch_toggle_label_on_tooltip',
+                    },
+                    {
+                        name: 'switchToggleLabelOff',
+                        label: 'switch_toggle_label_off',
+                        type: 'text',
+                        default: '',
+                        tooltip: 'switch_toggle_label_off_tooltip',
+                    },
+                    {
+                        name: 'switchToggleLabelPosition',
+                        label: 'switch_toggle_label_position',
+                        type: 'select',
+                        default: 'right',
+                        options: [
+                            { value: 'top', label: 'display_icon_position_top' },
+                            { value: 'bottom', label: 'display_icon_position_bottom' },
+                            { value: 'left', label: 'display_icon_position_left' },
+                            { value: 'right', label: 'display_icon_position_right' },
+                        ],
+                    },
+                    {
+                        name: 'switchToggleLabelOnColor',
+                        label: 'switch_toggle_label_on_color',
+                        type: 'color',
+                        default: '#FFC107',
+                    },
+                    {
+                        name: 'switchToggleLabelOffColor',
+                        label: 'switch_toggle_label_off_color',
+                        type: 'color',
+                        default: '#555555',
+                    },
+                    {
+                        name: 'switchToggleLabelFontSize',
+                        label: 'switch_toggle_label_font_size',
+                        type: 'number',
+                        default: 14,
+                        min: 8,
+                        max: 48,
                     },
                 ],
             },
@@ -743,13 +859,90 @@ export function getWidgetInfo(): RxWidgetInfo {
                 ],
             },
 
+            // --- NAVIGATION MODE ---
+            {
+                name: 'mode_navigation',
+                label: 'deluxe_navigation_settings',
+                hidden: 'data.mode !== "navigation"',
+                fields: [
+                    {
+                        name: 'navigationTargetView',
+                        label: 'navigation_target_view',
+                        type: 'views',
+                        default: '',
+                        tooltip: 'navigation_target_view_tooltip',
+                    },
+                    {
+                        name: 'navigationLabel',
+                        label: 'navigation_label',
+                        type: 'text',
+                        default: '',
+                        tooltip: 'navigation_label_tooltip',
+                    },
+                    {
+                        name: 'navigationLabelPosition',
+                        label: 'navigation_label_position',
+                        type: 'select',
+                        default: 'bottom',
+                        options: [
+                            { value: 'top', label: 'display_icon_position_top' },
+                            { value: 'bottom', label: 'display_icon_position_bottom' },
+                            { value: 'left', label: 'display_icon_position_left' },
+                            { value: 'right', label: 'display_icon_position_right' },
+                        ],
+                        hidden: (data: unknown) => !(data as OneIconToRuleThemAllRxData).navigationLabel,
+                    },
+                    {
+                        name: 'navigationLabelFontSize',
+                        label: 'navigation_label_font_size',
+                        type: 'number',
+                        default: 14,
+                        min: 8,
+                        max: 48,
+                        hidden: (data: unknown) => !(data as OneIconToRuleThemAllRxData).navigationLabel,
+                    },
+                    {
+                        name: 'navigationLabelColor',
+                        label: 'navigation_label_color',
+                        type: 'color',
+                        default: '#555555',
+                        hidden: (data: unknown) => !(data as OneIconToRuleThemAllRxData).navigationLabel,
+                    },
+                    {
+                        name: 'navigationLabelActiveColor',
+                        label: 'navigation_label_active_color',
+                        type: 'color',
+                        default: '#FFC107',
+                        hidden: (data: unknown) => !(data as OneIconToRuleThemAllRxData).navigationLabel,
+                    },
+                    {
+                        name: 'navigationLabelTextAlign',
+                        label: 'navigation_label_text_align',
+                        type: 'select',
+                        options: [
+                            { value: 'left', label: 'align_left' },
+                            { value: 'center', label: 'align_center' },
+                            { value: 'right', label: 'align_right' },
+                        ],
+                        default: 'center',
+                        hidden: (data: unknown) => !(data as OneIconToRuleThemAllRxData).navigationLabel,
+                    },
+                ],
+            },
+
             // ================================================
-            // GROUP 3: ICON SETTINGS (Hidden for window_shutter)
+            // GROUP 3: ICON SETTINGS (Hidden for window_shutter and switch+toggle-style)
             // ================================================
             {
                 name: 'icon',
                 label: 'deluxe_icon_settings',
-                hidden: 'data.mode === "window_shutter"',
+                hidden: (data: unknown) => {
+                    const d = data as OneIconToRuleThemAllRxData;
+                    return (
+                        d.mode === FlexMode.WINDOW_SHUTTER ||
+                        (d.mode === FlexMode.SWITCH && d.switchDisplayStyle === 'toggle')
+                    );
+                },
                 fields: [
                     {
                         name: 'icon',
@@ -788,12 +981,14 @@ export function getWidgetInfo(): RxWidgetInfo {
                         label: 'active_color',
                         type: 'color',
                         default: '#FFC107',
+                        tooltip: 'active_color_tooltip',
                     },
                     {
                         name: 'inactiveColor',
                         label: 'inactive_color',
                         type: 'color',
                         default: '#555555',
+                        tooltip: 'inactive_color_tooltip',
                     },
                 ],
             },
@@ -903,6 +1098,10 @@ export function getWidgetInfo(): RxWidgetInfo {
                 hidden: (data: unknown) => {
                     const typedData = data as OneIconToRuleThemAllRxData;
                     const mode = MODE_DEFINITIONS[typedData.mode];
+                    // Toggle-Submode of Switch has its own label fields — hide generic status group.
+                    if (typedData.mode === FlexMode.SWITCH && typedData.switchDisplayStyle === 'toggle') {
+                        return true;
+                    }
                     return !mode?.hasPercentage && typedData.mode !== FlexMode.SWITCH;
                 },
                 fields: [

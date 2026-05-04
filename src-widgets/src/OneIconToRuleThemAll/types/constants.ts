@@ -46,6 +46,13 @@ export const MODE_DEFINITIONS: Record<FlexMode, ModeDefinition> = {
         hasPercentage: false,
         description: 'Read-only text display with transformation',
     },
+    [FlexMode.NAVIGATION]: {
+        id: FlexMode.NAVIGATION,
+        label: 'Navigation',
+        hasDialog: false,
+        hasPercentage: false,
+        description: 'Navigate to another vis-2 view on click',
+    },
 };
 
 /**

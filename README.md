@@ -95,6 +95,16 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+- Neuer Modus "Navigation": dedizierter Navigations-Button mit View-Dropdown, optionaler Beschriftung und Highlight wenn die Ziel-View aktuell geöffnet ist
+- Schalter-Modus: neue Darstellungs-Variante "Toggle-Switch" (Material Toggle mit Schiebeknopf) als Alternative zur Icon-Darstellung
+- Toggle-Switch: getrennte Farben pro Zustand für Track, Knopf und Beschriftung; Beschriftung an Position oben/unten/links/rechts; Schiebeknopf bleibt als Fixpunkt unabhängig von der Beschriftungslänge
+- Schalter-Einstellungen in drei thematische Gruppen aufgeteilt (Werte, Toggle-Optik, Toggle-Beschriftung)
+- Icon-Settings: Tooltips an Aktiv-/Inaktiv-Farbe erläutern die Bedeutung pro Modus
+- Robustheit: Icon-Farben fallen auf Defaults zurück, falls die Felder leer sind (vermeidet weiße/farblose Icons zur Laufzeit)
+- DE-Wording: "Karte" konsistent zu "Kachel" geändert
+
 ### 0.4.7 (2026-05-03)
 
 - Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend

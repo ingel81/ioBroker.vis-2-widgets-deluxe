@@ -11,6 +11,7 @@ import {
     ClickAction,
     type OneIconToRuleThemAllRxData,
     type OneIconToRuleThemAllState,
+    type TextAlign,
 } from './types';
 import { HeatingModeLogic } from './modes/HeatingMode';
 import { DimmerModeLogic } from './modes/DimmerMode';
@@ -18,12 +19,14 @@ import { SwitchModeLogic } from './modes/SwitchMode';
 import { WindowShutterModeLogic } from './modes/WindowShutterMode';
 import { NumericDisplayModeLogic } from './modes/NumericDisplayMode';
 import { StringDisplayModeLogic } from './modes/StringDisplayMode';
+import { NavigationModeLogic } from './modes/NavigationMode';
 import { HeatingDialog } from './components/HeatingDialog';
 import { DimmerDialog } from './components/DimmerDialog';
 import { WindowShutterDialog } from './components/WindowShutterDialog';
 import { IconWithStatus } from './components/IconWithStatus';
 import { HorizontalDisplay } from './components/HorizontalDisplay';
 import { VerticalDisplay } from './components/VerticalDisplay';
+import { ToggleSwitchDisplay } from './components/ToggleSwitchDisplay';
 import { WindowShutterIcon } from './components/WindowShutterIcon';
 import { CardWrapper } from './components/CardWrapper';
 import { getWidgetInfo } from './config/widgetInfo';
@@ -37,6 +40,7 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
     private windowShutterMode!: WindowShutterModeLogic;
     private numericDisplayMode!: NumericDisplayModeLogic;
     private stringDisplayMode!: StringDisplayModeLogic;
+    private navigationMode!: NavigationModeLogic;
 
     constructor(props: VisRxWidgetProps) {
         super(props);
@@ -71,6 +75,9 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             stringDisplay: {
                 value: null,
                 formattedValue: '--',
+            },
+            navigation: {
+                isOnTargetView: false,
             },
         };
 
@@ -216,6 +223,16 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             updates => this.setState({ stringDisplay: { ...this.state.stringDisplay, ...updates } }),
             (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
         );
+
+        // NavigationMode
+        this.navigationMode = new NavigationModeLogic(
+            {
+                targetView: this.state.rxData.navigationTargetView,
+            },
+            this.props.context.socket,
+            updates => this.setState({ navigation: { ...this.state.navigation, ...updates } }),
+            (oid, value) => this.props.context.setValue(oid, value as string | number | boolean | null),
+        );
     }
 
     // ========================================
@@ -262,13 +279,18 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             case FlexMode.STRING_DISPLAY:
                 await this.stringDisplayMode.initialize();
                 break;
+
+            case FlexMode.NAVIGATION:
+                await this.navigationMode.initialize();
+                this.navigationMode.updateActiveView(this.props.context.activeView);
+                break;
         }
 
         // Fetch OID name for dialog title
         await this.fetchOidName();
     }
 
-    componentDidUpdate(_prevProps: VisRxWidgetProps, prevState: OneIconToRuleThemAllState): void {
+    componentDidUpdate(prevProps: VisRxWidgetProps, prevState: OneIconToRuleThemAllState): void {
         // Handle mode-specific state updates
         switch (this.state.rxData.mode) {
             case FlexMode.HEATING_KNX:
@@ -631,6 +653,21 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 }
                 break;
             }
+
+            case FlexMode.NAVIGATION: {
+                const prevRxDataNav = prevState.rxData as unknown as OneIconToRuleThemAllRxData;
+                const targetViewChanged = this.state.rxData.navigationTargetView !== prevRxDataNav.navigationTargetView;
+                const activeViewChanged = this.props.context.activeView !== prevProps.context.activeView;
+
+                if (targetViewChanged) {
+                    this.initializeModes();
+                    void this.navigationMode.initialize();
+                }
+                if (targetViewChanged || activeViewChanged) {
+                    this.navigationMode.updateActiveView(this.props.context.activeView);
+                }
+                break;
+            }
         }
     }
 
@@ -639,6 +676,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
         this.dimmerMode.destroy();
         // Cleanup window shutter mode
         this.windowShutterMode.destroy();
+        // Cleanup navigation mode (no-op, but kept for consistency)
+        this.navigationMode?.destroy();
     }
 
     // ========================================
@@ -746,6 +785,14 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 // ClickAction.NONE -> Noop
                 break;
             }
+
+            case FlexMode.NAVIGATION: {
+                const targetView = this.state.rxData.navigationTargetView;
+                if (targetView) {
+                    this.props.context.changeView(targetView);
+                }
+                break;
+            }
         }
     };
 
@@ -771,6 +818,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                 return this.numericDisplayMode.isActive(this.state.numericDisplay);
             case FlexMode.STRING_DISPLAY:
                 return this.stringDisplayMode.isActive(this.state.stringDisplay);
+            case FlexMode.NAVIGATION:
+                return this.navigationMode.isActive(this.state.navigation);
             default:
                 return false;
         }
@@ -830,35 +879,72 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
     }
 
     /**
-     * Check if display mode uses horizontal layout
+     * Effective icon position for layout-aware modes (display + navigation).
+     *
+     * For navigation, the user configures *label* position; the icon sits opposite,
+     * so we invert the chosen value to get the icon-position the layout components expect.
+     */
+    private getEffectiveIconPosition(): IconPosition {
+        if (this.state.rxData.mode === FlexMode.NAVIGATION) {
+            const labelPos = this.state.rxData.navigationLabelPosition ?? IconPosition.BOTTOM;
+            switch (labelPos) {
+                case IconPosition.TOP:
+                    return IconPosition.BOTTOM;
+                case IconPosition.BOTTOM:
+                    return IconPosition.TOP;
+                case IconPosition.LEFT:
+                    return IconPosition.RIGHT;
+                case IconPosition.RIGHT:
+                    return IconPosition.LEFT;
+                default:
+                    return IconPosition.TOP;
+            }
+        }
+        return this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+    }
+
+    /**
+     * True for navigation mode only when a label is configured —
+     * an empty label falls back to the IconWithStatus rendering path.
+     */
+    private hasNavigationLabel(): boolean {
+        return this.state.rxData.mode === FlexMode.NAVIGATION && !!this.state.rxData.navigationLabel?.trim();
+    }
+
+    /**
+     * Check if display/navigation mode uses horizontal layout
      */
     private isHorizontalDisplayLayout(): boolean {
         const mode = this.state.rxData.mode;
-        const iconPos = this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+        const isDisplay = mode === FlexMode.NUMERIC_DISPLAY || mode === FlexMode.STRING_DISPLAY;
+        const isNavWithLabel = this.hasNavigationLabel();
 
-        if (mode !== FlexMode.NUMERIC_DISPLAY && mode !== FlexMode.STRING_DISPLAY) {
+        if (!isDisplay && !isNavWithLabel) {
             return false;
         }
 
+        const iconPos = this.getEffectiveIconPosition();
         return iconPos === IconPosition.LEFT || iconPos === IconPosition.RIGHT;
     }
 
     /**
-     * Check if display mode uses vertical layout (top/bottom)
+     * Check if display/navigation mode uses vertical layout (top/bottom)
      */
     private isVerticalDisplayLayout(): boolean {
         const mode = this.state.rxData.mode;
-        const iconPos = this.state.rxData.displayIconPosition ?? IconPosition.TOP;
+        const isDisplay = mode === FlexMode.NUMERIC_DISPLAY || mode === FlexMode.STRING_DISPLAY;
+        const isNavWithLabel = this.hasNavigationLabel();
 
-        if (mode !== FlexMode.NUMERIC_DISPLAY && mode !== FlexMode.STRING_DISPLAY) {
+        if (!isDisplay && !isNavWithLabel) {
             return false;
         }
 
+        const iconPos = this.getEffectiveIconPosition();
         return iconPos === IconPosition.TOP || iconPos === IconPosition.BOTTOM;
     }
 
     /**
-     * Get the display value for horizontal layouts
+     * Get the display value for horizontal/vertical layouts
      */
     private getDisplayValue(): string {
         const mode = this.state.rxData.mode;
@@ -867,16 +953,18 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             return this.state.numericDisplay.formattedValue;
         } else if (mode === FlexMode.STRING_DISPLAY) {
             return this.state.stringDisplay.formattedValue;
+        } else if (mode === FlexMode.NAVIGATION) {
+            return this.state.rxData.navigationLabel ?? '';
         }
 
         return '--';
     }
 
     /**
-     * Get text color for display modes (based on thresholds)
+     * Get text color for display/navigation modes
      */
     private getDisplayTextColor(): string | undefined {
-        // Heating mode: eigene Textfarbe
+        // Heating mode: own text color
         if (this.state.rxData.mode === FlexMode.HEATING_KNX) {
             return this.state.rxData.heatingStatusTextColor || '#555555';
         }
@@ -888,8 +976,46 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
             }
         }
 
+        // Navigation: separate active/inactive label colors with hard-coded fallbacks
+        if (this.state.rxData.mode === FlexMode.NAVIGATION) {
+            return this.getIsActive()
+                ? this.state.rxData.navigationLabelActiveColor || '#FFC107'
+                : this.state.rxData.navigationLabelColor || '#555555';
+        }
+
         // Display modes: configured text color (default: #555555)
         return this.state.rxData.displayTextColor || '#555555';
+    }
+
+    /**
+     * Effective font size for layout value/label.
+     */
+    private getDisplayValueFontSize(): number {
+        if (this.state.rxData.mode === FlexMode.NAVIGATION) {
+            return this.state.rxData.navigationLabelFontSize ?? 14;
+        }
+        return this.state.rxData.displayValueFontSize ?? this.state.rxData.statusFontSize ?? 14;
+    }
+
+    /**
+     * Effective text alignment for value/label.
+     */
+    private getDisplayTextAlign(): TextAlign | undefined {
+        if (this.state.rxData.mode === FlexMode.NAVIGATION) {
+            return this.state.rxData.navigationLabelTextAlign ?? 'center';
+        }
+        return this.state.rxData.displayTextAlign;
+    }
+
+    /**
+     * Icon color resolution. Falls back to hard-coded defaults when the user
+     * cleared the configured value (vis-2 stores '' instead of restoring the default).
+     */
+    private getIconColor(): string {
+        const isActive = this.getIsActive();
+        const active = this.state.rxData.activeColor || '#FFC107';
+        const inactive = this.state.rxData.inactiveColor || '#555555';
+        return isActive ? active : inactive;
     }
 
     private renderDialogContent(): React.JSX.Element {
@@ -1033,41 +1159,55 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
                     />
+                ) : this.state.rxData.mode === FlexMode.SWITCH && this.state.rxData.switchDisplayStyle === 'toggle' ? (
+                    <ToggleSwitchDisplay
+                        isOn={this.state.switch.isOn}
+                        onClick={this.handleClick}
+                        editMode={this.state.editMode}
+                        size={this.state.rxData.switchToggleSize ?? 'medium'}
+                        trackOnColor={this.state.rxData.switchToggleTrackOnColor || '#1976d2'}
+                        trackOffColor={this.state.rxData.switchToggleTrackOffColor || '#aaaaaa'}
+                        knobOnColor={this.state.rxData.switchToggleKnobOnColor || '#ffffff'}
+                        knobOffColor={this.state.rxData.switchToggleKnobOffColor || '#fafafa'}
+                        label={
+                            this.state.switch.isOn
+                                ? this.state.rxData.switchToggleLabelOn
+                                : this.state.rxData.switchToggleLabelOff
+                        }
+                        labelPosition={this.state.rxData.switchToggleLabelPosition ?? IconPosition.RIGHT}
+                        labelOnColor={this.state.rxData.switchToggleLabelOnColor || '#FFC107'}
+                        labelOffColor={this.state.rxData.switchToggleLabelOffColor || '#555555'}
+                        labelFontSize={this.state.rxData.switchToggleLabelFontSize ?? 14}
+                    />
                 ) : this.isHorizontalDisplayLayout() ? (
                     <HorizontalDisplay
                         icon={this.state.rxData.icon}
                         iconSize={this.state.rxData.iconSize}
                         iconRotation={this.state.rxData.iconRotation}
-                        iconColor={this.getIsActive() ? this.state.rxData.activeColor : this.state.rxData.inactiveColor}
+                        iconColor={this.getIconColor()}
                         value={this.getDisplayValue()}
                         valueColor={this.getDisplayTextColor()}
-                        valueFontSize={this.state.rxData.displayValueFontSize ?? this.state.rxData.statusFontSize ?? 14}
+                        valueFontSize={this.getDisplayValueFontSize()}
                         iconTextGap={this.state.rxData.displayIconTextGap ?? 8}
-                        iconPosition={
-                            (this.state.rxData.displayIconPosition as IconPosition.LEFT | IconPosition.RIGHT) ??
-                            IconPosition.LEFT
-                        }
+                        iconPosition={this.getEffectiveIconPosition() as IconPosition.LEFT | IconPosition.RIGHT}
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
-                        textAlign={this.state.rxData.displayTextAlign}
+                        textAlign={this.getDisplayTextAlign()}
                     />
                 ) : this.isVerticalDisplayLayout() ? (
                     <VerticalDisplay
                         icon={this.state.rxData.icon}
                         iconSize={this.state.rxData.iconSize}
                         iconRotation={this.state.rxData.iconRotation}
-                        iconColor={this.getIsActive() ? this.state.rxData.activeColor : this.state.rxData.inactiveColor}
+                        iconColor={this.getIconColor()}
                         value={this.getDisplayValue()}
                         valueColor={this.getDisplayTextColor()}
-                        valueFontSize={this.state.rxData.displayValueFontSize ?? this.state.rxData.statusFontSize ?? 14}
+                        valueFontSize={this.getDisplayValueFontSize()}
                         iconTextGap={this.state.rxData.displayIconTextGap ?? 8}
-                        iconPosition={
-                            (this.state.rxData.displayIconPosition as IconPosition.TOP | IconPosition.BOTTOM) ??
-                            IconPosition.TOP
-                        }
+                        iconPosition={this.getEffectiveIconPosition() as IconPosition.TOP | IconPosition.BOTTOM}
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
-                        textAlign={this.state.rxData.displayTextAlign}
+                        textAlign={this.getDisplayTextAlign()}
                     />
                 ) : (
                     <IconWithStatus
@@ -1076,8 +1216,8 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         useDifferentInactiveIcon={this.state.rxData.useDifferentInactiveIcon}
                         iconSize={this.state.rxData.iconSize}
                         iconRotation={this.state.rxData.iconRotation}
-                        activeColor={this.state.rxData.activeColor}
-                        inactiveColor={this.state.rxData.inactiveColor}
+                        activeColor={this.state.rxData.activeColor || '#FFC107'}
+                        inactiveColor={this.state.rxData.inactiveColor || '#555555'}
                         isActive={this.getIsActive()}
                         onClick={this.handleClick}
                         editMode={this.state.editMode}
