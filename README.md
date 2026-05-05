@@ -97,9 +97,9 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 -->
 ### **WORK IN PROGRESS**
 
-- Neuer Modus "Navigation" für View-Wechsel mit Highlight bei aktueller Ziel-View
-- Schalter-Modus: alternative Toggle-Switch-Darstellung mit Farben pro Zustand
-- Dialoge: Material-3-Look mit Filled-Tonal-Buttons und Widget-Icon im Header
+- New "Navigation" mode for view switching with highlight when on the target view
+- Switch mode: alternative toggle-switch style with separate colors per state
+- Dialogs: Material 3 look with filled-tonal buttons and widget icon in the header
 
 ### 0.4.7 (2026-05-03)
 
