@@ -97,12 +97,9 @@ Demo-Widget zum Testen und als Beispiel für die Widget-Entwicklung.
 -->
 ### **WORK IN PROGRESS**
 
-- Neuer Modus "Navigation" mit View-Picker, Beschriftung und Highlight wenn die Ziel-View aktuell geöffnet ist
-- Schalter-Modus: neue Darstellungs-Variante "Toggle-Switch" mit getrennten Farben für Track/Knopf/Beschriftung pro Zustand
-- Schalter-Einstellungen in thematische Gruppen aufgeteilt
-- Dialoge: Material-3 Look mit Filled-Tonal-Buttons, Header mit Widget-Icon, einheitliche Button-Größen über alle Dialoge
-- Tooltips für Aktiv-/Inaktiv-Farbe; Defaults greifen auch wenn Farb-Felder geleert werden
-- DE-Wording: "Karte" zu "Kachel" vereinheitlicht
+- Neuer Modus "Navigation" für View-Wechsel mit Highlight bei aktueller Ziel-View
+- Schalter-Modus: alternative Toggle-Switch-Darstellung mit Farben pro Zustand
+- Dialoge: Material-3-Look mit Filled-Tonal-Buttons und Widget-Icon im Header
 
 ### 0.4.7 (2026-05-03)
 
