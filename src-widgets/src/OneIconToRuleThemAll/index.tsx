@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import type { RxRenderWidgetProps, RxWidgetInfo, VisRxWidgetProps } from '@iobroker/types-vis-2';
-import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
-import { Close } from '@mui/icons-material';
+import { Dialog, DialogContent, DialogTitle, IconButton, Typography } from '@mui/material';
+import { Close, Window as WindowIcon } from '@mui/icons-material';
+import { Icon } from '../components';
 
 import Generic from '../Generic';
 import {
@@ -1263,15 +1264,47 @@ class OneIconToRuleThemAll extends Generic<OneIconToRuleThemAllRxData, OneIconTo
                         >
                             <DialogTitle
                                 sx={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: 2,
                                     ...(titleColor ? { color: titleColor } : {}),
                                 }}
                             >
-                                {this.state.rxData.dialogTitle || this.state.oidName || 'Control'}
+                                {(() => {
+                                    const accentColor = this.state.rxData.dialogPrimaryColor || '#2196F3';
+                                    const userIcon = this.state.rxData.icon;
+                                    if (this.state.rxData.mode === FlexMode.WINDOW_SHUTTER) {
+                                        return <WindowIcon sx={{ fontSize: 28, color: accentColor, flexShrink: 0 }} />;
+                                    }
+                                    if (userIcon && userIcon.trim() !== '') {
+                                        return (
+                                            <Icon
+                                                src={userIcon}
+                                                color={accentColor}
+                                                style={{ width: 28, height: 28, flexShrink: 0 }}
+                                            />
+                                        );
+                                    }
+                                    return null;
+                                })()}
+                                <Typography
+                                    variant="h5"
+                                    sx={{
+                                        fontWeight: 500,
+                                        flex: 1,
+                                        minWidth: 0,
+                                        whiteSpace: 'nowrap',
+                                        overflow: 'hidden',
+                                        textOverflow: 'ellipsis',
+                                        ...(titleColor ? { color: titleColor } : {}),
+                                    }}
+                                >
+                                    {this.state.rxData.dialogTitle || this.state.oidName || 'Control'}
+                                </Typography>
                                 <IconButton
                                     sx={{
-                                        position: 'absolute',
-                                        right: 8,
-                                        top: 8,
+                                        marginLeft: 'auto',
+                                        flexShrink: 0,
                                         ...(titleColor ? { color: titleColor } : {}),
                                     }}
                                     onClick={this.handleDialogClose}

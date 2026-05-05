@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Typography, Slider, Button, ButtonGroup, Divider, Chip } from '@mui/material';
+import { Box, Typography, Slider, Button, Divider, Chip } from '@mui/material';
 import { ArrowUpward, ArrowDownward, Stop } from '@mui/icons-material';
-import { getOutlinedButtonStyle, getButtonGroupStyle } from './shared/buttonStyles';
+import { getFilledTonalButtonStyle } from './shared/buttonStyles';
 
 export interface WindowShutterDialogProps {
     panes: Array<{
@@ -90,6 +90,7 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             backgroundColor: `${paneClosedColor}30`,
                             color: paneClosedColor,
                             fontWeight: 'bold',
+                            borderRadius: '12px',
                         }}
                     />,
                 );
@@ -105,6 +106,7 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             backgroundColor: `${paneTiltColor}30`,
                             color: paneTiltColor,
                             fontWeight: 'bold',
+                            borderRadius: '12px',
                         }}
                     />,
                 );
@@ -120,6 +122,7 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             backgroundColor: `${paneOpenColor}30`,
                             color: paneOpenColor,
                             fontWeight: 'bold',
+                            borderRadius: '12px',
                         }}
                     />,
                 );
@@ -199,16 +202,12 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                     </Box>
 
                     {/* Control Buttons */}
-                    <ButtonGroup
-                        fullWidth
-                        variant="outlined"
-                        sx={getButtonGroupStyle(48)}
-                    >
+                    <Box sx={{ display: 'flex', gap: 1, width: '100%' }}>
                         {onShutterUp && (
                             <Button
                                 onClick={onShutterUp}
                                 startIcon={<ArrowUpward />}
-                                sx={getOutlinedButtonStyle(primaryColor)}
+                                sx={{ ...getFilledTonalButtonStyle(primaryColor), flex: 1 }}
                             >
                                 {upLabel}
                             </Button>
@@ -218,7 +217,7 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             <Button
                                 onClick={onShutterStop}
                                 startIcon={<Stop />}
-                                sx={getOutlinedButtonStyle(primaryColor)}
+                                sx={{ ...getFilledTonalButtonStyle(primaryColor), flex: 1 }}
                             >
                                 {stopLabel}
                             </Button>
@@ -228,12 +227,12 @@ export const WindowShutterDialog: React.FC<WindowShutterDialogProps> = React.mem
                             <Button
                                 onClick={onShutterDown}
                                 startIcon={<ArrowDownward />}
-                                sx={getOutlinedButtonStyle(primaryColor)}
+                                sx={{ ...getFilledTonalButtonStyle(primaryColor), flex: 1 }}
                             >
                                 {downLabel}
                             </Button>
                         )}
-                    </ButtonGroup>
+                    </Box>
                 </Box>
             </Box>
         );

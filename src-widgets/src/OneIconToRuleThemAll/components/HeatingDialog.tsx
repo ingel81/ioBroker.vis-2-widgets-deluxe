@@ -2,6 +2,7 @@ import React from 'react';
 import { Box, Typography, Button, FormControl, Select, MenuItem } from '@mui/material';
 import { Add, Remove } from '@mui/icons-material';
 import type { HeatingMode } from '../types';
+import { getFilledButtonStyle, getFilledTonalButtonStyle } from './shared/buttonStyles';
 
 export interface HeatingDialogProps {
     setpointValue: number | null;
@@ -60,38 +61,24 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                 </Typography>
 
                 {/* Setpoint Control Buttons */}
-                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 2, mb: 3 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'center', gap: 1, mb: 3 }}>
                     <Button
-                        variant="outlined"
                         onClick={onDecrease}
                         sx={{
-                            minWidth: 60,
-                            height: 60,
-                            color: primaryColor,
-                            borderColor: primaryColor,
-                            '&:hover': {
-                                borderColor: primaryColor,
-                                backgroundColor: `${primaryColor}10`,
-                            },
+                            ...getFilledTonalButtonStyle(primaryColor),
+                            minWidth: 80,
                         }}
                     >
-                        <Remove sx={{ fontSize: 32 }} />
+                        <Remove sx={{ fontSize: 24 }} />
                     </Button>
                     <Button
-                        variant="outlined"
                         onClick={onIncrease}
                         sx={{
-                            minWidth: 60,
-                            height: 60,
-                            color: primaryColor,
-                            borderColor: primaryColor,
-                            '&:hover': {
-                                borderColor: primaryColor,
-                                backgroundColor: `${primaryColor}10`,
-                            },
+                            ...getFilledTonalButtonStyle(primaryColor),
+                            minWidth: 80,
                         }}
                     >
-                        <Add sx={{ fontSize: 32 }} />
+                        <Add sx={{ fontSize: 24 }} />
                     </Button>
                 </Box>
 
@@ -107,16 +94,8 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                     {controlType === 'button' ? (
                         <Button
                             fullWidth
-                            variant="outlined"
                             onClick={onModeSwitch}
-                            sx={{
-                                color: primaryColor,
-                                borderColor: primaryColor,
-                                '&:hover': {
-                                    borderColor: primaryColor,
-                                    backgroundColor: `${primaryColor}10`,
-                                },
-                            }}
+                            sx={getFilledTonalButtonStyle(primaryColor)}
                         >
                             {getCurrentModeName(currentMode)}
                         </Button>
@@ -133,6 +112,7 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                                 onChange={e => onModeSelect(Number(e.target.value))}
                                 sx={{
                                     color: primaryColor,
+                                    borderRadius: '12px',
                                     '& .MuiOutlinedInput-notchedOutline': {
                                         borderColor: primaryColor,
                                     },
@@ -161,20 +141,13 @@ export const HeatingDialog: React.FC<HeatingDialogProps> = React.memo(
                                 return (
                                     <Button
                                         key={mode.statusValue}
-                                        variant={isActive ? 'contained' : 'outlined'}
                                         onClick={() => onModeSelect(mode.controlValue)}
                                         sx={{
+                                            ...(isActive
+                                                ? getFilledButtonStyle(primaryColor)
+                                                : getFilledTonalButtonStyle(primaryColor)),
                                             flex: '1 1 calc(50% - 4px)',
                                             minWidth: '80px',
-                                            color: isActive ? '#fff !important' : primaryColor,
-                                            backgroundColor: isActive ? `${primaryColor} !important` : 'transparent',
-                                            borderColor: `${primaryColor} !important`,
-                                            borderWidth: isActive ? '2px' : '1px',
-                                            fontWeight: isActive ? 'bold' : 'normal',
-                                            '&:hover': {
-                                                borderColor: `${primaryColor} !important`,
-                                                backgroundColor: isActive ? primaryColor : `${primaryColor}10`,
-                                            },
                                         }}
                                     >
                                         {mode.label}

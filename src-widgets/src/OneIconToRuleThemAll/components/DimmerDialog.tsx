@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Typography, Slider, Button } from '@mui/material';
 import { PowerSettingsNew } from '@mui/icons-material';
-import { getOutlinedButtonStyle } from './shared/buttonStyles';
+import { getFilledTonalButtonStyle } from './shared/buttonStyles';
 
 export interface DimmerDialogProps {
     localValue: number;
@@ -68,18 +68,15 @@ export const DimmerDialog: React.FC<DimmerDialogProps> = React.memo(
                 </Box>
 
                 {showQuickButtons && (
-                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, width: '100%', boxSizing: 'border-box' }}>
+                    <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1, width: '100%', boxSizing: 'border-box' }}>
                         {quickButtons.map(btn => (
                             <Button
                                 key={btn.value}
-                                variant="outlined"
                                 onClick={() => onQuickSet(btn.value)}
-                                size="small"
                                 sx={{
-                                    ...getOutlinedButtonStyle(primaryColor),
-                                    flex: '1 1 calc(33.333% - 4px)',
+                                    ...getFilledTonalButtonStyle(primaryColor),
+                                    flex: '1 1 calc(33.333% - 8px)',
                                     minWidth: '50px',
-                                    px: 1,
                                 }}
                             >
                                 {btn.icon || btn.label}
