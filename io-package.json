@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "vis-2-widgets-deluxe",
-    "version": "0.4.7",
+    "version": "0.5.0",
     "news": {
+      "0.5.0": {
+        "en": "New \"Navigation\" mode for view switching with highlight when on the target view\nSwitch mode: alternative toggle-switch style with separate colors per state\nDialogs: Material 3 look with filled-tonal buttons and widget icon in the header",
+        "de": "Neuer \"Navigation\"-Modus zur Ansichtsvermittlung mit Highlight, wenn auf der Zielansicht\nSchaltmodus: alternativer Toggle-Schalter-Stil mit separaten Farben pro Zustand\nDialoge: Material 3 Look mit gefüllten Tasten und Widget-Symbol im Header",
+        "ru": "Новый режим «Навигация» для переключения просмотра с подсветкой при включении целевого вида\nРежим коммутации: альтернативный стиль переключателя с отдельными цветами в каждом штате\nДиалоги: Материал 3 выглядит с помощью полнотонных кнопок и значка виджета в заголовке",
+        "pt": "Novo modo \"Navegação\" para mudar de visão com realce quando na visão de destino\nModo de mudança: estilo alternativo de comutação com cores separadas por estado\nJanelas: Material 3 look com botões de topo preenchidos e ícone de widget no cabeçalho",
+        "nl": "Nieuwe \"Navigatie\" modus voor weergave schakelen met highlight wanneer op de doelweergave\nWisselmodus: alternatieve toggle-switch stijl met aparte kleuren per staat\nDialogen: Materiaal 3 kijken met gevulde-tonale knoppen en widget pictogram in de header",
+        "fr": "Nouveau mode \"Navigation\" pour la commutation de vue avec mise en évidence sur la vue cible\nMode de commutation: style alternatif de basculement avec des couleurs séparées par état\nBoîtes de dialogue: Material 3 look avec boutons remplis et icône widget dans l'en-tête",
+        "it": "Nuova modalità \"Navigazione\" per la visualizzazione di commutazione con evidenziare quando sulla vista di destinazione\nModalità di commutazione: stile toggle-switch alternativo con colori separati per stato\nDialogs: Materiale 3 look con pulsanti e icona del widget intestazione",
+        "es": "Nuevo modo \"Navigation\" para cambiar de vista con resaltar cuando en la vista de destino\nModo de conmutación: estilo de conmutación alternativa con colores separados por estado\nDialogs: Material 3 mira con botones de tono lleno y icono de widget en el encabezado",
+        "pl": "Nowy tryb \"Nawigacja\" do przełączania widoku z podświetleniem na widoku docelowym\nTryb przełączania: alternatywny styl przełącznika toggle- z odrębnymi kolorami na stan\nDialogi: Materiał 3 wygląd z przycisków filled- tonal i ikona widget w nagłówku",
+        "uk": "Новий режим «Навігація» для перегляду перемикачів з підсвічуванням при цільовому виді\nРежим комутації: альтернативний стиль витяжки з окремими кольорами на стан\nДіалоги: Матеріал 3 див. з заповненими кнопками та значками віджету в заголовку",
+        "zh-cn": "新建“ 导航” 模式, 用于在目标视图上切换带有亮点的视图\n切换模式:可选择的切换-切换样式,每个状态都有不同的颜色\n对话框: 材料 3 在标题中显示填充的按键和部件图标"
+      },
       "0.4.7": {
         "en": "Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun kompakt mittig statt bildschirmfüllend\nDependencies: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: actions/checkout auf v6 angehoben\nBuild-Tooling: release-script Plugins (iobroker, license, manual-review) auf v5 angehoben",
         "de": "Dialog: Drei-Stufen Breakpoint - Dialog auf Tablet/Desktop nun mit kompakt statt bildschirmausschnitt\nAbhängigkeiten: chai, mocha, @iobroker/testing, @types/node aktualisiert\nCI: Aktionen/Checkout auf v6 angehoben\nBuild-Tooling: Release-script Plugins (iobroker, lizenz, manual-review) auf v5 angehoben",
@@ -80,19 +93,6 @@
         "pl": "Wyświetlacz numeryczny: Formel- Feld für matematische Berechnungen (z.B. 'x / 1000' für W → kW)\nDisplay Modi: Text- Ausrichtung (Links / Mitte / Rechts) für Numeryc und String Display",
         "uk": "Numeric Display: Formel-Feld für mathematische Berechnungen (z.B. `x / 1000` für W→kW)\nDisplay Modi: Text-Ausrichtung (Links/Mitte/Rechts) für Numeric und String Display",
         "zh-cn": "数字显示:Formel-Feld für mathematische Berechnungen(z.B.`x / 1000' für W_kW)\n显示 Modi: Text-Ausrichtung (links/Mitte/Rechts) für 数字 und 字符串显示"
-      },
-      "0.4.1": {
-        "en": "Minor fixes (ESLint/Prettier)",
-        "de": "Kleinere Korrekturen (ESLint/Prettier)",
-        "ru": "Незначительные исправления (ESLint/Prettier)",
-        "pt": "Correcções menores (ESLint/Prettier)",
-        "nl": "Kleine correcties (ESLint/Prettiger)",
-        "fr": "Corrections mineures (ESLint/Prettier)",
-        "it": "Correzioni minori (ESLint/Prettier)",
-        "es": "Arreglos menores (ESLint/Prettier)",
-        "pl": "Niewielkie poprawki (ESLint / Prettier)",
-        "uk": "Фіксатори мінор (ESLint/Prettier)",
-        "zh-cn": "小修( ESLint/ prettier)"
       }
     },
     "titleLang": {
